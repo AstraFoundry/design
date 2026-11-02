@@ -1,0 +1,48 @@
+/*
+ * Font stacks with Chinese and Japanese fallbacks.
+ *
+ * Sites load their Latin faces (for example with next/font) and expose them as
+ * --font-latin-display, --font-latin-sans and --font-latin-mono. The Latin
+ * faces have no CJK glyphs, so each language falls back to its own system
+ * faces while Latin runs keep the brand fonts.
+ */
+
+:root {
+  --font-stack-display:
+    var(--font-latin-display, "Fraunces"), "Iowan Old Style", "Times New Roman", serif;
+  --font-stack-sans:
+    var(--font-latin-sans, "IBM Plex Sans"), system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-stack-mono:
+    var(--font-latin-mono, "JetBrains Mono"), ui-monospace, "SF Mono", monospace;
+}
+
+:lang(zh) {
+  --font-stack-display:
+    var(--font-latin-display, "Fraunces"), "Songti SC", "Noto Serif SC",
+    "Source Han Serif SC", STSong, serif;
+  --font-stack-sans:
+    var(--font-latin-sans, "IBM Plex Sans"), "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+}
+
+:lang(ja) {
+  --font-stack-display:
+    var(--font-latin-display, "Fraunces"), "Hiragino Mincho ProN", "Yu Mincho",
+    "Noto Serif JP", serif;
+  --font-stack-sans:
+    var(--font-latin-sans, "IBM Plex Sans"), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", Meiryo, "Noto Sans JP", system-ui, sans-serif;
+  /* Break Japanese lines between phrases rather than between any two characters. */
+  word-break: auto-phrase;
+}
+
+/*
+ * Negative tracking tuned for Latin display type crowds CJK characters. In the
+ * utilities layer so it outranks `tracking-*`.
+ */
+@layer utilities {
+  :is(:lang(zh), :lang(ja)):is(h1, h2, h3, .font-display) {
+    letter-spacing: 0;
+  }
+}

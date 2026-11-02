@@ -1,0 +1,121 @@
+/*
+ * Tailwind v4 mapping for the Sunbeam tokens. Import after `tailwindcss`:
+ *
+ *   @import "tailwindcss";
+ *   @import "@astrafoundry/design/styles.css";
+ *
+ * Components use semantic utilities only (`bg-background`, `text-foreground`,
+ * `border-border`, `bg-substrate` …). Never write `dark:` in components; the
+ * variant exists for vendored beUI code.
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Scan the package's components so their classes are generated. */
+@source "../src";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-faint: var(--faint);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-destructive: var(--danger);
+  --color-info: var(--info);
+  --color-canvas: var(--canvas);
+  --color-canvas-dot: var(--canvas-dot);
+  --color-scrim: var(--scrim);
+  --color-substrate: var(--substrate);
+  --color-substrate-surface: var(--substrate-surface);
+  --color-substrate-raised: var(--substrate-raised);
+  --color-substrate-line: var(--substrate-line);
+  --color-substrate-edge: var(--substrate-edge);
+  --color-substrate-hi: var(--substrate-hi);
+  --color-substrate-ink: var(--substrate-ink);
+  --color-substrate-muted: var(--substrate-muted);
+  --color-substrate-focus: var(--substrate-focus);
+  --color-substrate-focus-ink: var(--substrate-focus-ink);
+  --color-substrate-tint: var(--substrate-tint);
+  --color-substrate-tint-ink: var(--substrate-tint-ink);
+  --color-substrate-tint-muted: var(--substrate-tint-muted);
+  --color-brand: var(--yellow-500);
+
+  --font-display: var(--font-stack-display);
+  --font-sans: var(--font-stack-sans);
+  --font-mono: var(--font-stack-mono);
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+  --radius-3xl: 24px;
+
+  --shadow-1: var(--shadow-1);
+  --shadow-2: var(--shadow-2);
+  --shadow-3: var(--shadow-3);
+  --shadow-4: var(--shadow-4);
+  --shadow-5: var(--shadow-5);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  --animate-marquee: marquee var(--duration, 30s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 30s) linear infinite;
+  --animate-caret: caret 1s steps(2, start) infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes caret {
+  to {
+    visibility: hidden;
+  }
+}
+
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Dot grid for canvas-like demo surfaces. */
+@utility bg-dot-grid {
+  background-image: radial-gradient(var(--canvas-dot) 1px, transparent 1px);
+  background-size: 20px 20px;
+}

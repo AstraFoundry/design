@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+pnpm-lock.yaml
+
+# Vendored beUI (third-party code, see docs/beui.md)
+src/beui

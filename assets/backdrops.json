@@ -1,0 +1,95 @@
+{
+  "$description": "Backdrop photographs for mock UI stages. `pnpm assets:build <outDir>` renders every `ready` entry; `pending-source` entries have no original in assets/source yet. Originals are never hotlinked at runtime. `dominantColor` is written by the build.",
+  "backdrops": [
+    {
+      "id": "field",
+      "status": "ready",
+      "source": "source/field.jpg",
+      "sourceUrl": null,
+      "author": null,
+      "license": null,
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.42
+      },
+      "dominantColor": "#57551e",
+      "usage": ["lyra"],
+      "notes": "Motion-blurred poppies and yellow wildflowers. Original is Lyra's sign-in photo (lyra repo apps/web/public/brand/login-hero.jpg); lyra-landing's field-*.webp are crops of it. Photographer and license are not recorded in either repository; confirm before listing it on /credits."
+    },
+    {
+      "id": "arion-meadow",
+      "status": "pending-source",
+      "source": "source/arion-meadow.jpg",
+      "sourceUrl": "https://unsplash.com/photos/motion-blurred-flowers-in-meadow-FTbxkhiPPKM",
+      "author": null,
+      "license": "Unsplash License",
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dominantColor": null,
+      "usage": ["arion"],
+      "notes": "Download the original once from Unsplash, save it as source/arion-meadow.jpg (≤ about 1 MB, at least 2400 px wide), record the photographer, set the focal point and switch status to ready. Unsplash serves the photo page behind a bot challenge to automated clients, so the original and photographer could not be retrieved from the agent environment; download it manually."
+    },
+    {
+      "id": "telo",
+      "status": "ready",
+      "source": "source/telo.jpg",
+      "sourceUrl": "https://unsplash.com/photos/yellow-flowers-and-green-leaves-swirl-in-motion-IpcLnWfa4Mo",
+      "author": "DL314 Lin",
+      "license": "Unsplash License",
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dominantColor": "#5f8d13",
+      "usage": ["telo"],
+      "notes": "Yellow flowers and green leaves swirled by camera rotation. Downloaded once from images.unsplash.com (photo-1749864665887-b89a4d505053) at 2560 px; never hotlinked."
+    },
+    {
+      "id": "brand-hero",
+      "status": "ready",
+      "source": "source/brand-hero.jpg",
+      "sourceUrl": "https://unsplash.com/photos/star-trails-over-silhouetted-trees-at-night-0EggWy3ac68",
+      "author": "Travis Fish",
+      "license": "Unsplash License",
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "dominantColor": "#19201f",
+      "usage": ["astrafoundry"],
+      "notes": "Star trails over silhouetted trees, a long exposure. Downloaded once from images.unsplash.com (photo-1763464912904-74ef05b79062) at 2400 px; never hotlinked. The focal point keeps the treetops at the bottom of the wide crop."
+    },
+    {
+      "id": "gladiolus",
+      "status": "ready",
+      "source": "source/gladiolus.jpg",
+      "sourceUrl": "https://unsplash.com/photos/pink-gladiolus-flowers-with-green-foliage-in-motion-Jk_9EwoLXnY",
+      "author": "Eugene Golovesov",
+      "license": "Unsplash License",
+      "focalPoint": {
+        "x": 0.45,
+        "y": 0.62
+      },
+      "dominantColor": "#214738",
+      "usage": ["design"],
+      "notes": "Pink gladiolus over dark green foliage, swept by a slow pan. Copied from the Arion site sources (Arion apps/site/assets/backdrops/gladiolus.jpg, 2400 x 3626); never hotlinked. Dark enough for light type at the bottom of the card without a heavy scrim."
+    },
+    {
+      "id": "pink-motion",
+      "status": "ready",
+      "source": "source/pink-motion.jpg",
+      "sourceUrl": "https://unsplash.com/photos/pink-flowers-with-motion-blur-effect-DjZ5xwr1cq4",
+      "author": "Raphael Nicolas",
+      "license": "Unsplash License",
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "dominantColor": "#6e3235",
+      "usage": ["design"],
+      "notes": "Pink flowers streaked by motion blur. Copied from the Arion site sources (Arion apps/site/assets/backdrops/pink-motion.jpg, 2400 x 3600); never hotlinked."
+    }
+  ]
+}

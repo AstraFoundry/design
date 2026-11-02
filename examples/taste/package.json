@@ -1,0 +1,19 @@
+{
+  "name": "taste-example",
+  "private": true,
+  "type": "module",
+  "description": "Example consumer of @astrafoundry/design. Add taste examples beside this package.",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@astrafoundry/design": "link:../.."
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "~5.9.3"
+  }
+}
