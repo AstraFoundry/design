@@ -36,7 +36,7 @@ npm install @astrafoundry/design
 { "dependencies": { "@astrafoundry/design": "0.1.0" } }
 ```
 
-`0.1.0` is the package version in this repository. The [release workflow](.github/workflows/release.yml) publishes that version to npm when a `v*.*.*` tag is pushed and the `NPM_TOKEN` secret is set. Until a version exists on npm, depend on this git repository instead of copying the source:
+`0.1.0` is the package version in this repository. The [release workflow](.github/workflows/release.yml) publishes it by running `make publish` when a `v*.*.*` tag is pushed and the `NPM_TOKEN` secret is set. Until a version exists on npm, depend on this git repository instead of copying the source:
 
 ```json
 { "dependencies": { "@astrafoundry/design": "github:AstraFoundry/design#<commit>" } }
@@ -190,10 +190,21 @@ pnpm test          # token and skill drift check + vitest
 pnpm tokens:build  # regenerate tokens/sunbeam.css and the skill's token tables
 pnpm assets:build <outDir>
 pnpm check
+make login         # npm login for the @astrafoundry scope
+make whoami
+make publish       # whoami, pnpm check, then publish to npm
 ```
 
 ## Publishing
 
-`publishConfig.access` is `public` and `publishConfig.exports` swaps the entry points to `dist/` on npm. Run `pnpm build` first. `files` ships `dist`, `src` (for Tailwind's `@source` and source maps), tokens, fonts, the manifest, originals, the skill, DESIGN.md and the backdrop script. Examples are not part of the tarball.
+`publishConfig.access` is `public` and `publishConfig.exports` swaps the entry points to `dist/` on npm. `files` ships `dist`, `src` (for Tailwind's `@source` and source maps), tokens, fonts, the manifest, originals, the skill, DESIGN.md and the backdrop script. Examples are not part of the tarball.
 
-Pushing a `v*.*.*` tag runs [`.github/workflows/release.yml`](.github/workflows/release.yml), which publishes `@astrafoundry/design` to the npm registry with `NPM_TOKEN`. No version has been published from this repository until that workflow succeeds.
+The project [`.npmrc`](.npmrc) sends the `@astrafoundry` scope to the public npm registry. `make login` writes the token to your user npm config. Do not commit a token.
+
+```sh
+make login     # npm login --scope=@astrafoundry --registry=https://registry.npmjs.org/
+make whoami    # the logged-in npm user
+make publish   # confirm login, run pnpm check, then pnpm publish --access public
+```
+
+`make publish` keeps npm's git checks on a local publish. When `CI` is set, as it is on GitHub Actions, it passes `--no-git-checks` so a tag checkout can publish. Pushing a `v*.*.*` tag runs [`.github/workflows/release.yml`](.github/workflows/release.yml), which runs `make publish` with `NPM_TOKEN` as `NODE_AUTH_TOKEN`. No version has been published from this repository until that workflow succeeds.
