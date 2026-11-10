@@ -224,6 +224,7 @@ Forbidden: `backdrop-filter` glass, outer glows, colored or gradient borders, gr
 3. A raised layer's corners are concentric with its controls: `tile` 28px − 8px inset = 20px, the radius of a 40px pill. They curve continuously where the platform draws it (`corner-shape: squircle` on the web, macOS in MyGo); pills stay pills.
 4. In the dark, a face is lighter than what it sits on and its shadow is darker. A darker face, or a light glow, reads as a hole.
 5. A layer may take the other scheme from the page, as a dark panel over a light page: give the panel its own scheme rather than restyling its controls.
+6. A selection that moves keeps its shape. The segments of a segmented control, and the items of any set whose chosen one carries a thumb or pill, are all as wide as the widest, so the raised face never resizes or shifts its balance as the choice moves. Lengthen the narrow labels' room, not the wide labels' text.
 
 On the web: `Panel`, or `data-material="raised"` on any layer, and the `material-face`, `material-face-primary`, `material-thumb`, `material-well`, `material-panel` and `rounded-continuous-*` utilities; `Button`, `IconButton` and `Segmented` follow their layer. In MyGo: `sunbeam.Panel`, `sunbeam.Layer`, and `sunbeam.Face`, `PrimaryFace`, `Thumb`, `Well` and `PanelSurface` for elements of your own.
 
@@ -362,6 +363,7 @@ Pick the object the step is about (a key, a microphone). When the step has no ob
 | Set captions in muted light ink at the card inset, bottom-left.     | Center bold white text with a drop shadow.                   |
 | Use inner radius = outer radius − inset.                            | Give nested elements the same radius as their container.     |
 | Keep one material per layer: flat chrome, raised floating panels.   | Raise a toolbar button while its neighbors stay flat.        |
+| Size the segments of a choice equally, to the widest.               | Let the selected pill grow and shrink with each label.       |
 | Spend yellow on the one primary action or result.                   | Use yellow for badges, borders, icons and links at once.     |
 | Play a scene once when it is seen and rest on the result.           | Loop, bounce or pulse forever.                               |
 | Show a real object as shaded solids with one part lit.              | Draw a wireframe, or a glossy render with labels and arrows. |

@@ -407,7 +407,7 @@ A feature tile insets its art panel by {spacing.tile-inset}.
 
 Depth comes from warm, two-layer shadows keyed off ink rather than neutral black: a one-pixel contact shadow and a soft spread below it, stronger in dark mode. Five levels: 1 for controls and chips, 2 for popovers, 3 for raised cards, 4 for dialogs, 5 for a window or the focus surface floating on a photograph.
 
-Surfaces come in two materials, and a layer has one of them. The page and the window's chrome are flat: a control there is a translucent fill with no edge, gradient or shadow. A layer that floats above them, a panel, popover, menu or dialog, is raised, and so is every control in it: a faint top-to-bottom gradient, a translucent one-pixel edge, a one-pixel white highlight inside the top edge, and a contact shadow with a soft one under it. Inside a raised layer a track of choices is recessed and the choice made is its one raised face. In dark mode a raised face is a lighter gray than the panel under it and its shadows are half black. The material follows the layer, never the component: the same button is flat in a toolbar and raised in a panel.
+Surfaces come in two materials, and a layer has one of them. The page and the window's chrome are flat: a control there is a translucent fill with no edge, gradient or shadow. A layer that floats above them, a panel, popover, menu or dialog, is raised, and so is every control in it: a faint top-to-bottom gradient, a translucent one-pixel edge, a one-pixel white highlight inside the top edge, and a contact shadow with a soft one under it. Inside a raised layer a track of choices is recessed and the choice made is its one raised face. Its segments are all as wide as the widest, so that face keeps its size wherever the choice goes. In dark mode a raised face is a lighter gray than the panel under it and its shadows are half black. The material follows the layer, never the component: the same button is flat in a toolbar and raised in a panel.
 
 No glass: no backdrop blur, no outer glows, no colored or gradient borders. A photograph is used as it is, without a tint, blur or vignette; choose a darker photograph rather than darkening a bright one.
 
@@ -440,6 +440,7 @@ Four curves: ease-out `cubic-bezier(.22, 1, .36, 1)` for anything entering or mo
 - Do set captions in muted light ink at the card inset, bottom left; don't center bold white text with a drop shadow.
 - Do use inner radius = outer radius − inset; don't give nested elements the radius of their container.
 - Do keep one material per layer, flat chrome and raised floating panels; don't raise one toolbar button while its neighbors stay flat.
+- Do size the segments of a segmented control equally, to the widest, so the chosen pill keeps its size as the choice moves; don't let it grow and shrink with each label.
 - Do spend yellow on the one primary action or result; don't use it for badges, borders, icons and links at once.
 - Do play a scene once when it is seen and rest on the result; don't loop, bounce or pulse forever.
 - Do show a real object as shaded solids with one part lit; don't draw a wireframe, or a glossy render with labels and arrows.
