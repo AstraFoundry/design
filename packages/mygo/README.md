@@ -2,6 +2,13 @@
 
 Sunbeam, the AstraFoundry design system, for native apps whose interface [MyGo](https://github.com/egoist/mygo) draws itself (package `github.com/egoist/mygo/ui`). It is the twin of the web package [`@astrafoundry/design`](../web/README.md): the same tokens, generated from the same `sunbeam.json`, and the same components following the same rules.
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AstraFoundry/design/main/docs/images/mygo-gallery-dark.png" />
+    <img src="https://raw.githubusercontent.com/AstraFoundry/design/main/docs/images/mygo-gallery-light.png" alt="The MyGo gallery, drawn by MyGo: a flat toolbar, and raised panels in light and dark." width="900" />
+  </picture>
+</p>
+
 ```sh
 go get github.com/AstraFoundry/design/packages/mygo
 ```

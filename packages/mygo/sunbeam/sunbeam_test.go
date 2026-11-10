@@ -141,8 +141,14 @@ func TestComponents(t *testing.T) {
 	if info, ok := tt.AccessByRole(ui.RoleRadioGroup, "Period"); !ok {
 		t.Errorf("no radio group named Period: %+v", info)
 	}
-	if _, ok := tt.AccessByRole(ui.RoleRadio, "Week"); !ok {
-		t.Error("no radio button named Week")
+	day, okDay := tt.AccessByRole(ui.RoleRadio, "Day")
+	week, okWeek := tt.AccessByRole(ui.RoleRadio, "Week")
+	if !okDay || !okWeek {
+		t.Fatal("no radio buttons named Day and Week")
+	}
+	// Segments are as wide as the widest, so the raised pill keeps its size.
+	if day.Bounds.W != week.Bounds.W || day.Bounds.W == 0 {
+		t.Errorf("segment widths Day %v, Week %v, want equal", day.Bounds.W, week.Bounds.W)
 	}
 }
 

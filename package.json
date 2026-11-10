@@ -14,7 +14,8 @@
     "assets:build": "pnpm --filter @astrafoundry/design assets:build",
     "mygo:check": "cd packages/mygo && gofmt -l . | (! grep .) && go vet ./... && go test ./...",
     "mygo:test": "cd packages/mygo && go test ./...",
-    "mygo:gallery": "cd packages/mygo && go run ./examples/gallery"
+    "mygo:gallery": "cd packages/mygo && go run ./examples/gallery",
+    "readme:images": "pnpm --filter @astrafoundry/design build && node packages/web/scripts/readme-images.mjs && cd packages/mygo && SUNBEAM_SNAPSHOT=\"$PWD/../../docs/images\" go test -count=1 ./examples/gallery"
   },
   "packageManager": "pnpm@10.34.7",
   "engines": {

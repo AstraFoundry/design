@@ -81,6 +81,8 @@ describe("Segmented", () => {
     expect(image.tabIndex).toBe(0);
     expect(theme.tabIndex).toBe(-1);
     expect(theme.className).not.toContain("material-thumb");
+    // Equal columns, so the raised pill keeps its size as the choice moves.
+    expect(screen.getByRole("radiogroup").className).toContain("auto-cols-fr");
   });
 
   it("chooses with a click and with the arrows, Home and End", () => {

@@ -8,6 +8,8 @@ const (
 	controlHeight float32 = 40
 	segmentHeight float32 = 32
 	wellInset     float32 = 4
+	// segmentPadding is the room beside a segment's label.
+	segmentPadding float32 = 12
 )
 
 // button is the shared base of the buttons: a pill of the control height
@@ -89,16 +91,25 @@ func SegmentedIcons(c *ui.Context, selected *int, icons []*ui.SVG, labels []stri
 
 func segmented(c *ui.Context, selected *int, labels []string, icons []*ui.SVG) ui.Element {
 	p := Colors(c)
+	// Every segment is as wide as the widest, so the raised pill keeps its
+	// size as the choice moves.
+	width := controlHeight
+	if icons == nil {
+		width = 0
+		for _, text := range labels {
+			w, _ := c.MeasureText(0, ui.Span{Text: text, Size: TypeLabelMD.Size, Weight: TypeLabelMD.Weight})
+			width = max(width, w+2*segmentPadding+2)
+		}
+	}
 	parts := ui.SegmentedBase(c, selected, len(labels))
 	track := parts.Track.Padding(wellInset).Gap(wellInset).Radius(segmentHeight/2 + wellInset)
 	Well(c, track)
 	return track.Children(func() {
 		for i, text := range labels {
 			s := parts.Segment(i).Height(segmentHeight).Radius(segmentHeight / 2).Center().Cursor(ui.CursorPointer)
+			s.Width(width)
 			if icons != nil {
-				s.Width(controlHeight).Label(text)
-			} else {
-				s.Padding(0, 12)
+				s.Label(text)
 			}
 			if i == *selected {
 				Thumb(c, s).TextColor(p.Foreground)

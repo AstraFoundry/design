@@ -26,8 +26,10 @@ export interface SegmentedProps<V extends string = string> {
  * the one raised face, as a switch between a few views. In a flat layer the
  * track is a flat fill and the chosen segment a flat solid one.
  *
- * It is a radio group: Tab reaches the chosen segment, and the arrows, Home
- * and End choose another. The track's 4px inset keeps its pills concentric.
+ * Segments are as wide as the widest, so the raised pill keeps its size as
+ * the choice moves. It is a radio group: Tab reaches the chosen segment, and
+ * the arrows, Home and End choose another. The track's 4px inset keeps its
+ * pills concentric.
  */
 export function Segmented<V extends string>({
   options,
@@ -69,7 +71,10 @@ export function Segmented<V extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("material-well inline-flex gap-1 rounded-full p-1", className)}
+      className={cn(
+        "material-well inline-grid auto-cols-fr grid-flow-col gap-1 rounded-full p-1",
+        className,
+      )}
     >
       {options.map((option, index) => {
         const selected = index === chosen;

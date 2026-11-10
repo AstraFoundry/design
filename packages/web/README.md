@@ -4,6 +4,13 @@ The shared visual layer of AstraFoundry sites: Sunbeam tokens for Tailwind v4, v
 
 This is the web package of the [Sunbeam monorepo](../../README.md); its twin for native apps drawn by MyGo is [`packages/mygo`](../mygo/README.md), built from the same tokens. `@astrafoundry/design` is the versioned package sites install. Product sites must not copy these files.
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AstraFoundry/design/main/docs/images/components-dark.png" />
+    <img src="https://raw.githubusercontent.com/AstraFoundry/design/main/docs/images/components-light.png" alt="Sunbeam's web components: buttons in three sizes and variants, round icon buttons, a segmented control, and a raised panel." width="960" />
+  </picture>
+</p>
+
 The package contains no user-facing copy. Every label, title and accessible name comes in through props from the site's dictionary. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Contents
@@ -80,6 +87,13 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-latin-mono" 
 **Theme.** Dark mode is the `.dark` class on `<html>` (for example `next-themes` with `attribute="class"`). Components use semantic utilities only and never write `dark:`. A part of the page can take the other scheme with `.dark` or `.light` on its root, as a dark panel over a light page.
 
 ## Materials
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AstraFoundry/design/main/docs/images/materials-dark.png" />
+    <img src="https://raw.githubusercontent.com/AstraFoundry/design/main/docs/images/materials-light.png" alt="The same controls flat on the page and raised in a panel." width="960" />
+  </picture>
+</p>
 
 A layer has one material, and every control in it takes that material. The page and its chrome are **flat**: a control is a translucent fill with no edge, gradient or shadow. A layer floating above them is **raised**: its controls get a faint top-to-bottom gradient, a translucent 1px edge, a 1px highlight inside the top edge and layered warm shadows. In dark mode a raised face is a lighter gray than the panel under it, with half-black shadows. The [skill](skills/sunbeam/SKILL.md#4-materials) has the full rules.
 
