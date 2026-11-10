@@ -1,184 +1,29 @@
 {
-  "name": "@astrafoundry/design",
-  "version": "0.1.0",
-  "description": "Sunbeam tokens, components, and mock stages for AstraFoundry. This repository accepts community taste contributions; @astrafoundry/design is the versioned npm package.",
-  "license": "MIT",
+  "name": "astrafoundry-design",
+  "private": true,
   "type": "module",
-  "sideEffects": [
-    "*.css"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AstraFoundry/design.git"
-  },
-  "bugs": {
-    "url": "https://github.com/AstraFoundry/design/issues"
-  },
-  "homepage": "https://github.com/AstraFoundry/design#readme",
-  "files": [
-    "dist",
-    "src",
-    "tokens",
-    "fonts",
-    "styles.css",
-    "assets/backdrops.json",
-    "assets/source",
-    "skills",
-    "DESIGN.md",
-    "scripts/build-backdrops.mjs",
-    "docs"
-  ],
-  "bin": {
-    "astrafoundry-backdrops": "./scripts/build-backdrops.mjs"
-  },
-  "exports": {
-    ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts"
-    },
-    "./ui": {
-      "types": "./src/ui/index.ts",
-      "import": "./src/ui/index.ts"
-    },
-    "./mock": {
-      "types": "./src/mock/index.ts",
-      "import": "./src/mock/index.ts"
-    },
-    "./beui/agents/agent-activity": {
-      "types": "./src/beui/components/agents/agent-activity/index.tsx",
-      "import": "./src/beui/components/agents/agent-activity/index.tsx"
-    },
-    "./beui/agents/loading-states": {
-      "types": "./src/beui/components/agents/loading-states/index.ts",
-      "import": "./src/beui/components/agents/loading-states/index.ts"
-    },
-    "./beui/motion/button": {
-      "types": "./src/beui/components/motion/button/index.tsx",
-      "import": "./src/beui/components/motion/button/index.tsx"
-    },
-    "./beui/lib/ease": {
-      "types": "./src/beui/lib/ease.ts",
-      "import": "./src/beui/lib/ease.ts"
-    },
-    "./beui/*": {
-      "types": "./src/beui/components/*.tsx",
-      "import": "./src/beui/components/*.tsx"
-    },
-    "./styles.css": "./styles.css",
-    "./tokens/*": "./tokens/*",
-    "./fonts/*": "./fonts/*",
-    "./assets/backdrops.json": "./assets/backdrops.json",
-    "./skills/*": "./skills/*",
-    "./DESIGN.md": "./DESIGN.md",
-    "./package.json": "./package.json"
-  },
-  "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js"
-      },
-      "./ui": {
-        "types": "./dist/ui/index.d.ts",
-        "import": "./dist/ui/index.js"
-      },
-      "./mock": {
-        "types": "./dist/mock/index.d.ts",
-        "import": "./dist/mock/index.js"
-      },
-      "./beui/agents/agent-activity": {
-        "types": "./dist/beui/components/agents/agent-activity/index.d.ts",
-        "import": "./dist/beui/components/agents/agent-activity/index.js"
-      },
-      "./beui/agents/loading-states": {
-        "types": "./dist/beui/components/agents/loading-states/index.d.ts",
-        "import": "./dist/beui/components/agents/loading-states/index.js"
-      },
-      "./beui/motion/button": {
-        "types": "./dist/beui/components/motion/button/index.d.ts",
-        "import": "./dist/beui/components/motion/button/index.js"
-      },
-      "./beui/lib/ease": {
-        "types": "./dist/beui/lib/ease.d.ts",
-        "import": "./dist/beui/lib/ease.js"
-      },
-      "./beui/*": {
-        "types": "./dist/beui/components/*.d.ts",
-        "import": "./dist/beui/components/*.js"
-      },
-      "./styles.css": "./styles.css",
-      "./tokens/*": "./tokens/*",
-      "./fonts/*": "./fonts/*",
-      "./assets/backdrops.json": "./assets/backdrops.json",
-      "./skills/*": "./skills/*",
-      "./DESIGN.md": "./DESIGN.md",
-      "./package.json": "./package.json"
-    }
-  },
+  "description": "Sunbeam, the AstraFoundry design system: the web package (@astrafoundry/design) and the MyGo package (github.com/AstraFoundry/design/packages/mygo).",
+  "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit && pnpm --filter taste-example typecheck",
-    "check": "pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run build",
-    "lint": "eslint . --max-warnings=0",
-    "test": "node scripts/tokens.mjs --check && vitest run",
-    "tokens:build": "node scripts/tokens.mjs",
-    "assets:build": "node scripts/build-backdrops.mjs --update-data"
-  },
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "lucide-react": "^1.47.0",
-    "tailwind-merge": "^3.7.0"
-  },
-  "peerDependencies": {
-    "motion": "^13.4.2",
-    "next-themes": "^0.4.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sharp": ">=0.34.0",
-    "shiki": "^4.4.3",
-    "tailwindcss": "^4.1.0"
-  },
-  "peerDependenciesMeta": {
-    "next-themes": {
-      "optional": true
-    },
-    "sharp": {
-      "optional": true
-    },
-    "shiki": {
-      "optional": true
-    }
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@google/design.md": "0.4.0",
-    "@tailwindcss/node": "^4.3.3",
-    "@testing-library/react": "^16.3.0",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "globals": "^16.5.0",
-    "jsdom": "^27.0.0",
-    "motion": "^13.4.2",
-    "next-themes": "^0.4.6",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "sharp": "^0.34.4",
-    "shiki": "^4.4.3",
-    "tailwindcss": "^4.3.3",
-    "prettier": "^3.6.2",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.0",
-    "vitest": "^3.2.4"
+    "check": "pnpm --filter @astrafoundry/design check && pnpm run mygo:check",
+    "build": "pnpm --filter @astrafoundry/design build",
+    "typecheck": "pnpm --filter @astrafoundry/design typecheck",
+    "lint": "pnpm --filter @astrafoundry/design lint",
+    "test": "pnpm --filter @astrafoundry/design test && pnpm run mygo:test",
+    "tokens:build": "pnpm --filter @astrafoundry/design tokens:build",
+    "assets:build": "pnpm --filter @astrafoundry/design assets:build",
+    "mygo:check": "cd packages/mygo && gofmt -l . | (! grep .) && go vet ./... && go test ./...",
+    "mygo:test": "cd packages/mygo && go test ./...",
+    "mygo:gallery": "cd packages/mygo && go run ./examples/gallery"
   },
   "packageManager": "pnpm@10.34.7",
   "engines": {
     "node": ">=24"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }

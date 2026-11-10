@@ -7,7 +7,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@astrafoundry/design": "link:../.."
+    "@astrafoundry/design": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19.3.0",

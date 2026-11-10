@@ -28,6 +28,13 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: pnpm
 
+      # make publish runs make check, which vets and tests the MyGo package too.
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: packages/mygo/go.mod
+          cache-dependency-path: packages/mygo/go.sum
+
       - name: Install
         run: pnpm install --frozen-lockfile
 

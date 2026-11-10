@@ -1,4 +1,6 @@
-# Login and publish for @astrafoundry/design.
+# Login and publish for @astrafoundry/design (packages/web).
+# The MyGo package (packages/mygo) is a Go module: it is released by pushing
+# a packages/mygo/vX.Y.Z tag, with nothing to publish.
 # Auth tokens stay in the user npm config, or in CI as NODE_AUTH_TOKEN.
 # Do not commit them.
 
@@ -17,7 +19,7 @@ login: ## Log in to the public npm registry for @astrafoundry
 whoami: ## Show the npm user for the public registry
 	npm whoami --registry=$(NPM_REGISTRY)
 
-check: ## Typecheck, lint, test, and build
+check: ## Typecheck, lint, test and build the web package; vet and test the MyGo package
 	pnpm check
 
 # Local publishes keep npm's git checks. CI publishes from a tag checkout
@@ -28,4 +30,4 @@ publish: ## Check, then publish @astrafoundry/design to npm
 		exit 1; \
 	}
 	$(MAKE) check
-	pnpm publish --access public$(if $(CI), --no-git-checks,)
+	pnpm --filter @astrafoundry/design publish --access public$(if $(CI), --no-git-checks,)

@@ -1,5 +1,5 @@
 {
-  "$description": "Sunbeam token values. Single source for tokens/sunbeam.css, the skill's token tables and DESIGN.md (pnpm tokens:build). Colors are CSS color/shadow values; var(--name) refers to another token in this file. typography, rounded, spacing and components follow the DESIGN.md token schema; components are written for light mode and their dark twins are derived.",
+  "$description": "Sunbeam token values. Single source for tokens/sunbeam.css, the skill's token tables, DESIGN.md and the MyGo package's tokens (packages/mygo/sunbeam/tokens_gen.go), all written by pnpm tokens:build. Colors are CSS color/shadow values; var(--name) refers to another token in this file. material holds the two surface materials, flat and raised, for light and dark. typography, rounded, spacing and components follow the DESIGN.md token schema; components are written for light mode and their dark twins are derived.",
   "scales": {
     "yellow-100": "hsl(48 100% 88%)",
     "yellow-300": "hsl(48 100% 64%)",
@@ -135,6 +135,54 @@
     "figure-halo": "0.22",
     "figure-lift": "0.05",
     "figure-soften": "0.35"
+  },
+  "material": {
+    "light": {
+      "flat-face": "rgb(20 18 14 / 0.05)",
+      "flat-face-hover": "rgb(20 18 14 / 0.08)",
+      "flat-face-pressed": "rgb(20 18 14 / 0.11)",
+      "flat-thumb": "hsl(0 0% 100%)",
+      "raised-face-from": "hsl(0 0% 100%)",
+      "raised-face-to": "hsl(40 12% 95%)",
+      "raised-face-pressed": "hsl(40 10% 93.5%)",
+      "raised-edge": "rgb(20 18 14 / 0.08)",
+      "raised-highlight": "rgb(255 255 255 / 0.95)",
+      "raised-shadow": "0 1px 1px rgb(20 18 14 / 0.04), 0 2px 6px -1px rgb(20 18 14 / 0.08)",
+      "raised-shadow-pressed": "0 1px 1px rgb(20 18 14 / 0.04)",
+      "raised-primary-from": "hsl(48 100% 60%)",
+      "raised-primary-to": "hsl(46 100% 49%)",
+      "raised-primary-edge": "rgb(110 70 0 / 0.16)",
+      "raised-primary-highlight": "rgb(255 255 255 / 0.5)",
+      "panel-face-from": "hsl(40 14% 97.6%)",
+      "panel-face-to": "hsl(40 10% 95.8%)",
+      "panel-edge": "rgb(20 18 14 / 0.07)",
+      "panel-highlight": "rgb(255 255 255 / 0.8)",
+      "panel-shadow": "0 1px 2px rgb(20 18 14 / 0.06), 0 12px 32px -8px rgb(20 18 14 / 0.16), 0 32px 64px -16px rgb(20 18 14 / 0.14)",
+      "well-face": "rgb(20 18 14 / 0.055)",
+      "well-shadow": "inset 0 1px 2px rgb(20 18 14 / 0.06)"
+    },
+    "dark": {
+      "flat-face": "rgb(255 255 255 / 0.07)",
+      "flat-face-hover": "rgb(255 255 255 / 0.1)",
+      "flat-face-pressed": "rgb(255 255 255 / 0.13)",
+      "flat-thumb": "hsl(26 6% 24%)",
+      "raised-face-from": "hsl(30 4% 29%)",
+      "raised-face-to": "hsl(30 4% 23.5%)",
+      "raised-face-pressed": "hsl(30 4% 21.5%)",
+      "raised-edge": "rgb(0 0 0 / 0.42)",
+      "raised-highlight": "rgb(255 255 255 / 0.15)",
+      "raised-shadow": "0 1px 1px rgb(0 0 0 / 0.2), 0 2px 6px -1px rgb(0 0 0 / 0.45)",
+      "raised-shadow-pressed": "0 1px 1px rgb(0 0 0 / 0.2)",
+      "raised-primary-edge": "rgb(0 0 0 / 0.35)",
+      "raised-primary-highlight": "rgb(255 255 255 / 0.4)",
+      "panel-face-from": "hsl(30 3% 22.5%)",
+      "panel-face-to": "hsl(30 3% 20.5%)",
+      "panel-edge": "rgb(0 0 0 / 0.4)",
+      "panel-highlight": "rgb(255 255 255 / 0.12)",
+      "panel-shadow": "0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.5), 0 32px 64px -16px rgb(0 0 0 / 0.45)",
+      "well-face": "rgb(255 255 255 / 0.06)",
+      "well-shadow": "inset 0 1px 2px rgb(0 0 0 / 0.25)"
+    }
   },
   "typography": {
     "headline-display": {

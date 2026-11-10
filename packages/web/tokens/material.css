@@ -1,0 +1,163 @@
+/*
+ * Sunbeam materials: flat and raised.
+ *
+ * A layer has one material, and everything in it takes that material. The
+ * page and its chrome are flat. A layer that floats above them (a panel, a
+ * popover, a menu, a dialog) is raised, and so is every control inside it.
+ * Mark a layer with `data-material="raised"`, or `"flat"` to flatten a part
+ * inside a raised one. `Panel` does this for you.
+ *
+ *   flat    a fill and nothing else: no border, no shadow, no gradient.
+ *   raised  a faint top-to-bottom gradient, a translucent 1px edge, a 1px
+ *           inner highlight along the top, and layered warm shadows. In dark
+ *           mode the face is a lighter gray than the panel under it, and
+ *           its shadows are half black.
+ *
+ * Controls read the nearest layer through two space toggles. In a flat
+ * layer `--when-flat` is `initial`, so `var(--when-flat, X)` gives X, while
+ * `var(--when-raised, Y)` gives nothing; a raised layer swaps them. The
+ * toggles hold no colors, so the colors resolve at the control itself and a
+ * `.dark` or `.light` part inside a layer still gets its own.
+ */
+
+@layer base {
+  :root,
+  [data-material="flat"] {
+    --when-flat: initial;
+    --when-raised: ;
+  }
+
+  [data-material="raised"] {
+    --when-flat: ;
+    --when-raised: initial;
+  }
+}
+
+/* The face of a button or other control: flat or raised, as its layer is. */
+@utility material-face {
+  border: 1px solid var(--when-raised, var(--raised-edge)) var(--when-flat, transparent);
+  background-clip: var(--when-raised, padding-box) var(--when-flat, border-box);
+  background-color: var(--when-raised, var(--raised-face-to))
+    var(--when-flat, var(--flat-face));
+  background-image: var(
+      --when-raised,
+      linear-gradient(var(--raised-face-from), var(--raised-face-to))
+    )
+    var(--when-flat, none);
+  box-shadow: var(
+      --when-raised,
+      inset 0 1px 0 var(--raised-highlight),
+      var(--raised-shadow)
+    )
+    var(--when-flat, 0 0 #0000);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--when-raised, var(--raised-face-to))
+        var(--when-flat, var(--flat-face-hover));
+      background-image: var(
+          --when-raised,
+          linear-gradient(
+            var(--raised-face-from),
+            color-mix(in oklab, var(--raised-face-to) 50%, var(--raised-face-from))
+          )
+        )
+        var(--when-flat, none);
+    }
+  }
+
+  &:active {
+    background-color: var(--when-raised, var(--raised-face-pressed))
+      var(--when-flat, var(--flat-face-pressed));
+    background-image: none;
+    box-shadow: var(--when-raised, var(--raised-shadow-pressed))
+      var(--when-flat, 0 0 #0000);
+  }
+}
+
+/* The face of the one primary action: flat yellow, or raised yellow. */
+@utility material-face-primary {
+  border: 1px solid var(--when-raised, var(--raised-primary-edge))
+    var(--when-flat, transparent);
+  background-clip: var(--when-raised, padding-box) var(--when-flat, border-box);
+  background-color: var(--when-raised, var(--raised-primary-to))
+    var(--when-flat, var(--primary));
+  background-image: var(
+      --when-raised,
+      linear-gradient(var(--raised-primary-from), var(--raised-primary-to))
+    )
+    var(--when-flat, none);
+  box-shadow: var(
+      --when-raised,
+      inset 0 1px 0 var(--raised-primary-highlight),
+      var(--raised-shadow)
+    )
+    var(--when-flat, 0 0 #0000);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--when-raised, var(--raised-primary-to))
+        var(--when-flat, color-mix(in oklab, var(--primary) 88%, var(--foreground)));
+    }
+  }
+
+  &:active {
+    background-image: none;
+    box-shadow: var(--when-raised, var(--raised-shadow-pressed))
+      var(--when-flat, 0 0 #0000);
+  }
+}
+
+/* The chosen segment of a segmented control: raised, or a flat solid fill. */
+@utility material-thumb {
+  border: 1px solid var(--when-raised, var(--raised-edge)) var(--when-flat, transparent);
+  background-clip: var(--when-raised, padding-box) var(--when-flat, border-box);
+  background-color: var(--when-raised, var(--raised-face-to))
+    var(--when-flat, var(--flat-thumb));
+  background-image: var(
+      --when-raised,
+      linear-gradient(var(--raised-face-from), var(--raised-face-to))
+    )
+    var(--when-flat, none);
+  box-shadow: var(
+      --when-raised,
+      inset 0 1px 0 var(--raised-highlight),
+      var(--raised-shadow)
+    )
+    var(--when-flat, 0 0 #0000);
+}
+
+/* A recessed track that holds choices: a segmented control's, a switch's. */
+@utility material-well {
+  background-color: var(--when-raised, var(--well-face))
+    var(--when-flat, var(--flat-face));
+  box-shadow: var(--when-raised, var(--well-shadow)) var(--when-flat, 0 0 #0000);
+}
+
+/* A floating raised layer. Pair it with data-material="raised". */
+@utility material-panel {
+  border: 1px solid var(--panel-edge);
+  background-clip: padding-box;
+  background-color: var(--panel-face-to);
+  background-image: linear-gradient(var(--panel-face-from), var(--panel-face-to));
+  box-shadow:
+    inset 0 1px 0 var(--panel-highlight),
+    var(--panel-shadow);
+  color: var(--foreground);
+}
+
+/*
+ * Rounded corners that curve continuously, as Apple's do, where the browser
+ * draws `corner-shape`; elsewhere they stay quarter circles. A squircle
+ * starts its curve where a circle of the same radius does but bends more
+ * tightly, so the radius grows by 1.5 to keep the corner as soft as the
+ * circular one it replaces. Use it on panels and cards, not on pills.
+ */
+@utility rounded-continuous-* {
+  border-radius: --value(--radius-*, [length]);
+
+  @supports (corner-shape: squircle) {
+    corner-shape: squircle;
+    border-radius: calc(--value(--radius- *, [length]) * 1.5);
+  }
+}

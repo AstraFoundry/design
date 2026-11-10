@@ -54,6 +54,9 @@
   --color-substrate-tint-ink: var(--substrate-tint-ink);
   --color-substrate-tint-muted: var(--substrate-tint-muted);
   --color-brand: var(--yellow-500);
+  --color-flat-face: var(--flat-face);
+  --color-flat-face-hover: var(--flat-face-hover);
+  --color-flat-face-pressed: var(--flat-face-pressed);
 
   --font-display: var(--font-stack-display);
   --font-sans: var(--font-stack-sans);
@@ -66,6 +69,8 @@
   --radius-xl: 14px;
   --radius-2xl: 18px;
   --radius-3xl: 24px;
+  --radius-tile: 28px;
+  --radius-stage: 40px;
 
   --shadow-1: var(--shadow-1);
   --shadow-2: var(--shadow-2);

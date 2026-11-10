@@ -10,7 +10,7 @@ Sunbeam is quiet, warm and precise. Warm ink on paper, one yellow, photographs f
 ## 0. Before you build
 
 - Read the project first and build the way it already does (React, Tailwind, plain CSS, Go UI). Do not add an animation or UI library the project does not use.
-- If the project depends on `@astrafoundry/design`, use it: `styles.css` for tokens, `Backdrop`, `FloatingStage`, `AppWindow`, `useInViewOnce`, `useStepTimeline`, `Button`, `LinkButton`. Otherwise copy the token values from section 2.
+- If the project depends on `@astrafoundry/design`, use it: `styles.css` for tokens, `Backdrop`, `FloatingStage`, `AppWindow`, `useInViewOnce`, `useStepTimeline`, `Button`, `IconButton`, `LinkButton`, `Panel`, `Segmented`. A MyGo app uses `github.com/AstraFoundry/design/packages/mygo/sunbeam` for the same tokens and components. Otherwise copy the token values from section 2.
 - Every color is a token. No physical colors (`#fff`, `zinc-500`, `bg-white`) and no `dark:` branches in components; light and dark live in the token layer.
 - Every user-facing string comes from the project's dictionary. Art and mock UI carry no untranslated copy.
 
@@ -136,6 +136,33 @@ Values are generated from `tokens/sunbeam.json` (the single source). Scales and 
 | `--figure-lift`   | `0`    | `0.05` |
 | `--figure-soften` | `0`    | `0.35` |
 
+**Material (flat and raised surfaces; see Materials)**
+
+| Token                        | Light                                                                                                           | Dark                                                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `--flat-face`                | `rgb(20 18 14 / 0.05)`                                                                                          | `rgb(255 255 255 / 0.07)`                                                                            |
+| `--flat-face-hover`          | `rgb(20 18 14 / 0.08)`                                                                                          | `rgb(255 255 255 / 0.1)`                                                                             |
+| `--flat-face-pressed`        | `rgb(20 18 14 / 0.11)`                                                                                          | `rgb(255 255 255 / 0.13)`                                                                            |
+| `--flat-thumb`               | `hsl(0 0% 100%)`                                                                                                | `hsl(26 6% 24%)`                                                                                     |
+| `--raised-face-from`         | `hsl(0 0% 100%)`                                                                                                | `hsl(30 4% 29%)`                                                                                     |
+| `--raised-face-to`           | `hsl(40 12% 95%)`                                                                                               | `hsl(30 4% 23.5%)`                                                                                   |
+| `--raised-face-pressed`      | `hsl(40 10% 93.5%)`                                                                                             | `hsl(30 4% 21.5%)`                                                                                   |
+| `--raised-edge`              | `rgb(20 18 14 / 0.08)`                                                                                          | `rgb(0 0 0 / 0.42)`                                                                                  |
+| `--raised-highlight`         | `rgb(255 255 255 / 0.95)`                                                                                       | `rgb(255 255 255 / 0.15)`                                                                            |
+| `--raised-shadow`            | `0 1px 1px rgb(20 18 14 / 0.04), 0 2px 6px -1px rgb(20 18 14 / 0.08)`                                           | `0 1px 1px rgb(0 0 0 / 0.2), 0 2px 6px -1px rgb(0 0 0 / 0.45)`                                       |
+| `--raised-shadow-pressed`    | `0 1px 1px rgb(20 18 14 / 0.04)`                                                                                | `0 1px 1px rgb(0 0 0 / 0.2)`                                                                         |
+| `--raised-primary-from`      | `hsl(48 100% 60%)`                                                                                              | same                                                                                                 |
+| `--raised-primary-to`        | `hsl(46 100% 49%)`                                                                                              | same                                                                                                 |
+| `--raised-primary-edge`      | `rgb(110 70 0 / 0.16)`                                                                                          | `rgb(0 0 0 / 0.35)`                                                                                  |
+| `--raised-primary-highlight` | `rgb(255 255 255 / 0.5)`                                                                                        | `rgb(255 255 255 / 0.4)`                                                                             |
+| `--panel-face-from`          | `hsl(40 14% 97.6%)`                                                                                             | `hsl(30 3% 22.5%)`                                                                                   |
+| `--panel-face-to`            | `hsl(40 10% 95.8%)`                                                                                             | `hsl(30 3% 20.5%)`                                                                                   |
+| `--panel-edge`               | `rgb(20 18 14 / 0.07)`                                                                                          | `rgb(0 0 0 / 0.4)`                                                                                   |
+| `--panel-highlight`          | `rgb(255 255 255 / 0.8)`                                                                                        | `rgb(255 255 255 / 0.12)`                                                                            |
+| `--panel-shadow`             | `0 1px 2px rgb(20 18 14 / 0.06), 0 12px 32px -8px rgb(20 18 14 / 0.16), 0 32px 64px -16px rgb(20 18 14 / 0.14)` | `0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.5), 0 32px 64px -16px rgb(0 0 0 / 0.45)` |
+| `--well-face`                | `rgb(20 18 14 / 0.055)`                                                                                         | `rgb(255 255 255 / 0.06)`                                                                            |
+| `--well-shadow`              | `inset 0 1px 2px rgb(20 18 14 / 0.06)`                                                                          | `inset 0 1px 2px rgb(0 0 0 / 0.25)`                                                                  |
+
 <!-- tokens:end -->
 
 Tailwind v4 utilities map 1:1: `bg-background`, `text-foreground`, `bg-card`, `text-muted-foreground`, `border-border`, `bg-primary`, `bg-substrate`, `text-substrate-hi`, `bg-substrate-focus`, `bg-substrate-tint`, `shadow-1` … `shadow-5`.
@@ -179,7 +206,26 @@ Tailwind v4 utilities map 1:1: `bg-background`, `text-foreground`, `bg-card`, `t
 | substrate  | Always dark backstage behind demos when no photo is licensed.   |
 | tint       | Secondary chips set on a photograph. Translucent fill, no blur. |
 
-Forbidden: `backdrop-filter` glass, outer glows, colored or gradient borders, gradient text, colored shadows. The only gradient is the ink scrim (`--scrim` at ≤ 55% fading to transparent) under text on a photograph.
+Forbidden: `backdrop-filter` glass, outer glows, colored or gradient borders, gradient text, colored shadows. Two gradients exist: the ink scrim (`--scrim` at ≤ 55% fading to transparent) under text on a photograph, and the faint top-to-bottom face of the raised material below (one hue, a few percent of lightness).
+
+**Flat and raised** — A layer has one material, and everything in it takes that material. Material follows elevation, not the component: the same button is flat in a toolbar and raised in a panel.
+
+|                  | Flat                                                                                 | Raised                                                                                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Where            | The page and the window's chrome: title bars, toolbars, sidebars, cards in the flow. | A layer floating above them (panel, popover, menu, dialog, HUD) and every control inside it.                                                                   |
+| Control face     | One fill, `--flat-face` (translucent ink). No edge, no shadow, no gradient.          | `--raised-face-from` → `--raised-face-to` top to bottom, a 1px translucent `--raised-edge`, a 1px `--raised-highlight` inside the top edge, `--raised-shadow`. |
+| Hover / press    | `--flat-face-hover` / `--flat-face-pressed`.                                         | The gradient's foot lightens / the face goes solid `--raised-face-pressed` and drops to `--raised-shadow-pressed`. Both scale to 0.97.                         |
+| Track of choices | `--flat-face`; the choice made is a solid `--flat-thumb`.                            | Recessed: `--well-face` with `--well-shadow`; the choice made is the one raised face in it, the others have no face.                                           |
+| The layer itself | No surface of its own, or a `card` with a hairline.                                  | `--panel-face-*` gradient, `--panel-edge`, `--panel-highlight`, three-layer `--panel-shadow`; `tile` radius with an 8px inset.                                 |
+| Dark mode        | Translucent white fills.                                                             | Faces a lighter gray than the panel under them, near-black edges, a white highlight at about 15%, half-black shadows.                                          |
+
+1. Never mix materials in one layer. A flat part inside a panel opens a flat layer of its own.
+2. Raise controls and floating layers only: never text, content, page cards or a whole window. Images, previews and thumbnails take no material; a chosen thumbnail shows a ring at an offset, not a face.
+3. A raised layer's corners are concentric with its controls: `tile` 28px − 8px inset = 20px, the radius of a 40px pill. They curve continuously where the platform draws it (`corner-shape: squircle` on the web, macOS in MyGo); pills stay pills.
+4. In the dark, a face is lighter than what it sits on and its shadow is darker. A darker face, or a light glow, reads as a hole.
+5. A layer may take the other scheme from the page, as a dark panel over a light page: give the panel its own scheme rather than restyling its controls.
+
+On the web: `Panel`, or `data-material="raised"` on any layer, and the `material-face`, `material-face-primary`, `material-thumb`, `material-well`, `material-panel` and `rounded-continuous-*` utilities; `Button`, `IconButton` and `Segmented` follow their layer. In MyGo: `sunbeam.Panel`, `sunbeam.Layer`, and `sunbeam.Face`, `PrimaryFace`, `Thumb`, `Well` and `PanelSurface` for elements of your own.
 
 ## 5. Backdrop cards
 
@@ -188,7 +234,7 @@ A backdrop card is a rounded card whose base is a motion-blurred natural photogr
 **The photograph**
 
 - Natural subjects (flowers, foliage, grass, night sky) with real camera motion: pans, swirls, long exposures. Never a stock gradient, never AI-generated abstraction, never a screenshot.
-- From the backdrop manifest (`packages/design/assets/backdrops.json`): licensed, credited, rendered to AVIF and WebP, never hotlinked. The dominant color and a blur placeholder show until it loads.
+- From the backdrop manifest (`packages/web/assets/backdrops.json`): licensed, credited, rendered to AVIF and WebP, never hotlinked. The dominant color and a blur placeholder show until it loads.
 - Used as is: no tint layer, no blur filter, no vignette. Choose a darker photo instead of darkening a bright one; add the ink scrim only behind text.
 
 **Anatomy** (one inset `p` shared by every zone: 24px on phones, 48–64px from 1024px)
@@ -315,6 +361,7 @@ Pick the object the step is about (a key, a microphone). When the step has no ob
 | Make one surface solid; quiet the rest with tint.                   | Frost every element with glass blur.                         |
 | Set captions in muted light ink at the card inset, bottom-left.     | Center bold white text with a drop shadow.                   |
 | Use inner radius = outer radius − inset.                            | Give nested elements the same radius as their container.     |
+| Keep one material per layer: flat chrome, raised floating panels.   | Raise a toolbar button while its neighbors stay flat.        |
 | Spend yellow on the one primary action or result.                   | Use yellow for badges, borders, icons and links at once.     |
 | Play a scene once when it is seen and rest on the result.           | Loop, bounce or pulse forever.                               |
 | Show a real object as shaded solids with one part lit.              | Draw a wireframe, or a glossy render with labels and arrows. |
@@ -325,7 +372,7 @@ Pick the object the step is about (a key, a microphone). When the step has no ob
 1. Any physical color, `dark:` branch, glass blur, glow, gradient text or colored shadow? Replace with tokens or remove.
 2. More than one yellow element on the screen? Keep the primary action only.
 3. On a photograph: exactly one solid surface? Mark and caption on the same inset? Text over a bright area has the ink scrim?
-4. Nested corners concentric?
+4. Nested corners concentric? Each layer one material, flat on the page and raised only where it floats, with dark faces lighter than what they sit on?
 5. Every animation: plays once in view, rests on the final frame, honors reduced motion, uses the Sunbeam curves?
 6. A 3D figure: a real object at real proportions, solids painted back to front, at most one lit part, the three arrival slots done by 2.1s, one physical response, controls outside the drawing?
 7. Every string from the dictionary, none repeating a title or icon?
