@@ -239,6 +239,14 @@ make whoami
 make publish       # whoami, pnpm check, then publish to npm (from the repository root)
 ```
 
+To release from CI, set the repository secret `NPM_TOKEN` (an npm automation or publish-scoped granular token for `@astrafoundry`), bump `version` in this package.json, merge, and push a matching tag:
+
+```sh
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+The [release workflow](../../.github/workflows/release.yml) refuses a tag that does not match the version, then runs `make publish`. Run it by hand from the Actions tab for a dry run.
+
 ## Publishing
 
 `publishConfig.access` is `public` and `publishConfig.exports` swaps the entry points to `dist/` on npm. `files` ships `dist`, `src` (for Tailwind's `@source` and source maps), tokens, fonts, the manifest, originals, the skill, DESIGN.md and the backdrop script. Examples are not part of the tarball.
