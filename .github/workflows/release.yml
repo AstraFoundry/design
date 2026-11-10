@@ -24,6 +24,9 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # The npm environment holds NPM_TOKEN (or reads the organization's) and
+    # its protection rules decide who may release.
+    environment: npm
     timeout-minutes: 20
     steps:
       - name: Checkout
