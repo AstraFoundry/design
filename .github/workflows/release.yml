@@ -1,12 +1,25 @@
 name: Release
 
+# Publishes @astrafoundry/design (packages/web) to npm with `make publish`.
+#   - Push a tag vX.Y.Z that matches packages/web/package.json to publish.
+#   - Run it by hand (Actions → Release → Run workflow) for a dry run.
+# Needs the repository secret NPM_TOKEN: an npm automation (or granular,
+# publish-scoped) token for the @astrafoundry scope.
+# The Go module is released by its own tag, packages/mygo/vX.Y.Z, which this
+# workflow ignores.
+
 on:
   push:
     tags: ["v*.*.*"]
+  workflow_dispatch:
 
 permissions:
   contents: read
   id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -38,7 +51,21 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Check the tag matches the package version
+        if: github.event_name == 'push'
+        run: |
+          version=$(node -p "require('./packages/web/package.json').version")
+          if [ "${GITHUB_REF_NAME}" != "v${version}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match packages/web/package.json version ${version}."
+            exit 1
+          fi
+
       - name: Publish to npm
+        if: github.event_name == 'push'
         run: make publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Dry run
+        if: github.event_name == 'workflow_dispatch'
+        run: make check && pnpm --filter @astrafoundry/design publish --dry-run --no-git-checks --access public
