@@ -31,6 +31,12 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: packages/mygo/go.mod
+          cache-dependency-path: packages/mygo/go.sum
+
       - name: Install
         run: pnpm install --frozen-lockfile
 

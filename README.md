@@ -1,210 +1,193 @@
-# @astrafoundry/design
+<h1 align="center">Sunbeam</h1>
 
-The shared visual layer of AstraFoundry sites: Sunbeam tokens for Tailwind v4, vendored beUI motion components, presentation primitives, and the floating mock UI stage (product demos on soft, motion-blurred photographs).
+<p align="center">
+  AstraFoundry's design system for the web and for native apps drawn by MyGo.<br />
+  Warm ink on paper, one yellow, flat chrome and raised layers.
+</p>
 
-This repository is the public place to contribute taste: tokens, components, and examples. `@astrafoundry/design` is the versioned package sites install. Product sites must not copy these files.
+<p align="center">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-14120e?style=flat-square" /></a>
+  <a href="https://github.com/AstraFoundry/design/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/AstraFoundry/design/ci.yml?branch=main&color=14120e&style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/@astrafoundry/design"><img alt="npm" src="https://img.shields.io/npm/v/@astrafoundry/design?color=14120e&style=flat-square" /></a>
+  <a href="https://pkg.go.dev/github.com/AstraFoundry/design/packages/mygo/sunbeam"><img alt="Go Reference" src="https://img.shields.io/badge/go-reference-14120e?style=flat-square" /></a>
+</p>
 
-The package contains no user-facing copy. Every label, title and accessible name comes in through props from the site's dictionary. See [CONTRIBUTING.md](CONTRIBUTING.md).
+<p align="center">
+  <a href="packages/web">Web</a>
+  ·
+  <a href="packages/mygo">MyGo</a>
+  ·
+  <a href="packages/web/skills/sunbeam/SKILL.md">Specification</a>
+  ·
+  <a href="packages/web/DESIGN.md">DESIGN.md</a>
+  ·
+  <a href="CONTRIBUTING.md">Contributing</a>
+</p>
 
-## Contents
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/hero-dark.jpg" />
+    <img src="docs/images/hero-light.jpg" alt="A product window on a motion-blurred photograph of a meadow. The window's title bar, sidebar and cards are flat. A capture panel floats over its corner, raised: its buttons, its segmented control and its edge have a soft gradient, a hairline and a shadow." width="960" />
+  </picture>
+</p>
 
-| Path                  | What                                                                                                                                                                             |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens/sunbeam.json` | Token values, the single source. `tokens/sunbeam.css`, the skill's token tables and the DESIGN.md front matter are generated from it (`pnpm tokens:build`; tests fail on drift). |
-| `DESIGN.md`           | Sunbeam in the open DESIGN.md format (published at `/design.md`); see [DESIGN.md](#designmd).                                                                                    |
-| `skills/sunbeam/`     | `SKILL.md`, the Sunbeam specification as an Agent Skill (published at `/design` and `/design/skill.md`).                                                                         |
-| `tokens/sunbeam.css`  | `:root` / `.dark` semantic tokens, ink and yellow scales, the always-dark substrate, warm two-layer shadows.                                                                     |
-| `tokens/theme.css`    | Tailwind v4 `@theme inline` mapping, `@custom-variant dark`, keyframes and utilities; `@source` for the package itself.                                                          |
-| `tokens/base.css`     | Document defaults: body colors and font, selection, focus ring, reduced motion.                                                                                                  |
-| `fonts/cjk.css`       | Font stacks with Chinese (`:lang(zh)`) and Japanese (`:lang(ja)`) fallbacks.                                                                                                     |
-| `styles.css`          | All of the above, in order.                                                                                                                                                      |
-| `src/ui`              | `Button`, `LinkButton`, `Container`, `Reveal`, `Brand`, `BrandMark`, `ChatMessage`, `SiteHeaderShell`, `SiteFooterShell`, `LocaleSwitch`, `LocaleList`.                          |
-| `src/mock`            | `Backdrop`, `BackdropCard`, `FloatingStage`, `AppWindow`, `DesktopWindow`, `MockFrame`, `useStepTimeline`, `useInViewOnce`.                                                      |
-| `src/beui`            | Vendored beUI. See [`docs/beui.md`](docs/beui.md).                                                                                                                               |
-| `assets/`             | Backdrop manifest, originals and the image build script.                                                                                                                         |
-| `examples/taste`      | A consumer of this package. Add further taste examples beside it; they are not published.                                                                                        |
+## Quiet, warm and precise
 
-## Use in a Next.js site
+Sunbeam is one design language with two implementations that share every token: React components and Tailwind v4 tokens for the web, and a Go package for native windows that [MyGo](https://github.com/egoist/mygo) draws on the GPU.
 
-Install the published package:
+- **One source of truth.** Every color, radius, space and text style lives in [`sunbeam.json`](packages/web/tokens/sunbeam.json). The CSS, the specification's tables, DESIGN.md and the Go tokens are generated from it, and the tests fail when any of them drifts.
+- **Two materials, one rule.** The page and its chrome are flat. Layers that float above them are raised, along with everything inside them. Components pick the material up from their layer, so you never choose it by hand.
+- **Made to be read by agents.** The [Sunbeam skill](packages/web/skills/sunbeam/SKILL.md) and [DESIGN.md](packages/web/DESIGN.md) state the rules for people and coding agents alike.
+- **Accessible by default.** Keyboard focus is always visible, segmented controls are real radio groups, and motion respects reduced-motion settings on both platforms.
+
+## Packages
+
+| Package                          | For                                                                       | Install                                               |
+| -------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [`packages/web`](packages/web)   | Next.js and React sites: Tailwind v4 tokens, components, mock demo stages | `npm install @astrafoundry/design`                    |
+| [`packages/mygo`](packages/mygo) | Native apps with MyGo's `ui` package: the same tokens and components      | `go get github.com/AstraFoundry/design/packages/mygo` |
+| [`examples`](examples)           | Taste examples that consume the web package (not published)               |                                                       |
+
+## Materials: flat and raised
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/materials-dark.png" />
+    <img src="docs/images/materials-light.png" alt="The same controls twice: on the left, flat on the page, as fills with no edges or shadows; on the right, raised in a panel, with a gradient, a hairline edge, a top highlight and a shadow." width="960" />
+  </picture>
+</p>
+
+A layer has one material, and every control in it takes that material. The material follows the layer, not the component: the same button is flat in a toolbar and raised in a panel.
+
+|                  | Flat                                                    | Raised                                                                                          |
+| ---------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Where            | The page and its chrome: title bars, toolbars, sidebars | A floating layer (panel, popover, menu, dialog) and every control in it                         |
+| Control          | One translucent fill, with no edge and no shadow        | A faint top-to-bottom gradient, a translucent hairline, a 1px top highlight and layered shadows |
+| Track of choices | A fill, with the choice made as a solid thumb           | A recessed well, with the choice made as its one raised face                                    |
+| Dark mode        | Translucent white fills                                 | Faces lighter gray than the panel, with near-black edges and half-black shadows                 |
+
+Corners nest concentrically: a panel's 28px radius minus its 8px inset is the 20px radius of the 40px pills inside it. Where the platform supports it, corners curve continuously, using `corner-shape: squircle` on the web and MyGo's continuous corners on macOS.
+
+## Components
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/components-dark.png" />
+    <img src="docs/images/components-light.png" alt="Sunbeam's components: buttons in three sizes and three variants, round icon buttons, a segmented control, and a raised panel holding them." width="960" />
+  </picture>
+</p>
+
+| Component    | Web (`@astrafoundry/design/ui`)    | MyGo (`sunbeam`)                                       |
+| ------------ | ---------------------------------- | ------------------------------------------------------ |
+| Button       | `Button`, `LinkButton`             | `Button`, `PrimaryButton`, `GhostButton`               |
+| Icon button  | `IconButton`                       | `IconButton`                                           |
+| Segmented    | `Segmented`                        | `Segmented`, `SegmentedIcons`                          |
+| Panel        | `Panel`                            | `Panel`                                                |
+| Layers       | `data-material="raised"`           | `Layer(sunbeam.Raised, …)`                             |
+| Own controls | `material-face`, `material-well` … | `Face`, `PrimaryFace`, `Thumb`, `Well`, `PanelSurface` |
+| Scheme       | `.dark`, `.light`, `Panel scheme`  | `Use`, `Scheme`                                        |
+
+The web package also ships the site shell (`SiteHeaderShell`, `SiteFooterShell`, `LocaleSwitch`), mock product demos on photographs (`FloatingStage`, `AppWindow`, `BackdropCard`), and vendored [beUI](https://beui.dev) motion components.
+
+## Native, with MyGo
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/mygo-gallery-dark.png" />
+    <img src="docs/images/mygo-gallery-light.png" alt="The MyGo gallery, drawn by MyGo itself: a flat toolbar, and raised panels in light and dark." width="900" />
+  </picture>
+</p>
+
+This image is drawn by MyGo itself, not a browser: the package's own gallery, rendered headlessly. The Go components follow the same rules as the web ones:
+
+```go
+func (app *App) view(c *ui.Context) {
+	sunbeam.Use(c) // Sunbeam's colors, light or dark as the system is
+	sunbeam.Button(c, "Chat") // flat: the window's chrome
+	sunbeam.Scheme(c, true, func() { // a dark panel, whatever the window
+		sunbeam.Panel(c, func() { // raised, and everything in it
+			if sunbeam.Button(c, "Capture in portrait mode").Clicked() {
+				app.capture()
+			}
+		})
+	})
+}
+```
+
+## Quick start on the web
 
 ```sh
 npm install @astrafoundry/design
 ```
-
-```json
-{ "dependencies": { "@astrafoundry/design": "0.1.0" } }
-```
-
-`0.1.0` is the package version in this repository. The [release workflow](.github/workflows/release.yml) publishes it by running `make publish` when a `v*.*.*` tag is pushed and the `NPM_TOKEN` secret is set. Until a version exists on npm, depend on this git repository instead of copying the source:
-
-```json
-{ "dependencies": { "@astrafoundry/design": "github:AstraFoundry/design#<commit>" } }
-```
-
-Peer dependencies: `react`, `react-dom` 19, `motion` 13, `tailwindcss` 4; optionally `next-themes` (theme toggle), `shiki` (code blocks) and `sharp` (backdrop build).
-
-**Transpile.** Git installs and this repository resolve TypeScript sources. The npm tarball's `publishConfig` points `exports` at compiled ESM in `dist/`. Add the package to `transpilePackages` either way:
-
-```ts
-// next.config.ts
-const config = { transpilePackages: ["@astrafoundry/design"] };
-export default config;
-```
-
-**Styles.** Import Tailwind, then the package, in the global stylesheet. `theme.css` registers the package's own sources with `@source`, so its classes are generated without extra configuration.
 
 ```css
 @import "tailwindcss";
 @import "@astrafoundry/design/styles.css";
 ```
 
-**Fonts.** Load the Latin faces with `next/font` and expose them as CSS variables; the CJK fallbacks apply by `<html lang>`.
-
 ```tsx
-const display = Fraunces({ subsets: ["latin"], variable: "--font-latin-display" });
-const sans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-latin-sans",
-});
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-latin-mono" });
-// <html lang={tag} className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+import { Button, IconButton, Panel, Segmented } from "@astrafoundry/design/ui";
+
+<Panel scheme="dark">
+  <IconButton label={copy.download}>
+    <Download />
+  </IconButton>
+  <Button variant="secondary">{copy.capture}</Button>
+  <Segmented label={copy.view} value={view} onValueChange={setView} options={views} />
+</Panel>;
 ```
 
-**Theme.** Dark mode is the `.dark` class on `<html>` (for example `next-themes` with `attribute="class"`). Components use semantic utilities only and never write `dark:`.
+See the [web package](packages/web/README.md) for fonts, themes, mock demos, backdrops and publishing, and the [MyGo package](packages/mygo/README.md) for the Go API.
 
-## Components
+## For AI agents
 
-```tsx
-import { Brand, Container, LinkButton, SiteHeaderShell } from "@astrafoundry/design/ui";
-import {
-  AppWindow,
-  FloatingStage,
-  useInViewOnce,
-  useStepTimeline,
-} from "@astrafoundry/design/mock";
-import { TextReveal } from "@astrafoundry/design/beui/motion/text-reveal";
-```
-
-- `LinkButton` renders a plain anchor; pass the site's locale-aware link as `as={AppLink}`. `SiteFooterShell` takes the same through `linkAs`.
-- `SiteHeaderShell` takes `brand`, `nav`, `actions` and a `mobileMenu(close)` render function; `menuLabels` is required with a mobile menu.
-- `LocaleSwitch` and `LocaleList` take the label and the list of `{ locale, tag, name, href, current }` links; switching locale is a full page load.
-
-### Mock demos
-
-A demo is a mock window on a `FloatingStage`, driven by a scripted timeline that starts when the reader scrolls to it:
-
-```tsx
-"use client";
-
-const DELAYS = [900, 1400, 1100] as const;
-
-export function ProductDemo({ label }: { label: string }) {
-  const [ref, inView] = useInViewOnce<HTMLDivElement>(0.2);
-  const { step } = useStepTimeline(DELAYS, inView);
-  return (
-    <FloatingStage backdrop="field" priority>
-      <div ref={ref}>
-        <AppWindow label={label} className="h-[520px]">
-          {/* product-specific mock content keyed off `step` */}
-        </AppWindow>
-      </div>
-    </FloatingStage>
-  );
-}
-```
-
-Rules the primitives enforce or expect:
-
-- Mock surfaces are solid (`bg-card`, hairline border, `shadow-5`) with real hierarchy. No glass, glow or colored gradients. Text set over the photo gets the ink scrim only (`FloatingStage scrim="top" | "bottom"`).
-- `AppWindow`, `DesktopWindow` and `MockFrame` announce the demo as one image (`role="img"` with the required `label`) and make its contents `inert`. Interactive controls such as a replay button go outside the window.
-- `useStepTimeline` waits for `running` (pair it with `useInViewOnce`) and, under `prefers-reduced-motion`, reports the final step immediately and schedules nothing. `Reveal` renders in place under reduced motion.
-- Product-specific mocks (Arion's dictation pill, Telo's chat layout, Lyra's workspace) live in the consuming site's widgets, not here.
-
-### Backdrop cards
-
-`BackdropCard` is Sunbeam's signature surface: a photograph, the mark and wordmark top-left, one solid focus surface (`bg-substrate-focus`, white in both modes) flanked by tint chips that bleed off the edges, a status line under it and a muted caption bottom-left on the same inset as the mark. The wordmark (`wordmarkAs`) and caption are real text; the focus row is `inert` and hidden from assistive technology. Pass `played={inView}` to play the focus row's entrance once, and `guides` to draw the inset, the focus axis and the numbered zones.
-
-```tsx
-const [ref, inView] = useInViewOnce<HTMLDivElement>(0.4);
-<div ref={ref}>
-  <BackdropCard
-    backdrop="gladiolus"
-    wordmark={copy.name}
-    mark={<BrandMark />}
-    before={{ title: copy.token, detail: "--yellow-500" }}
-    focus={copy.message}
-    after={{ title: copy.export }}
-    status={copy.status}
-    caption={copy.caption}
-    played={inView}
-  />
-</div>;
-```
-
-## Agent skill
-
-`skills/sunbeam/SKILL.md` is the Sunbeam specification for people and coding agents: principles, tokens, type, materials, backdrop cards, feature tiles, 3D demonstration figures, motion, copy and a review checklist. Its token tables are generated; edit the prose, then run `pnpm tokens:build`. Install it with the skills CLI (`npx skills add https://github.com/AstraFoundry/design/tree/main/skills/sunbeam`), download it from `https://astrafoundry.si/design/skill.md`, or read `skills/sunbeam/SKILL.md` from the installed package.
-
-## DESIGN.md
-
-`DESIGN.md` is Sunbeam in the open [DESIGN.md](https://github.com/google-labs-code/design.md) format, for any agent or design tool that reads it. `pnpm tokens:build` writes its front matter from `tokens/sunbeam.json`: colors as hex with `{colors.x}` aliases, a `dark-` twin of every semantic color, the `typography`, `rounded`, `spacing` and `components` groups, and a derived `-dark` variant of every component that uses a mode-dependent color. The body is written by hand in the format's section order. `pnpm test` runs the official linter (`@google/design.md`) and fails on any error or warning, including a component pair below WCAG AA contrast. Fetch it with `curl -fsSL https://astrafoundry.si/design.md -o DESIGN.md`, or import `@astrafoundry/design/DESIGN.md`.
-
-## Backdrops
-
-`assets/backdrops.json` lists every backdrop: `id`, `status`, `source` (original under `assets/`), `sourceUrl`, `author`, `license`, `focalPoint`, `dominantColor`, `usage`, `notes`. Originals are committed as optimized JPEGs (about 1 MB at most, at least 2400 px wide) in `assets/source/`; nothing is hotlinked at runtime.
-
-Render a site's images into its public directory:
+Give your coding agent the specification, and it will build in Sunbeam on either platform:
 
 ```sh
-# in this repository (paths are relative to where you run the command)
-pnpm assets:build <outDir>
-
-# in another repository, with sharp installed
-pnpm exec astrafoundry-backdrops public/backdrops
+npx skills add https://github.com/AstraFoundry/design/tree/main/packages/web/skills/sunbeam
 ```
 
-For each `ready` entry it writes `<id>/wide-1200`, `wide-2400` (1.62:1) and `tall-900` (2:3) as AVIF and WebP, plus `desktop.jpg` (800 × 1000, under 200 KB) for native apps. Crops are centered on the focal point. In this repository the script also regenerates `src/mock/backdrops.generated.ts` (blur placeholder, average color, object position) and the manifest's `dominantColor`; commit those with any manifest or original change. The build fails, naming the entry, when a ready original is missing or too small. `pending-source` entries are skipped with a warning.
+| File                                               | Contents                                                                                          |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [`SKILL.md`](packages/web/skills/sunbeam/SKILL.md) | Principles, tokens, type, materials, backdrop cards, figures, motion, copy and a review checklist |
+| [`DESIGN.md`](packages/web/DESIGN.md)              | Sunbeam in the open DESIGN.md format, linted for WCAG AA contrast                                 |
+| [`sunbeam.json`](packages/web/tokens/sunbeam.json) | Every token value                                                                                 |
 
-`<Backdrop id="field" />` then renders a decorative `<picture>` (portrait crop on narrow portrait screens, AVIF before WebP) over the placeholder, served from `/backdrops/<id>/` (`basePath` to change). Only ready ids type-check. `backdropCredits` lists every entry's source, author and license for a credits page.
+## Run locally
 
-| id             | Status         | Use          | Source                                                                                                                                  |
-| -------------- | -------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `field`        | ready          | Lyra         | Lyra's sign-in photo (`lyra` `apps/web/public/brand/login-hero.jpg`); photographer not recorded                                         |
-| `arion-meadow` | pending-source | Arion        | [Unsplash `FTbxkhiPPKM`](https://unsplash.com/photos/motion-blurred-flowers-in-meadow-FTbxkhiPPKM)                                      |
-| `telo`         | ready          | Telo         | [Unsplash `IpcLnWfa4Mo`](https://unsplash.com/photos/yellow-flowers-and-green-leaves-swirl-in-motion-IpcLnWfa4Mo), DL314 Lin            |
-| `brand-hero`   | ready          | astrafoundry | [Unsplash `0EggWy3ac68`](https://unsplash.com/photos/star-trails-over-silhouetted-trees-at-night-0EggWy3ac68), Travis Fish              |
-| `gladiolus`    | ready          | design       | [Unsplash `Jk_9EwoLXnY`](https://unsplash.com/photos/pink-gladiolus-flowers-with-green-foliage-in-motion-Jk_9EwoLXnY), Eugene Golovesov |
-| `pink-motion`  | ready          | design       | [Unsplash `DjZ5xwr1cq4`](https://unsplash.com/photos/pink-flowers-with-motion-blur-effect-DjZ5xwr1cq4), Raphael Nicolas                 |
-
-To finish a pending entry: save the original as `assets/source/<id>.jpg`, fill in `author`, `license` and `focalPoint`, set `status` to `ready`, run `assets:build`, and commit the original, manifest and generated module together.
-
-## Scripts
+Node.js 24, the pinned pnpm and Go 1.27 are required (`GOTOOLCHAIN=auto` downloads Go 1.27 for you).
 
 ```sh
-pnpm build         # tsc to dist/
-pnpm typecheck
-pnpm lint
-pnpm test          # token and skill drift check + vitest
-pnpm tokens:build  # regenerate tokens/sunbeam.css and the skill's token tables
-pnpm assets:build <outDir>
-pnpm check
-make login         # npm login for the @astrafoundry scope
-make whoami
-make publish       # whoami, pnpm check, then publish to npm
+git clone https://github.com/AstraFoundry/design.git
+cd design
+pnpm install
+pnpm mygo:gallery   # open the native gallery
 ```
-
-## Publishing
-
-`publishConfig.access` is `public` and `publishConfig.exports` swaps the entry points to `dist/` on npm. `files` ships `dist`, `src` (for Tailwind's `@source` and source maps), tokens, fonts, the manifest, originals, the skill, DESIGN.md and the backdrop script. Examples are not part of the tarball.
-
-The project [`.npmrc`](.npmrc) sends the `@astrafoundry` scope to the public npm registry. `make login` writes the token to your user npm config. Do not commit a token.
 
 ```sh
-make login     # npm login --scope=@astrafoundry --registry=https://registry.npmjs.org/
-make whoami    # the logged-in npm user
-make publish   # confirm login, run pnpm check, then pnpm publish --access public
+pnpm check          # web: typecheck, lint, test, build · Go: gofmt, vet, test
+pnpm tokens:build   # after editing sunbeam.json
+pnpm readme:images  # re-render the images in this README (needs Playwright's Chromium)
 ```
 
-`make publish` keeps npm's git checks on a local publish. When `CI` is set, as it is on GitHub Actions, it passes `--no-git-checks` so a tag checkout can publish. Pushing a `v*.*.*` tag runs [`.github/workflows/release.yml`](.github/workflows/release.yml), which runs `make publish` with `NPM_TOKEN` as `NODE_AUTH_TOKEN`. No version has been published from this repository until that workflow succeeds.
+## Contributing
+
+| Location                 | Purpose                                                            |
+| ------------------------ | ------------------------------------------------------------------ |
+| `packages/web/tokens/`   | `sunbeam.json` (the source) and the generated and hand-written CSS |
+| `packages/web/src/ui/`   | Web components                                                     |
+| `packages/web/src/mock/` | Mock demo stages and backdrops                                     |
+| `packages/mygo/sunbeam/` | MyGo components and the generated Go tokens                        |
+| `packages/web/skills/`   | The Sunbeam specification                                          |
+| `docs/images/`           | The README's images, rendered by `pnpm readme:images`              |
+
+A component that both platforms have keeps the same name, rules and tokens in each, so change it in both. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+## Release
+
+- `@astrafoundry/design`: push a `vX.Y.Z` tag, and the release workflow publishes it to npm.
+- The Go module: push a `packages/mygo/vX.Y.Z` tag.
+
+## License
+
+MIT. Photographs and vendored beUI keep their own terms; see [NOTICE.md](packages/web/NOTICE.md).

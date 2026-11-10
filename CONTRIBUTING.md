@@ -1,10 +1,10 @@
 # Contributing taste
 
-This repository is the AstraFoundry design system. `@astrafoundry/design` is the versioned package. Change the source here; do not paste tokens or components into a product site.
+This repository is the AstraFoundry design system, Sunbeam, for two platforms: `packages/web` is the versioned npm package `@astrafoundry/design`, and `packages/mygo` is the Go module for native apps drawn by [MyGo](https://github.com/egoist/mygo). Change the source here; do not paste tokens or components into a product site or app.
 
 ## Tokens
 
-Edit `tokens/sunbeam.json`, then regenerate the CSS, the skill tables and the DESIGN.md front matter:
+Edit `packages/web/tokens/sunbeam.json`, then regenerate the CSS, the skill tables, the DESIGN.md front matter and the Go tokens (`packages/mygo/sunbeam/tokens_gen.go`):
 
 ```sh
 pnpm tokens:build
@@ -15,9 +15,11 @@ pnpm test
 
 ## Components
 
-Shared presentation components go in `src/ui`. Mock stages go in `src/mock`. Vendored beUI stays in `src/beui`; follow [`docs/beui.md`](docs/beui.md) when adding one.
+Web components go in `packages/web/src/ui`; mock stages in `packages/web/src/mock`. Vendored beUI stays in `packages/web/src/beui`; follow [`docs/beui.md`](packages/web/docs/beui.md) when adding one.
 
-Components take every label through props. They use semantic utilities (`bg-background`, `text-foreground`) and do not write `dark:` or physical colors. `src/beui` is the exception, because it is third-party code.
+A component that both platforms have keeps the same name, the same rules and the same tokens in each: `Button`, `IconButton`, `Panel` and `Segmented` are in `packages/web/src/ui` and in `packages/mygo/sunbeam`. Add or change it in both, and keep the materials rule: flat on the page and its chrome, raised in a floating layer.
+
+Components take every label through props (in Go, through arguments). Web components use semantic utilities (`bg-background`, `text-foreground`) and do not write `dark:` or physical colors; Go components take colors from `sunbeam.Colors(c)`. `src/beui` is the exception, because it is third-party code.
 
 ## Examples
 
@@ -32,4 +34,4 @@ pnpm install
 pnpm check
 ```
 
-Node.js 24 and the pinned pnpm are required.
+`pnpm check` typechecks, lints, tests and builds the web package, then gofmt-checks, vets and tests the Go module. Node.js 24, the pinned pnpm and Go 1.27 (the version `packages/mygo/go.mod` names; `GOTOOLCHAIN=auto` fetches it) are required.
