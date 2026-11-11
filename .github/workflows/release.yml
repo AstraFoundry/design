@@ -28,6 +28,11 @@ jobs:
     # its protection rules decide who may release.
     environment: npm
     timeout-minutes: 20
+    # The environment secret is NPM_TOKEN. setup-node writes
+    # `_authToken=${NODE_AUTH_TOKEN}` and, when that variable is unset, exports
+    # a placeholder. `make publish` then runs `npm whoami` and gets 401.
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
