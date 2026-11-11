@@ -1,0 +1,39 @@
+name: Package status
+
+# Reads the published @astrafoundry/design package with GITHUB_TOKEN.
+# Prints the name, version, visibility, and html_url. No tokens.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://npm.pkg.github.com
+          scope: "@astrafoundry"
+
+      - name: Show the published package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "registry-version=$(npm view @astrafoundry/design version --registry https://npm.pkg.github.com)"
+          gh api "orgs/AstraFoundry/packages?package_type=npm" --jq '.[] | {name,visibility,html_url,version_count}'
+          for name in design @astrafoundry/design; do
+            echo "package=$name"
+            gh api "orgs/AstraFoundry/packages/npm/${name}" --jq '{name,visibility,html_url,version_count}' || true
+            gh api "orgs/AstraFoundry/packages/npm/${name}/versions" --jq '.[] | {name,html_url}' || true
+          done
