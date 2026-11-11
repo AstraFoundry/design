@@ -6,6 +6,11 @@ import { Button } from "../src/ui/button.js";
 import { IconButton } from "../src/ui/icon-button.js";
 import { Panel } from "../src/ui/panel.js";
 import { Segmented } from "../src/ui/segmented.js";
+import { LocaleSwitch } from "../src/ui/locale-switch.js";
+import {
+  CenterMorphModal,
+  CenterMorphModalContent,
+} from "../src/beui/components/motion/center-morph-modal.js";
 
 afterEach(cleanup);
 
@@ -83,6 +88,9 @@ describe("Segmented", () => {
     expect(theme.className).not.toContain("material-thumb");
     // Equal columns, so the raised pill keeps its size as the choice moves.
     expect(screen.getByRole("radiogroup").className).toContain("auto-cols-fr");
+    // A tight flex row must not squeeze the segments, their labels or icons.
+    expect(screen.getByRole("radiogroup").className).toContain("shrink-0");
+    expect(image.className).toContain("[&_svg]:shrink-0");
   });
 
   it("chooses with a click and with the arrows, Home and End", () => {
@@ -106,5 +114,47 @@ describe("Segmented", () => {
     render(<Picker iconOnly />);
     const theme = screen.getByRole("radio", { name: "Theme" });
     expect(theme.textContent).toBe("");
+  });
+});
+
+describe("floating layers", () => {
+  it("raises an open dialog and its close button, over an unblurred scrim", async () => {
+    render(
+      <CenterMorphModal open onOpenChange={() => {}}>
+        <CenterMorphModalContent
+          ariaLabel="Confirm"
+          closeButtonLabel="Close"
+          backdropLabel="Dismiss"
+        >
+          <p>Body</p>
+        </CenterMorphModalContent>
+      </CenterMorphModal>,
+    );
+    const dialog = await screen.findByRole("dialog", { name: "Confirm" });
+    expect(dialog.getAttribute("data-material")).toBe("raised");
+    expect(dialog.className).toContain("material-panel");
+    expect(screen.getByRole("button", { name: "Close" }).className).toContain(
+      "material-face",
+    );
+    expect(document.body.innerHTML).not.toContain("backdrop-blur");
+  });
+
+  it("raises the locale popover", async () => {
+    // jsdom has no ResizeObserver; the popover measures its trigger with one.
+    globalThis.ResizeObserver ??= class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    } as unknown as typeof ResizeObserver;
+    render(
+      <LocaleSwitch
+        label="Language"
+        links={[{ locale: "en", tag: "en", name: "English", href: "/", current: true }]}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Language" }));
+    const popover = await screen.findByRole("dialog");
+    expect(popover.getAttribute("data-material")).toBe("raised");
+    expect(popover.className).toContain("material-panel");
   });
 });

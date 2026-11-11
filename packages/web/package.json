@@ -1,6 +1,6 @@
 {
   "name": "@astrafoundry/design",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sunbeam tokens, components, and mock stages for AstraFoundry. This repository accepts community taste contributions; @astrafoundry/design is the versioned npm package.",
   "license": "MIT",
   "type": "module",

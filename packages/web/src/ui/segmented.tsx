@@ -29,7 +29,8 @@ export interface SegmentedProps<V extends string = string> {
  * Segments are as wide as the widest, so the raised pill keeps its size as
  * the choice moves. It is a radio group: Tab reaches the chosen segment, and
  * the arrows, Home and End choose another. The track's 4px inset keeps its
- * pills concentric.
+ * pills concentric. It never shrinks below its segments in a flex row, so a
+ * tight row wraps its neighbors instead of squeezing the labels and icons.
  */
 export function Segmented<V extends string>({
   options,
@@ -72,7 +73,7 @@ export function Segmented<V extends string>({
       role="radiogroup"
       aria-label={label}
       className={cn(
-        "material-well inline-grid auto-cols-fr grid-flow-col gap-1 rounded-full p-1",
+        "material-well inline-grid shrink-0 auto-cols-fr grid-flow-col gap-1 rounded-full p-1",
         className,
       )}
     >
@@ -95,7 +96,7 @@ export function Segmented<V extends string>({
               "inline-flex h-8 select-none items-center justify-center gap-1.5 rounded-full border border-transparent text-sm font-medium whitespace-nowrap",
               "transition-[background-color,color,box-shadow] duration-150 ease-out",
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-              "[&_svg]:size-4",
+              "[&_svg]:size-4 [&_svg]:shrink-0",
               iconOnly ? "w-10" : "px-3",
               selected
                 ? "material-thumb text-foreground"

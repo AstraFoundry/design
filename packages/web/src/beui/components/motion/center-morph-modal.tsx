@@ -3,7 +3,9 @@
 // Local changes: the backdrop and close-button accessible labels are required
 // props so copy stays in the project's dictionary; the content scrolls when it
 // is taller than the viewport; the focus effect runs only on open/close (the
-// upstream version re-ran on every parent render and stole focus while typing).
+// upstream version re-ran on every parent render and stole focus while typing);
+// the dialog is a raised Sunbeam layer with a warm shadow over an unblurred
+// ink scrim.
 
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -198,14 +200,14 @@ export function CenterMorphModalContent({
                 transition={{ duration: reduce ? 0.1 : 0.28, ease: EASE_OUT }}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "pointer-events-auto fixed inset-0 z-[100] h-full w-full cursor-default bg-background/10 backdrop-blur-sm",
+                  "pointer-events-auto fixed inset-0 z-[100] h-full w-full cursor-default bg-scrim/25",
                   backdropClassName,
                 )}
               />
 
               <div
                 inert={!isPresent}
-                className="pointer-events-none fixed inset-4 z-[100] flex items-center justify-center overflow-y-auto drop-shadow-2xl"
+                className="pointer-events-none fixed inset-4 z-[100] flex items-center justify-center overflow-y-auto [filter:drop-shadow(0_2px_4px_rgb(20_18_14/0.06))_drop-shadow(0_20px_40px_rgb(20_18_14/0.18))] dark:[filter:drop-shadow(0_2px_4px_rgb(0_0_0/0.3))_drop-shadow(0_20px_40px_rgb(0_0_0/0.55))]"
               >
                 <div className="flex max-h-full w-full flex-col items-center py-8">
                   <motion.div
@@ -231,8 +233,9 @@ export function CenterMorphModalContent({
                     transition={
                       reduce ? { duration: 0.14, ease: EASE_OUT } : CENTER_UNFOLD_TRANSITION
                     }
+                    data-material="raised"
                     className={cn(
-                      "pointer-events-auto relative w-full max-w-[26rem] origin-center overflow-hidden rounded-[30px] border border-border bg-background will-change-[clip-path]",
+                      "material-panel pointer-events-auto relative w-full max-w-[26rem] origin-center overflow-hidden rounded-[30px] will-change-[clip-path]",
                       className,
                     )}
                   >
@@ -254,7 +257,7 @@ export function CenterMorphModalContent({
                         duration: reduce ? 0.12 : 0.2,
                         ease: EASE_OUT,
                       }}
-                      className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-foreground/[0.05] text-muted-foreground transition-colors hover:bg-foreground/[0.08] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="material-face absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-[background-color,color,box-shadow] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <X className="h-4 w-4" aria-hidden="true" />
                     </motion.button>

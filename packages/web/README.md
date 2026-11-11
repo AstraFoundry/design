@@ -41,16 +41,29 @@ npm install @astrafoundry/design
 ```
 
 ```json
-{ "dependencies": { "@astrafoundry/design": "0.1.0" } }
+{ "dependencies": { "@astrafoundry/design": "0.1.1" } }
 ```
 
-`0.1.0` is the package version in this repository. The [release workflow](../../.github/workflows/release.yml) publishes it to GitHub Packages (`https://npm.pkg.github.com`) by running `make publish` when a `v*.*.*` tag is pushed. The workflow authenticates with `GITHUB_TOKEN`. Install from that registry:
+`0.1.1` is the package version in this repository. The [release workflow](../../.github/workflows/release.yml) publishes it to GitHub Packages (`https://npm.pkg.github.com`) by running `make publish` when a `v*.*.*` tag is pushed. The workflow authenticates with `GITHUB_TOKEN`. Install from that registry:
 
 ```sh
 npm install @astrafoundry/design --registry https://npm.pkg.github.com
 ```
 
-Until a version exists there, depend on this git repository instead of copying the source. The package lives in `packages/web`, which pnpm reaches with `path:`:
+GitHub Packages asks for a token with `read:packages` even for this public package. A site maps the scope in its committed `.npmrc` and keeps the token in the user-level config, because pnpm ignores tokens in a project `.npmrc`:
+
+```ini
+# .npmrc (committed)
+@astrafoundry:registry=https://npm.pkg.github.com
+```
+
+```sh
+pnpm config set "//npm.pkg.github.com/:_authToken" "<token with read:packages>"
+```
+
+In GitHub Actions, `actions/setup-node` with `registry-url: https://npm.pkg.github.com` and `scope: "@astrafoundry"` writes that line; pass the job's `GITHUB_TOKEN` as `NODE_AUTH_TOKEN` and grant `packages: read`.
+
+To try a change before it is published, depend on this git repository instead of copying the source. The package lives in `packages/web`, which pnpm reaches with `path:`:
 
 ```json
 {
@@ -60,7 +73,7 @@ Until a version exists there, depend on this git repository instead of copying t
 }
 ```
 
-Peer dependencies: `react`, `react-dom` 19, `motion` 13, `tailwindcss` 4; optionally `next-themes` (theme toggle), `shiki` (code blocks) and `sharp` (backdrop build).
+Peer dependencies: `react`, `react-dom` 19, `motion` 13, `tailwindcss` 4; optionally `next-themes` (theme toggle), `shiki` (code blocks) and `sharp` (backdrop build). GitHub Packages drops `peerDependenciesMeta` from the registry metadata, so pnpm installs the optional three as well when the package comes from there.
 
 **Transpile.** Git installs and this repository resolve TypeScript sources. The npm tarball's `publishConfig` points `exports` at compiled ESM in `dist/`. Add the package to `transpilePackages` either way:
 
@@ -248,7 +261,7 @@ make publish       # whoami, pnpm check, then publish to npm (from the repositor
 To release from CI, bump `version` in this package.json, merge, and push a matching tag. Actions publishes with its own `GITHUB_TOKEN`; do not add an npmjs token:
 
 ```sh
-git tag v0.1.0 && git push origin v0.1.0
+git tag v0.1.1 && git push origin v0.1.1
 ```
 
 The [release workflow](../../.github/workflows/release.yml) refuses a tag that does not match the version, then runs `make publish`. Run it by hand from the Actions tab for a dry run.

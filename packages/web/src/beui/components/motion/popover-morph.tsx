@@ -283,6 +283,8 @@ export function MorphPopoverContent({
           data-morph-popover-portal=""
           // Wrapper carries the shadow as a drop-shadow filter, which hugs the
           // clipped shape below (box-shadow would just get clipped away).
+          // Local change: the two outer layers of Sunbeam's warm --panel-shadow,
+          // half black in the dark, instead of a neutral black drop shadow.
           variants={wrap}
           initial={reduce ? { opacity: 0 } : "hidden"}
           animate={reduce ? { opacity: 1 } : "show"}
@@ -294,7 +296,7 @@ export function MorphPopoverContent({
             visibility: layout ? "visible" : "hidden",
             transformOrigin: originFor(side, align),
           }}
-          className="fixed z-[9999] [filter:drop-shadow(0_10px_18px_rgba(0,0,0,0.14))]"
+          className="fixed z-[9999] [filter:drop-shadow(0_1px_2px_rgb(20_18_14/0.06))_drop-shadow(0_12px_24px_rgb(20_18_14/0.16))] dark:[filter:drop-shadow(0_1px_2px_rgb(0_0_0/0.3))_drop-shadow(0_12px_24px_rgb(0_0_0/0.5))]"
         >
           <motion.div
             ref={ctx.contentRef}
@@ -303,10 +305,9 @@ export function MorphPopoverContent({
             aria-labelledby={ctx.triggerId}
             variants={clip}
             style={{ borderRadius: radius }}
-            className={cn(
-              "overflow-hidden border border-border bg-background",
-              className,
-            )}
+            // Local change: a popover floats, so it is a raised Sunbeam layer.
+            data-material="raised"
+            className={cn("material-panel overflow-hidden", className)}
           >
             {children}
           </motion.div>

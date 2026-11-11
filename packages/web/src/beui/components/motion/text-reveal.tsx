@@ -1,7 +1,10 @@
 "use client";
 // beui.dev/components/motion/text-animation
-// Local change: a zero-width space (U+200B) separates units like a space
-// does, so Chinese and Japanese copy can mark its phrase boundaries.
+// Local changes: a zero-width space (U+200B) separates units like a space
+// does, so Chinese and Japanese copy can mark its phrase boundaries. With
+// reduced motion every unit still settles at y 0 and no blur: the static HTML
+// and the first client render carry the full entrance state (the preference
+// reads false until hydration ends), so the final state must reset it too.
 
 import { motion, type Transition, useInView } from "motion/react";
 import { useReducedMotion } from "../../lib/hooks/use-reduced-motion.js";
@@ -92,12 +95,14 @@ export function TextReveal({
             ? { opacity: 0 }
             : { y: yOffset, opacity: 0, filter: `blur(${blur}px)` };
           const animate = shouldAnimate
-            ? reduce
-              ? { opacity: 1 }
-              : { y: 0, opacity: 1, filter: "blur(0px)" }
+            ? { y: 0, opacity: 1, filter: "blur(0px)" }
             : initial;
           const transition: Transition = reduce
-            ? { opacity: { duration: 0.25, ease: EASE_OUT, delay: d * 0.3 } }
+            ? {
+                y: { duration: 0 },
+                filter: { duration: 0 },
+                opacity: { duration: 0.25, ease: EASE_OUT, delay: d * 0.3 },
+              }
             : {
                 y: { type: "spring" as const, ...s, delay: d },
                 opacity: { duration: 0.7, ease: EASE_OUT, delay: d },

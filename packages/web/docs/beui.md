@@ -49,10 +49,12 @@ Each modified file says so in a comment at its top. Upstream keeps English defau
 - `motion/otp-input.tsx` requires `aria-label`, has no English `<title>`, submits through an optional `name`, and uses `text-success` / `border-foreground/40` instead of `emerald-*` / `border-border-strong`.
 - `motion/checkbox.tsx` has no English `<title>` and submits `"on"` through an optional `name` while checked.
 
+- `motion/popover-morph.tsx` is a raised Sunbeam layer: its panel carries `data-material="raised"` and `material-panel`, and its drop shadow is the warm outer part of `--panel-shadow` (half black in the dark) instead of a neutral black one.
 - `motion/theme-toggle.tsx` takes its accessible labels as props so copy stays in the dictionary.
 - `agents/code-block.tsx` takes `labels` (status and copy-button text); `agents/tool-result.tsx` takes `statusLabel`; `agents/todo-list.tsx` takes `labels` (list name, progress, item status); activity tool items take `actionLabel`.
-- `motion/text-reveal.tsx` treats a zero-width space (U+200B) as a break between units, like a space. Chinese and Japanese headlines mark their phrase boundaries with it.
+- `motion/text-reveal.tsx` treats a zero-width space (U+200B) as a break between units, like a space. Chinese and Japanese headlines mark their phrase boundaries with it. Under reduced motion its units still end at `y: 0` and no blur, with no movement: the HTML carries the entrance state until hydration ends, so the final state resets it.
   - **Breaking change versus upstream:** text that contains U+200B now splits there. Strings that carried a zero-width space for another reason will animate as separate units, and the space itself is not rendered.
+- `motion/center-morph-modal.tsx` is a raised Sunbeam layer: the dialog carries `data-material="raised"` and `material-panel`, its close button is a `material-face`, its shadow is warm (half black in the dark), and its backdrop is the ink `--scrim` at 25% with no blur.
 - `motion/center-morph-modal.tsx` is controlled-only (no built-in trigger), takes its close and backdrop labels as props, returns focus to the element that opened it, lets tall content scroll, and runs its focus effect only on open and close (upstream re-ran it on every parent render, which moved focus back to the first field while typing).
 
 ## Adding a component
