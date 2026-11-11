@@ -18,6 +18,11 @@
  * `var(--when-raised, Y)` gives nothing; a raised layer swaps them. The
  * toggles hold no colors, so the colors resolve at the control itself and a
  * `.dark` or `.light` part inside a layer still gets its own.
+ *
+ * Edges are written as border-width, border-style and border-color, never the
+ * `border` shorthand: a minifier (Lightning CSS in Next.js and Tailwind)
+ * reads two toggled colors in the shorthand as one and keeps only the flat
+ * one, so a raised face lost its edge and showed a currentColor ring.
  */
 
 @layer base {
@@ -35,7 +40,9 @@
 
 /* The face of a button or other control: flat or raised, as its layer is. */
 @utility material-face {
-  border: 1px solid var(--when-raised, var(--raised-edge)) var(--when-flat, transparent);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--when-raised, var(--raised-edge)) var(--when-flat, transparent);
   background-clip: var(--when-raised, padding-box) var(--when-flat, border-box);
   background-color: var(--when-raised, var(--raised-face-to))
     var(--when-flat, var(--flat-face));
@@ -77,8 +84,9 @@
 
 /* The face of the one primary action: flat yellow, or raised yellow. */
 @utility material-face-primary {
-  border: 1px solid var(--when-raised, var(--raised-primary-edge))
-    var(--when-flat, transparent);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--when-raised, var(--raised-primary-edge)) var(--when-flat, transparent);
   background-clip: var(--when-raised, padding-box) var(--when-flat, border-box);
   background-color: var(--when-raised, var(--raised-primary-to))
     var(--when-flat, var(--primary));
@@ -110,7 +118,9 @@
 
 /* The chosen segment of a segmented control: raised, or a flat solid fill. */
 @utility material-thumb {
-  border: 1px solid var(--when-raised, var(--raised-edge)) var(--when-flat, transparent);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--when-raised, var(--raised-edge)) var(--when-flat, transparent);
   background-clip: var(--when-raised, padding-box) var(--when-flat, border-box);
   background-color: var(--when-raised, var(--raised-face-to))
     var(--when-flat, var(--flat-thumb));

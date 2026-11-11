@@ -1,6 +1,8 @@
 // @vitest-environment node
 import { fileURLToPath } from "node:url";
-import { compile } from "@tailwindcss/node";
+import { compile, optimize } from "@tailwindcss/node";
+import cssnano from "cssnano";
+import postcss from "postcss";
 import { describe, expect, it } from "vitest";
 
 const base = fileURLToPath(new URL("..", import.meta.url));
@@ -73,6 +75,27 @@ describe("styles.css", () => {
     // Every material token the utilities read is defined for light and dark.
     for (const name of css.matchAll(/var\(--((?:raised|panel|well|flat)-[a-z-]+)\)/g)) {
       expect(css).toContain(`--${name[1]}: `);
+    }
+  });
+
+  it("keeps the raised edges through a minifier", async () => {
+    const compiler = await compile('@import "tailwindcss";\n@import "./styles.css";\n', {
+      base,
+      onDependency: () => {},
+    });
+    const built = compiler.build(["material-face", "material-face-primary", "material-thumb"]);
+    // Lightning CSS (Tailwind, Turbopack) and cssnano (Next.js with webpack)
+    // both minify production CSS. cssnano kept one color of a `border`
+    // shorthand that held two toggled ones, and raised faces lost their edge.
+    const minified = [
+      optimize(built, { minify: true }).code,
+      (await postcss([cssnano({ preset: "default" })]).process(built, { from: undefined }))
+        .css,
+    ];
+    for (const code of minified) {
+      for (const edge of ["--raised-edge", "--raised-primary-edge"]) {
+        expect(code).toContain(`var(--when-raised,var(${edge}))`);
+      }
     }
   });
 });
