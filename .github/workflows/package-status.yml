@@ -36,6 +36,6 @@ jobs:
           gh api "orgs/AstraFoundry/packages?package_type=npm" --jq '.[] | {name,visibility,html_url,version_count}'
           for name in design @astrafoundry/design; do
             echo "package=$name"
-            gh api "orgs/AstraFoundry/packages/npm/${name}" --jq '{name,visibility,html_url,version_count}' || true
+            gh api "orgs/AstraFoundry/packages/npm/${name}" --jq '{name,visibility,html_url,version_count,repository:.repository.full_name}' || true
             gh api "orgs/AstraFoundry/packages/npm/${name}/versions" --jq '.[] | {name,html_url}' || true
           done
