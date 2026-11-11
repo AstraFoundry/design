@@ -1,10 +1,12 @@
 name: Release
 
-# Publishes @astrafoundry/design (packages/web) to npm with `make publish`.
+# Publishes @astrafoundry/design (packages/web) to GitHub Packages with
+# `make publish`.
 #   - Push a tag vX.Y.Z that matches packages/web/package.json to publish.
 #   - Run it by hand (Actions → Release → Run workflow) for a dry run.
-# Needs the repository secret NPM_TOKEN: an npm automation (or granular,
-# publish-scoped) token for the @astrafoundry scope.
+# Auth is the Actions GITHUB_TOKEN (packages: write) against
+# https://npm.pkg.github.com. This workflow does not publish to npmjs and
+# does not read NPM_TOKEN.
 # The Go module is released by its own tag, packages/mygo/vX.Y.Z, which this
 # workflow ignores.
 
@@ -15,7 +17,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write
+  packages: write
 
 concurrency:
   group: release
@@ -24,15 +26,12 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    # The npm environment holds NPM_TOKEN (or reads the organization's) and
-    # its protection rules decide who may release.
-    environment: npm
     timeout-minutes: 20
-    # The environment secret is NPM_TOKEN. setup-node writes
-    # `_authToken=${NODE_AUTH_TOKEN}` and, when that variable is unset, exports
-    # a placeholder. `make publish` then runs `npm whoami` and gets 401.
+    # setup-node writes `//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}`.
+    # The value is the job's GITHUB_TOKEN, not an npmjs token. Set it before
+    # setup-node so that action does not export a placeholder.
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,7 +45,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          registry-url: https://registry.npmjs.org
+          registry-url: https://npm.pkg.github.com
+          scope: "@astrafoundry"
           cache: pnpm
 
       # make publish runs make check, which vets and tests the MyGo package too.
@@ -68,12 +68,14 @@ jobs:
             exit 1
           fi
 
-      - name: Publish to npm
+      - name: Publish to GitHub Packages
         if: github.event_name == 'push'
         run: make publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Dry run
         if: github.event_name == 'workflow_dispatch'
         run: make check && pnpm --filter @astrafoundry/design publish --dry-run --no-git-checks --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

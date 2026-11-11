@@ -8,7 +8,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-14120e?style=flat-square" /></a>
   <a href="https://github.com/AstraFoundry/design/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/AstraFoundry/design/ci.yml?branch=main&color=14120e&style=flat-square" /></a>
-  <a href="https://www.npmjs.com/package/@astrafoundry/design"><img alt="npm" src="https://img.shields.io/npm/v/@astrafoundry/design?color=14120e&style=flat-square" /></a>
+  <a href="https://github.com/AstraFoundry/design/pkgs/npm/design"><img alt="GitHub Packages" src="https://img.shields.io/badge/github%20packages-@astrafoundry%2Fdesign-14120e?style=flat-square" /></a>
   <a href="https://pkg.go.dev/github.com/AstraFoundry/design/packages/mygo/sunbeam"><img alt="Go Reference" src="https://img.shields.io/badge/go-reference-14120e?style=flat-square" /></a>
 </p>
 
