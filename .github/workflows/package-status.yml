@@ -4,7 +4,9 @@ name: Package status
 # Prints the name, version, visibility, and html_url. No tokens.
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/package-status.yml"]
 
 permissions:
   contents: read
