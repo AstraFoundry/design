@@ -3,7 +3,12 @@ name: Release
 # Publishes @astrafoundry/design (packages/web) to GitHub Packages with
 # `make publish`.
 #   - Push a tag vX.Y.Z that matches packages/web/package.json to publish.
-#   - Run it by hand (Actions → Release → Run workflow) for a dry run.
+#   - Or run it by hand on main (Actions → Release → Run workflow) with
+#     `publish` checked: it publishes the version in package.json, then tags
+#     the commit vX.Y.Z and creates the GitHub release. For when a tag cannot
+#     be pushed; the tag it creates does not start another run.
+#   - Run it by hand without `publish` for a dry run.
+# Either way, a published version also gets a GitHub release.
 # Auth is the Actions GITHUB_TOKEN (packages: write) against
 # https://npm.pkg.github.com. This workflow does not publish to npmjs and
 # does not read NPM_TOKEN.
@@ -14,9 +19,14 @@ on:
   push:
     tags: ["v*.*.*"]
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the version in packages/web/package.json, then tag and release it
+        type: boolean
+        default: false
 
 permissions:
-  contents: read
+  contents: write # the tag and the GitHub release
   packages: write
 
 concurrency:
@@ -59,23 +69,55 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Read the package version
+        id: version
+        run: echo "version=$(node -p "require('./packages/web/package.json').version")" >> "$GITHUB_OUTPUT"
+
       - name: Check the tag matches the package version
         if: github.event_name == 'push'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          version=$(node -p "require('./packages/web/package.json').version")
-          if [ "${GITHUB_REF_NAME}" != "v${version}" ]; then
-            echo "::error::Tag ${GITHUB_REF_NAME} does not match packages/web/package.json version ${version}."
+          if [ "${GITHUB_REF_NAME}" != "v${VERSION}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match packages/web/package.json version ${VERSION}."
+            exit 1
+          fi
+
+      - name: Check a manual release runs on main with an unused version
+        if: github.event_name == 'workflow_dispatch' && inputs.publish
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "::error::Publish by hand from main, not ${GITHUB_REF}."
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v${VERSION}" > /dev/null; then
+            echo "::error::Tag v${VERSION} already exists. Bump packages/web/package.json first."
             exit 1
           fi
 
       - name: Publish to GitHub Packages
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || inputs.publish
         run: make publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Tag and release
+        if: github.event_name == 'push' || inputs.publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if gh release view "v${VERSION}" > /dev/null 2>&1; then
+            echo "GitHub release v${VERSION} already exists."
+          else
+            gh release create "v${VERSION}" --target "${GITHUB_SHA}" \
+              --title "@astrafoundry/design ${VERSION}" --generate-notes
+          fi
+
       - name: Dry run
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' && !inputs.publish
         run: make check && pnpm --filter @astrafoundry/design publish --dry-run --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -264,7 +264,7 @@ To release from CI, bump `version` in this package.json, merge, and push a match
 git tag v0.1.1 && git push origin v0.1.1
 ```
 
-The [release workflow](../../.github/workflows/release.yml) refuses a tag that does not match the version, then runs `make publish`. Run it by hand from the Actions tab for a dry run.
+The [release workflow](../../.github/workflows/release.yml) refuses a tag that does not match the version, runs `make publish`, then creates the GitHub release. Run it by hand from the Actions tab for a dry run. Where a tag cannot be pushed, run it by hand on `main` with `publish` checked: it publishes the version in this package.json, then creates the `vX.Y.Z` tag and the GitHub release (and refuses a version whose tag exists).
 
 ## Publishing
 
