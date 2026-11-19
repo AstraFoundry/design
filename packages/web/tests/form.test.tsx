@@ -197,6 +197,25 @@ describe("choices", () => {
     expect(control.querySelector(".material-thumb")).toBeTruthy();
   });
 
+  it("a switch's and a slider's knobs take their layer's material, never their own", () => {
+    render(
+      <>
+        <Switch aria-label="Flat switch" />
+        <Slider aria-label="Flat slider" defaultValue={50} />
+      </>,
+    );
+    const knobs = [
+      screen
+        .getByRole("switch", { name: "Flat switch" })
+        .querySelector(".material-thumb")!,
+      screen.getByRole("slider", { name: "Flat slider" }).closest(".material-thumb")!,
+    ];
+    for (const knob of knobs) {
+      // No layer of its own: on the page the knob is a flat solid face.
+      expect(knob.closest("[data-material]")).toBeNull();
+    }
+  });
+
   it("a slider moves by its step with the arrow keys", () => {
     render(<Slider aria-label="Volume" defaultValue={40} step={10} />);
     const slider = screen.getByRole("slider", { name: "Volume" });

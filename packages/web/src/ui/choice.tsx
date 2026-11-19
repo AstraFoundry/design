@@ -123,7 +123,8 @@ const SWITCH = {
 } as const;
 
 /**
- * A switch: a recessed track whose knob is a raised face. On, the track
+ * A switch: a recessed track whose knob is the layer's thumb face (raised
+ * in a raised layer, a flat solid one on the page). On, the track
  * fills with ink. The knob runs on the spring curve, so it overshoots a
  * hair and settles into its detent.
  */
@@ -142,7 +143,6 @@ export function Switch({ className, size = "md", ...rest }: SwitchProps) {
       {...rest}
     >
       <BaseSwitch.Thumb
-        data-material="raised"
         className={cn(
           "material-thumb block rounded-full transition-[translate,width] duration-(--duration-toggle) ease-spring",
           "group-active:w-[calc(100%-1.5rem+2px)]",
@@ -180,7 +180,6 @@ export function Slider({
               key={index}
               index={index}
               aria-label={thumbLabels?.[index] ?? ariaLabel}
-              data-material="raised"
               className={cn(
                 "material-thumb size-5 rounded-full transition-[scale] duration-(--duration-press) ease-out",
                 "active:scale-110 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",

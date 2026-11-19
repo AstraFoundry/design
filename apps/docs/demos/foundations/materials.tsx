@@ -6,14 +6,14 @@ import { Download } from "lucide-react";
 function Controls() {
   return (
     <div className="flex flex-col items-start gap-3">
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button>Capture</Button>
         <Button variant="secondary">Cancel</Button>
         <IconButton label="Download">
           <Download aria-hidden />
         </IconButton>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <Segmented
           label="Mode"
           value="photo"
@@ -31,16 +31,19 @@ function Controls() {
 
 export default function Materials() {
   return (
-    <div className="grid w-full gap-6 sm:grid-cols-2">
+    <div className="grid w-full gap-6 @container [grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))]">
       <div className="flex flex-col gap-2">
         <p className="text-xs font-medium text-muted-foreground">Flat</p>
-        <div data-material="flat" className="rounded-continuous-tile p-2">
+        <div
+          data-material="flat"
+          className="w-fit max-w-full rounded-continuous-tile p-2"
+        >
           <Controls />
         </div>
       </div>
       <div className="flex flex-col gap-2">
         <p className="text-xs font-medium text-muted-foreground">Raised</p>
-        <Panel>
+        <Panel className="w-fit max-w-full">
           <Controls />
         </Panel>
       </div>
