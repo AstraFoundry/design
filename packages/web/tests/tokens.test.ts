@@ -56,6 +56,15 @@ describe("Sunbeam tokens", () => {
         tokens.material.dark,
       ].flatMap((group) => Object.keys(group ?? {})),
     );
+    for (const name of Object.keys(
+      (tokens as unknown as { motion: Record<string, string> }).motion,
+    )) {
+      defined.add(`duration-${name}`);
+    }
+    // Theme variables of theme.css, which Tailwind emits wherever they are used.
+    for (const match of read("../tokens/theme.css").matchAll(/^\s+--([a-z0-9-]+):/gm)) {
+      defined.add(match[1]!);
+    }
     for (const name of ["font-stack-display", "font-stack-sans", "font-stack-mono"]) {
       defined.add(name);
     }
@@ -63,15 +72,37 @@ describe("Sunbeam tokens", () => {
       read("../tokens/sunbeam.css"),
       read("../tokens/theme.css"),
       read("../tokens/base.css"),
+      read("../tokens/material.css"),
     ].join("\n");
     const referenced = [...sources.matchAll(/var\(--([a-z0-9-]+)(?=[,)])/g)].map(
       (m) => m[1],
     );
-    const themeLocal = new Set(["duration", "gap"]);
+    // Set by Base UI on its popups and drawers.
+    const themeLocal = new Set([
+      "duration",
+      "gap",
+      "transform-origin",
+      "drawer-swipe-movement-x",
+      "drawer-swipe-movement-y",
+      "drawer-swipe-strength",
+      "drawer-swipe-progress",
+      // The layer toggles of material.css.
+      "when-flat",
+      "when-raised",
+    ]);
     const missing = referenced.filter(
       (name) => !defined.has(name!) && !themeLocal.has(name!),
     );
     expect(missing).toEqual([]);
+  });
+
+  it("motion durations are tokens, in CSS and in Go", () => {
+    const css = read("../tokens/sunbeam.css");
+    expect(css).toContain("--duration-popup: 160ms;");
+    expect(css).toContain("--duration-popup-exit: 100ms;");
+    expect(css).toContain("--duration-press: 120ms;");
+    const go = read("../../mygo/sunbeam/tokens_gen.go");
+    expect(go).toContain("const DurationPopup = 160 * time.Millisecond");
   });
 
   it("dark mode only re-stages tokens that light mode defines", () => {

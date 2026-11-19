@@ -182,7 +182,7 @@ export function renderDesignMdFrontMatter(tokens) {
     version: "alpha",
     name: "Sunbeam",
     description:
-      "AstraFoundry's design system: warm paper and ink, one vivid yellow for the single action or result, motion-blurred natural photographs under one solid focus surface, concentric corners, and motion that plays once and rests.",
+      "AstraFoundry's design system for fast, clear interaction: warm ink on a light ground, one vivid yellow for the single action or result, flat chrome and raised floating layers, impressionist motion-blurred photographs under one solid focus surface, concentric corners, and quick motion that settles.",
     colors: designMdColors(tokens),
     typography: tokens.typography,
     rounded: tokens.rounded,
@@ -245,6 +245,9 @@ ${block(tokens.light)}
 
   /* Material */
 ${block(tokens.material.light)}
+
+  /* Motion */
+${block(Object.fromEntries(Object.entries(tokens.motion ?? {}).map(([name, value]) => [`duration-${name}`, value])))}
 }
 
 .dark {
@@ -344,7 +347,11 @@ export function renderGoTokens(tokens) {
     "",
     "package sunbeam",
     "",
-    'import "github.com/egoist/mygo/ui"',
+    "import (",
+    '\t"time"',
+    "",
+    '\t"github.com/egoist/mygo/ui"',
+    ")",
     "",
     "// Palette holds one mode of Sunbeam's semantic, art, figure and material",
     "// tokens. Each field's comment names its CSS custom property.",
@@ -379,6 +386,12 @@ export function renderGoTokens(tokens) {
   for (const [name, value] of Object.entries(tokens.spacing)) {
     out.push(`// Space${goName(name)} is the ${name} spacing, in DIPs.`);
     out.push(`const Space${goName(name)} float32 = ${px(value)}`, "");
+  }
+  for (const [name, value] of Object.entries(tokens.motion ?? {})) {
+    const match = /^(\d+)ms$/.exec(value);
+    if (!match) throw new Error(`Cannot read the duration "${value}"`);
+    out.push(`// Duration${goName(name)} is the ${name} duration.`);
+    out.push(`const Duration${goName(name)} = ${match[1]} * time.Millisecond`, "");
   }
   for (const [name, style] of Object.entries(tokens.typography)) {
     const families = style.fontFamily

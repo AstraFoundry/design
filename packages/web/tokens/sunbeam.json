@@ -1,5 +1,5 @@
 {
-  "$description": "Sunbeam token values. Single source for tokens/sunbeam.css, the skill's token tables, DESIGN.md and the MyGo package's tokens (packages/mygo/sunbeam/tokens_gen.go), all written by pnpm tokens:build. Colors are CSS color/shadow values; var(--name) refers to another token in this file. material holds the two surface materials, flat and raised, for light and dark. typography, rounded, spacing and components follow the DESIGN.md token schema; components are written for light mode and their dark twins are derived.",
+  "$description": "Sunbeam token values. Single source for tokens/sunbeam.css, the skill's token tables, DESIGN.md and the MyGo package's tokens (packages/mygo/sunbeam/tokens_gen.go), all written by pnpm tokens:build. Colors are CSS color/shadow values; var(--name) refers to another token in this file. material holds the two surface materials, flat and raised, for light and dark. motion holds the durations of interactive motion, mode-invariant. typography, rounded, spacing and components follow the DESIGN.md token schema; components are written for light mode and their dark twins are derived.",
   "scales": {
     "yellow-100": "hsl(48 100% 88%)",
     "yellow-300": "hsl(48 100% 64%)",
@@ -183,6 +183,23 @@
       "well-face": "rgb(255 255 255 / 0.06)",
       "well-shadow": "inset 0 1px 2px rgb(0 0 0 / 0.25)"
     }
+  },
+  "motion": {
+    "press": "120ms",
+    "toggle": "200ms",
+    "tooltip": "120ms",
+    "tooltip-exit": "80ms",
+    "popup": "160ms",
+    "popup-exit": "100ms",
+    "dialog": "240ms",
+    "dialog-exit": "150ms",
+    "drawer": "320ms",
+    "drawer-exit": "220ms",
+    "toast": "260ms",
+    "toast-exit": "160ms",
+    "indicator": "220ms",
+    "collapse": "220ms",
+    "collapse-exit": "180ms"
   },
   "typography": {
     "headline-display": {

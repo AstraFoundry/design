@@ -2,7 +2,11 @@
 
 package sunbeam
 
-import "github.com/egoist/mygo/ui"
+import (
+	"time"
+
+	"github.com/egoist/mygo/ui"
+)
 
 // Palette holds one mode of Sunbeam's semantic, art, figure and material
 // tokens. Each field's comment names its CSS custom property.
@@ -462,6 +466,51 @@ const SpaceCardInsetMD float32 = 40
 
 // SpaceCardInsetLG is the card-inset-lg spacing, in DIPs.
 const SpaceCardInsetLG float32 = 56
+
+// DurationPress is the press duration.
+const DurationPress = 120 * time.Millisecond
+
+// DurationToggle is the toggle duration.
+const DurationToggle = 200 * time.Millisecond
+
+// DurationTooltip is the tooltip duration.
+const DurationTooltip = 120 * time.Millisecond
+
+// DurationTooltipExit is the tooltip-exit duration.
+const DurationTooltipExit = 80 * time.Millisecond
+
+// DurationPopup is the popup duration.
+const DurationPopup = 160 * time.Millisecond
+
+// DurationPopupExit is the popup-exit duration.
+const DurationPopupExit = 100 * time.Millisecond
+
+// DurationDialog is the dialog duration.
+const DurationDialog = 240 * time.Millisecond
+
+// DurationDialogExit is the dialog-exit duration.
+const DurationDialogExit = 150 * time.Millisecond
+
+// DurationDrawer is the drawer duration.
+const DurationDrawer = 320 * time.Millisecond
+
+// DurationDrawerExit is the drawer-exit duration.
+const DurationDrawerExit = 220 * time.Millisecond
+
+// DurationToast is the toast duration.
+const DurationToast = 260 * time.Millisecond
+
+// DurationToastExit is the toast-exit duration.
+const DurationToastExit = 160 * time.Millisecond
+
+// DurationIndicator is the indicator duration.
+const DurationIndicator = 220 * time.Millisecond
+
+// DurationCollapse is the collapse duration.
+const DurationCollapse = 220 * time.Millisecond
+
+// DurationCollapseExit is the collapse-exit duration.
+const DurationCollapseExit = 180 * time.Millisecond
 
 // TypeHeadlineDisplay is the headline-display text style.
 var TypeHeadlineDisplay = TextStyle{Families: []string{"Fraunces", "Iowan Old Style", "serif"}, Size: 96, Weight: 400, LineHeight: 0.98, LetterSpacing: -0.03}

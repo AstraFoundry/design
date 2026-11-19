@@ -78,24 +78,62 @@ describe("styles.css", () => {
     }
   });
 
+  it("gives fields and popups their layer's material and Sunbeam's motion", async () => {
+    const compiler = await compile('@import "tailwindcss";\n@import "./styles.css";\n', {
+      base,
+      onDependency: () => {},
+    });
+    const css = compiler.build([
+      "material-field",
+      "popup-motion",
+      "dialog-motion",
+      "drawer-motion",
+      "backdrop-motion",
+    ]);
+    // A field is a card with a hairline on the page, and a recessed well in a raised layer.
+    expect(css).toContain(
+      "background-color: var(--when-raised, var(--well-face)) var(--when-flat, var(--card))",
+    );
+    expect(css).toContain(
+      "border-color: var(--when-raised, transparent) var(--when-flat, var(--input))",
+    );
+    // Popups grow from their anchor and leave faster than they came.
+    expect(css).toContain("transform-origin: var(--transform-origin");
+    expect(css).toContain("[data-starting-style]");
+    expect(css).toContain("[data-ending-style]");
+    expect(css).toContain("var(--duration-popup-exit)");
+    expect(css).toContain("var(--duration-dialog)");
+    expect(css).toContain("var(--duration-drawer)");
+    expect(css).toContain("transition-duration: var(--duration-popup)");
+  });
+
   it("keeps the raised edges through a minifier", async () => {
     const compiler = await compile('@import "tailwindcss";\n@import "./styles.css";\n', {
       base,
       onDependency: () => {},
     });
-    const built = compiler.build(["material-face", "material-face-primary", "material-thumb"]);
+    const built = compiler.build([
+      "material-face",
+      "material-face-primary",
+      "material-thumb",
+      "material-field",
+    ]);
     // Lightning CSS (Tailwind, Turbopack) and cssnano (Next.js with webpack)
     // both minify production CSS. cssnano kept one color of a `border`
     // shorthand that held two toggled ones, and raised faces lost their edge.
     const minified = [
       optimize(built, { minify: true }).code,
-      (await postcss([cssnano({ preset: "default" })]).process(built, { from: undefined }))
-        .css,
+      (
+        await postcss([cssnano({ preset: "default" })]).process(built, {
+          from: undefined,
+        })
+      ).css,
     ];
     for (const code of minified) {
       for (const edge of ["--raised-edge", "--raised-primary-edge"]) {
         expect(code).toContain(`var(--when-raised,var(${edge}))`);
       }
+      expect(code).toContain("var(--when-flat,var(--input))");
     }
   });
 });

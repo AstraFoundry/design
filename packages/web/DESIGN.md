@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Sunbeam
-description: "AstraFoundry's design system: warm paper and ink, one vivid yellow for the single action or result, motion-blurred natural photographs under one solid focus surface, concentric corners, and motion that plays once and rests."
+description: "AstraFoundry's design system for fast, clear interaction: warm ink on a light ground, one vivid yellow for the single action or result, flat chrome and raised floating layers, impressionist motion-blurred photographs under one solid focus surface, concentric corners, and quick motion that settles."
 colors:
   yellow-100: "#fff3c2"
   yellow-300: "#ffda47"
@@ -377,7 +377,7 @@ The full specification, with feature tiles, 3D demonstration figures and a revie
 Light mode is the default. Every semantic color has a `dark-` twin, and every component that changes in dark mode has a `-dark` variant; the twin aliases the light value where dark mode keeps it. Switch the whole set at once, never per component.
 
 - **Ramps.** Two ramps carry every other color: yellow ({colors.yellow-100}, {colors.yellow-300}, {colors.yellow-500}, {colors.yellow-700}) and warm ink ({colors.ink-50}, {colors.ink-100}, {colors.ink-200}, {colors.ink-300}, {colors.ink-400}, {colors.ink-500}, {colors.ink-700}, {colors.ink-800}, {colors.ink-900}). Use the semantic names below, not the ramps.
-- **Paper and ink.** {colors.background} is warm paper, {colors.foreground} warm ink. {colors.card} is solid content: panels, windows, mock product UI.
+- **Ground and ink.** {colors.background} is a warm light ground, {colors.foreground} warm ink. {colors.card} is solid content: panels, windows, mock product UI.
 - **Yellow.** {colors.primary} fills the single primary action and marks a result; {colors.ring} is the focus ring. {colors.accent} with {colors.accent-foreground} is a quiet highlight, used sparingly.
 - **Quiet.** {colors.secondary} and {colors.muted} fill wells and secondary controls; {colors.muted-foreground} carries leads and captions. {colors.border} and {colors.input} are 1px hairlines; {colors.faint} is the outline of drawn figures.
 - **Status.** {colors.success}, {colors.danger} and {colors.info} color icons and dots only, never running text.

@@ -125,6 +125,23 @@
     0 32px 64px -16px rgb(20 18 14 / 0.14);
   --well-face: rgb(20 18 14 / 0.055);
   --well-shadow: inset 0 1px 2px rgb(20 18 14 / 0.06);
+
+  /* Motion */
+  --duration-press: 120ms;
+  --duration-toggle: 200ms;
+  --duration-tooltip: 120ms;
+  --duration-tooltip-exit: 80ms;
+  --duration-popup: 160ms;
+  --duration-popup-exit: 100ms;
+  --duration-dialog: 240ms;
+  --duration-dialog-exit: 150ms;
+  --duration-drawer: 320ms;
+  --duration-drawer-exit: 220ms;
+  --duration-toast: 260ms;
+  --duration-toast-exit: 160ms;
+  --duration-indicator: 220ms;
+  --duration-collapse: 220ms;
+  --duration-collapse-exit: 180ms;
 }
 
 .dark {

@@ -86,7 +86,8 @@
 @utility material-face-primary {
   border-width: 1px;
   border-style: solid;
-  border-color: var(--when-raised, var(--raised-primary-edge)) var(--when-flat, transparent);
+  border-color: var(--when-raised, var(--raised-primary-edge))
+    var(--when-flat, transparent);
   background-clip: var(--when-raised, padding-box) var(--when-flat, border-box);
   background-color: var(--when-raised, var(--raised-primary-to))
     var(--when-flat, var(--primary));
@@ -169,5 +170,137 @@
   @supports (corner-shape: squircle) {
     corner-shape: squircle;
     border-radius: calc(--value(--radius- *, [length]) * 1.5);
+  }
+}
+
+/*
+ * The face of a text field. On the page it is solid content, a card with a
+ * hairline; in a raised layer it is recessed, a well with no edge, so it
+ * reads as a place to put something rather than a thing to press. Focus
+ * draws the ring outside, never a colored border.
+ */
+@utility material-field {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--when-raised, transparent) var(--when-flat, var(--input));
+  background-color: var(--when-raised, var(--well-face)) var(--when-flat, var(--card));
+  box-shadow: var(--when-raised, var(--well-shadow)) var(--when-flat, 0 0 #0000);
+}
+
+/*
+ * Motion for Base UI popups. Popover, menu, select and the like grow from
+ * their anchor on a short spring and leave faster, on the ease-out curve.
+ * They read Base UI's [data-starting-style] and [data-ending-style].
+ */
+@utility popup-motion {
+  transform-origin: var(--transform-origin, center);
+  transition-property: opacity, scale, translate;
+  transition-duration: var(--duration-popup);
+  transition-timing-function: var(--ease-spring);
+
+  &[data-starting-style] {
+    opacity: 0;
+    scale: 0.96;
+  }
+
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    transition-duration: var(--duration-popup-exit);
+    transition-timing-function: var(--ease-out);
+  }
+
+  &[data-instant] {
+    transition-duration: 0ms;
+  }
+}
+
+/* A tooltip: a quick fade with a 2px rise, and an even quicker exit. */
+@utility tooltip-motion {
+  transform-origin: var(--transform-origin, center);
+  transition-property: opacity, translate;
+  transition-duration: var(--duration-tooltip);
+  transition-timing-function: var(--ease-out);
+
+  &[data-starting-style] {
+    opacity: 0;
+    translate: 0 2px;
+  }
+
+  &[data-ending-style] {
+    opacity: 0;
+    transition-duration: var(--duration-tooltip-exit);
+  }
+
+  &[data-instant] {
+    transition-duration: 0ms;
+  }
+}
+
+/* A dialog: rises 8px from 0.96 on a spring, leaves on ease-out. */
+@utility dialog-motion {
+  transition-property: opacity, scale, translate;
+  transition-duration: var(--duration-dialog);
+  transition-timing-function: var(--ease-spring);
+
+  &[data-starting-style] {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 8px;
+  }
+
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    transition-duration: var(--duration-dialog-exit);
+    transition-timing-function: var(--ease-out);
+  }
+}
+
+/*
+ * A drawer slides from its edge on the drawer curve and follows the finger
+ * while it is swiped (Base UI sets the movement variables). A fast swipe
+ * shortens the exit: --drawer-swipe-strength runs from 0 to 1.
+ */
+@utility drawer-motion {
+  transition-property: transform;
+  transition-duration: var(--duration-drawer);
+  transition-timing-function: var(--ease-drawer);
+  transform: translate(
+    var(--drawer-swipe-movement-x, 0px),
+    var(--drawer-swipe-movement-y, 0px)
+  );
+
+  &[data-swiping] {
+    transition-duration: 0ms;
+    user-select: none;
+  }
+
+  &[data-ending-style] {
+    transition-duration: calc(
+      var(--drawer-swipe-strength, 1) * var(--duration-drawer-exit)
+    );
+  }
+}
+
+/* The ink scrim behind a dialog or drawer. */
+@utility backdrop-motion {
+  background-color: color-mix(in oklab, var(--scrim) 28%, transparent);
+  opacity: calc(1 - var(--drawer-swipe-progress, 0));
+  transition-property: opacity;
+  transition-duration: var(--duration-dialog);
+  transition-timing-function: var(--ease-out);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+
+  &[data-ending-style] {
+    transition-duration: var(--duration-dialog-exit);
+  }
+
+  &[data-swiping] {
+    transition-duration: 0ms;
   }
 }

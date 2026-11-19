@@ -2,7 +2,7 @@
 
 <p align="center">
   AstraFoundry's design system for the web and for native apps drawn by MyGo.<br />
-  Warm ink on paper, one yellow, flat chrome and raised layers.
+  Warm ink, one yellow, flat chrome and raised layers.
 </p>
 
 <p align="center">

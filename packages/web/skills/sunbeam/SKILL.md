@@ -5,7 +5,7 @@ description: Sunbeam, the AstraFoundry design system. Use when building, reviewi
 
 # Sunbeam
 
-Sunbeam is quiet, warm and precise. Warm ink on paper, one yellow, photographs for atmosphere and solid surfaces for focus. The public reference is <https://astrafoundry.si/design>; this file is the same specification in one page.
+Sunbeam is clear, quick and precise. Warm ink on a light ground, one yellow, photographs for atmosphere and solid surfaces for focus. The public reference is <https://astrafoundry.si/design>; this file is the same specification in one page.
 
 ## 0. Before you build
 
@@ -197,14 +197,14 @@ Tailwind v4 utilities map 1:1: `bg-background`, `text-foreground`, `bg-card`, `t
 
 **Surfaces**
 
-| Surface    | Use                                                             |
-| ---------- | --------------------------------------------------------------- |
-| background | The page. Warm paper in light, warm near-black in dark.         |
-| card       | Solid content: panels, windows, mock product UI.                |
-| focus      | The one solid surface on a photograph. White in both modes.     |
-| muted      | Wells, hover fills, inline code.                                |
-| substrate  | Always dark backstage behind demos when no photo is licensed.   |
-| tint       | Secondary chips set on a photograph. Translucent fill, no blur. |
+| Surface    | Use                                                              |
+| ---------- | ---------------------------------------------------------------- |
+| background | The page. A warm light ground in light, warm near-black in dark. |
+| card       | Solid content: panels, windows, mock product UI.                 |
+| focus      | The one solid surface on a photograph. White in both modes.      |
+| muted      | Wells, hover fills, inline code.                                 |
+| substrate  | Always dark backstage behind demos when no photo is licensed.    |
+| tint       | Secondary chips set on a photograph. Translucent fill, no blur.  |
 
 Forbidden: `backdrop-filter` glass, outer glows, colored or gradient borders, gradient text, colored shadows. Two gradients exist: the ink scrim (`--scrim` at ≤ 55% fading to transparent) under text on a photograph, and the faint top-to-bottom face of the raised material below (one hue, a few percent of lightness).
 
