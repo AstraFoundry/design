@@ -1,6 +1,6 @@
 "use client";
 
-import { IconButton, Segmented } from "@astrafoundry/design/ui";
+import { IconButton, Tooltip } from "@astrafoundry/design/ui";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -8,52 +8,53 @@ import { UI } from "@/lib/i18n-ui";
 import { useDocsLang } from "../lang";
 
 const ORDER = ["light", "dark", "system"] as const;
+type Choice = (typeof ORDER)[number];
+const ICON = { light: Sun, dark: Moon, system: Monitor } as const;
 
 /**
- * Light, dark or system, as a segmented control of icons; `compact`, one
- * icon button that steps through them, for narrow headers.
+ * One button that steps through light, dark and system. The icon shows the
+ * current choice and turns into the next on a short spring; the tooltip
+ * names the choice and what a press does.
  */
-export function ThemeSwitch({
-  className,
-  compact = false,
-}: {
-  className?: string;
-  compact?: boolean;
-}) {
+export function ThemeSwitch({ className }: { className?: string }) {
   const t = UI[useDocsLang()];
   const { theme, setTheme } = useTheme();
-  // The theme is known only on the client; render "system" until then.
+  // The theme is known only on the client; show "system" until then.
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  const value = mounted ? (theme ?? "system") : "system";
-  if (compact) {
-    const index = ORDER.indexOf(value as (typeof ORDER)[number]);
-    const Icon = value === "light" ? Sun : value === "dark" ? Moon : Monitor;
-    const names = { light: t.light, dark: t.dark, system: t.system };
-    return (
+  const current: Choice =
+    mounted && ORDER.includes(theme as Choice) ? (theme as Choice) : "system";
+  const next = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length]!;
+  const name = { light: t.light, dark: t.dark, system: t.system };
+  const label = `${t.theme}: ${name[current]}`;
+  return (
+    <Tooltip content={`${label} → ${name[next]}`}>
       <IconButton
-        label={`${t.theme}: ${names[value as keyof typeof names] ?? t.system}`}
+        label={label}
         variant="ghost"
         size="sm"
         className={className}
-        onClick={() => setTheme(ORDER[(index + 1) % ORDER.length]!)}
+        onClick={() => setTheme(next)}
       >
-        <Icon aria-hidden />
+        <span className="relative grid size-[18px] place-items-center">
+          {ORDER.map((choice) => {
+            const Icon = ICON[choice];
+            const on = choice === current;
+            return (
+              <Icon
+                key={choice}
+                aria-hidden
+                className={
+                  "absolute size-[18px] transition-[opacity,rotate,scale] duration-(--duration-toggle) ease-spring motion-reduce:transition-none " +
+                  (on
+                    ? "scale-100 rotate-0 opacity-100"
+                    : "scale-50 -rotate-90 opacity-0")
+                }
+              />
+            );
+          })}
+        </span>
       </IconButton>
-    );
-  }
-  return (
-    <Segmented
-      label={t.theme}
-      value={value}
-      onValueChange={setTheme}
-      iconOnly
-      className={className}
-      options={[
-        { value: "light", label: t.light, icon: <Sun aria-hidden /> },
-        { value: "dark", label: t.dark, icon: <Moon aria-hidden /> },
-        { value: "system", label: t.system, icon: <Monitor aria-hidden /> },
-      ]}
-    />
+    </Tooltip>
   );
 }

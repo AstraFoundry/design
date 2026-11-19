@@ -110,8 +110,7 @@ export function DocsHeader({ tree }: { tree?: PageTree.Root }) {
           <DocsSearch className="hidden w-56 sm:flex" />
           <DocsSearch compact className="sm:hidden" />
           <DocsLocaleSwitch />
-          <ThemeSwitch className="hidden sm:inline-grid" />
-          <ThemeSwitch compact className="sm:hidden" />
+          <ThemeSwitch />
           <a
             href={gitHubUrl}
             aria-label={t.github}
