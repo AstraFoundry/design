@@ -116,6 +116,28 @@ describe("display", () => {
     expect(screen.getAllByRole("columnheader")).toHaveLength(2);
     expect(screen.getByText("12").className).toContain("tabular-nums");
   });
+
+  it("a hovered row is a rounded face, its hairlines hidden, not a square band", () => {
+    render(
+      <Table>
+        <TableBody>
+          <TableRow data-testid="row">
+            <TableCell>Atlas</TableCell>
+            <TableCell>12</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>,
+    );
+    const row = screen.getByTestId("row");
+    // The row paints nothing itself; its cells do, rounded at the ends.
+    expect(row.className).not.toMatch(/hover:bg-/);
+    expect(row.className).toContain("hover:border-transparent");
+    expect(row.className).toContain("has-[+tr:hover]:border-transparent");
+    const cell = screen.getByText("Atlas");
+    expect(cell.className).toContain("group-hover/row:bg-flat-face");
+    expect(cell.className).toContain("first:rounded-l-[16px]");
+    expect(cell.className).toContain("last:rounded-r-[16px]");
+  });
 });
 
 describe("dates", () => {

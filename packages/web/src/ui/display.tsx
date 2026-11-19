@@ -293,17 +293,33 @@ export function TableBody({ className, ...rest }: ComponentPropsWithoutRef<"tbod
   return <tbody className={cn("[&_tr:last-child]:border-0", className)} {...rest} />;
 }
 
+/**
+ * A row. Hovered or selected, its cells form one rounded face, concentric
+ * with the card, and the hairlines above and below it step aside so the
+ * face is not cut by square lines.
+ */
 export function TableRow({ className, ...rest }: ComponentPropsWithoutRef<"tr">) {
   return (
     <tr
       className={cn(
-        "border-b border-border transition-colors hover:bg-flat-face/60 data-[state=selected]:bg-flat-face",
+        "group/row border-b border-border transition-colors duration-(--duration-press)",
+        "hover:border-transparent has-[+tr:hover]:border-transparent",
+        "data-[state=selected]:border-transparent has-[+tr[data-state=selected]]:border-transparent",
         className,
       )}
       {...rest}
     />
   );
 }
+
+/**
+ * The rounded face a hovered or selected row's cells share: 16px, the
+ * 24px card's corner less its 8px inset.
+ */
+const rowFace = cn(
+  "transition-colors duration-(--duration-press) first:rounded-l-[16px] last:rounded-r-[16px]",
+  "group-hover/row:bg-flat-face group-data-[state=selected]/row:bg-flat-face-hover",
+);
 
 type Align = "start" | "center" | "end";
 const ALIGN: Record<Align, string> = {
@@ -336,7 +352,12 @@ export function TableCell({
 }: Omit<ComponentPropsWithoutRef<"td">, "align"> & { align?: Align }) {
   return (
     <td
-      className={cn("h-11 px-3 text-foreground tabular-nums", ALIGN[align], className)}
+      className={cn(
+        "h-11 px-3 text-foreground tabular-nums",
+        rowFace,
+        ALIGN[align],
+        className,
+      )}
       {...rest}
     />
   );
