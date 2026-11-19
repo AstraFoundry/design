@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@import "@astrafoundry/design/styles.css";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+
+/* Sunbeam's own sources, demos and docs chrome generate their classes. */
+@source "../../../packages/web/src";
+@source "../components";
+@source "../demos";
+
+/*
+ * The docs chrome in Sunbeam's colors. Fumadocs reads its --color-fd-*
+ * variables; the shadcn preset maps them to the semantic tokens, and these
+ * fix the few that read differently in Sunbeam: yellow stays for the one
+ * primary action, so the docs' active links and accents are ink.
+ */
+:root,
+.dark {
+  --color-fd-primary: var(--foreground);
+  --color-fd-primary-foreground: var(--background);
+  --color-fd-accent: var(--flat-face-hover);
+  --color-fd-accent-foreground: var(--foreground);
+  --color-fd-ring: var(--ring);
+  --color-fd-overlay: color-mix(in oklab, var(--scrim) 28%, transparent);
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-accent: var(--flat-face-hover);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-ring: var(--ring);
+  --sidebar-primary-foreground: var(--background);
+  --destructive: var(--danger);
+}
+
+@theme {
+  --font-sans: var(--font-stack-sans);
+  --font-mono: var(--font-stack-mono);
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}

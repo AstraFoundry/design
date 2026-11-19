@@ -5,3 +5,8 @@ pnpm-lock.yaml
 
 # Vendored beUI (third-party code, see docs/beui.md)
 packages/web/src/beui
+
+# Docs build output
+apps/docs/.next
+apps/docs/out
+apps/docs/.source

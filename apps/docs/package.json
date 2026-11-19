@@ -1,0 +1,40 @@
+{
+  "name": "docs",
+  "private": true,
+  "type": "module",
+  "description": "The Sunbeam documentation site: every component with live demos, in Chinese and English.",
+  "scripts": {
+    "dev": "pnpm backdrops && next dev --webpack",
+    "build": "pnpm backdrops && next build --webpack",
+    "start": "serve out",
+    "backdrops": "node ../../packages/web/scripts/build-backdrops.mjs public/backdrops",
+    "typecheck": "next typegen && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "postcss": "^8.5.32",
+    "serve": "^14.2.8",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "@astrafoundry/design": "workspace:*",
+    "@base-ui/react": "^1.9.0",
+    "fumadocs-core": "16.19.4",
+    "fumadocs-mdx": "15.6.3",
+    "fumadocs-ui": "npm:@fumadocs/base-ui@16.19.4",
+    "lucide-react": "^1.66.0",
+    "motion": "^13.5.1",
+    "next": "16.4.6",
+    "next-themes": "^0.4.6",
+    "react": "^19.3.1",
+    "react-day-picker": "^10.0.2",
+    "react-dom": "^19.3.1",
+    "shiki": "^4.6.0"
+  }
+}
