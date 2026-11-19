@@ -36,6 +36,10 @@ func (app *overlays) view(c *ui.Context) {
 			sunbeam.NumberInput(c, &app.seatsState, &app.seats, 1, 50, 1, "Fewer seats", "More seats").Label("Seats").Width(140)
 			sunbeam.Menu(c, &app.menu, "Actions", func(m sunbeam.MenuBuilder) {
 				m.Item("Rename")
+				m.Submenu("Share", func(s sunbeam.MenuBuilder) {
+					s.Item("Copy link")
+					s.Item("Invite people")
+				})
 				m.Item("Duplicate")
 				m.Separator()
 				m.Check("Show grid", &app.grid)

@@ -41,23 +41,23 @@ func (app *App) view(c *ui.Context) {
 }
 ```
 
-| API                                                    | What                                                                                     |
-| ------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `Use`, `Theme`, `Scheme`                               | Theme the window, or a part of it, with Sunbeam, so MyGo's own widgets match.            |
-| `Colors`, `Light`, `Dark`, `Palette`                   | The palette of the part being built, and every semantic, art, figure and material token. |
-| `Ink50`…`Ink900`, `Yellow100`…, `Substrate…`           | The scales and the substrate.                                                            |
-| `Radius…`, `Space…`, `Type…`                           | Radii, spacing and text styles, in DIPs.                                                 |
-| `Button`, `PrimaryButton`, `GhostButton`, `IconButton` | Buttons that take their layer's material.                                                |
-| `Panel`                                                | A floating raised layer.                                                                 |
-| `Segmented`, `SegmentedIcons`, `Tabs`, `Toggle`        | A well of choices whose one raised face slides to the chosen segment.                    |
-| `Field`, `TextInput`, `NumberInput`                    | Text and number fields: solid with a hairline in the window, recessed in a raised layer. |
-| `Checkbox`, `RadioGroup`, `Switch`, `Slider`           | Choices, checked and on in ink; the switch's knob settles on a spring.                   |
-| `Select`, `Combobox`, `Menu`, `Popover`, `Dialog`      | Raised floating layers; their controls are raised with them.                             |
-| `Toasts`, `Tooltip`                                    | Raised notes at the window's edge, and short labels for icon buttons.                    |
-| `Card`, `Accordion`, `Avatar`, `Badge`, `Divider`      | Content on the window: flat, with hairlines.                                             |
-| `Progress`, `Meter`, `Spinner`                         | Ink in a recessed track, and the one loop Sunbeam allows.                                |
-| `Layer`, `Current`, `Flat`, `Raised`                   | Open a layer of a material, and read the current one.                                    |
-| `Face`, `PrimaryFace`, `Thumb`, `Well`, `PanelSurface` | The materials for elements of your own.                                                  |
+| API                                                    | What                                                                                                                                                    |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Use`, `Theme`, `Scheme`                               | Theme the window, or a part of it, with Sunbeam, so MyGo's own widgets match.                                                                           |
+| `Colors`, `Light`, `Dark`, `Palette`                   | The palette of the part being built, and every semantic, art, figure and material token.                                                                |
+| `Ink50`…`Ink900`, `Yellow100`…, `Substrate…`           | The scales and the substrate.                                                                                                                           |
+| `Radius…`, `Space…`, `Type…`                           | Radii, spacing and text styles, in DIPs.                                                                                                                |
+| `Button`, `PrimaryButton`, `GhostButton`, `IconButton` | Buttons that take their layer's material.                                                                                                               |
+| `Panel`                                                | A floating raised layer.                                                                                                                                |
+| `Segmented`, `SegmentedIcons`, `Tabs`, `Toggle`        | A well of choices whose one raised face slides to the chosen segment.                                                                                   |
+| `Field`, `TextInput`, `NumberInput`                    | Text and number fields: solid with a hairline in the window, recessed in a raised layer.                                                                |
+| `Checkbox`, `RadioGroup`, `Switch`, `Slider`           | Choices, checked and on in ink; the switch's knob settles on a spring.                                                                                  |
+| `Select`, `Combobox`, `Menu`, `Popover`, `Dialog`      | Raised floating layers; their controls are raised with them. Submenus keep a safe triangle: a diagonal move toward one passes over the rows it crosses. |
+| `Toasts`, `Tooltip`                                    | Raised notes at the window's edge, and short labels for icon buttons.                                                                                   |
+| `Card`, `Accordion`, `Avatar`, `Badge`, `Divider`      | Content on the window: flat, with hairlines.                                                                                                            |
+| `Progress`, `Meter`, `Spinner`                         | Ink in a recessed track, and the one loop Sunbeam allows.                                                                                               |
+| `Layer`, `Current`, `Flat`, `Raised`                   | Open a layer of a material, and read the current one.                                                                                                   |
+| `Face`, `PrimaryFace`, `Thumb`, `Well`, `PanelSurface` | The materials for elements of your own.                                                                                                                 |
 
 ## Materials
 

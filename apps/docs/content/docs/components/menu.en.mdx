@@ -19,6 +19,10 @@ Actions on one object.
 
 Choosing a value: use Select.
 
+## Submenus and the safe triangle
+
+With a submenu open, a pointer moving diagonally from its item toward it passes over the rows in between: they are not highlighted and the submenu stays (Base UI's `safePolygon`). Resting on another row, or veering away, switches to it. MyGo's `sunbeam.Menu` keeps the same rule and switches after a 300ms rest.
+
 ## Motion
 
 <MotionTable

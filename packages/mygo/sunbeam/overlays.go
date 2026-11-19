@@ -3,6 +3,7 @@ package sunbeam
 import (
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/egoist/mygo/ui"
 )
@@ -222,13 +223,23 @@ func Combobox(c *ui.Context, state *ComboboxState, selected *string, options []s
 
 // MenuBuilder adds the rows of a Menu.
 type MenuBuilder struct {
-	c *ui.Context
-	m ui.MenuParts
+	c   *ui.Context
+	m   ui.MenuParts
+	aim *menuAim
+}
+
+// aimed lets the pointer pass over row on its way to an open submenu: the
+// row ignores the pointer while it is inside the safe triangle.
+func (b MenuBuilder) aimed(row ui.Element) ui.Element {
+	if b.aim != nil {
+		b.aim.see(row)
+	}
+	return row
 }
 
 // Item adds an action; its Clicked reports a choice, which closes the menu.
 func (b MenuBuilder) Item(text string) ui.Element {
-	item := row(b.c, b.m.Item())
+	item := row(b.c, b.aimed(b.m.Item()))
 	return item.Children(func() { ui.Text(b.c, text).SingleLine().FontSize(TypeBodySM.Size) })
 }
 
@@ -236,7 +247,7 @@ func (b MenuBuilder) Item(text string) ui.Element {
 // while on.
 func (b MenuBuilder) Check(text string, on *bool) ui.Element {
 	p := Colors(b.c)
-	item := row(b.c, b.m.CheckItem(*on))
+	item := row(b.c, b.aimed(b.m.CheckItem(*on)))
 	item.Children(func() {
 		ui.Box(b.c).Size(14, 14).Children(func() {
 			if *on {
@@ -249,6 +260,141 @@ func (b MenuBuilder) Check(text string, on *bool) ui.Element {
 		*on = !*on
 	}
 	return item
+}
+
+// aimRest is how long the pointer may rest over another item, while a
+// submenu is open, before that item takes over: a pause means the user
+// wants it, a passing pointer is on its way to the submenu.
+const aimRest = 300 * time.Millisecond
+
+// Submenu adds an item labelled text that opens build's items in a raised
+// list beside it, as the pointer moves onto it or Right is pressed.
+func (b MenuBuilder) Submenu(text string, build func(m MenuBuilder)) ui.Element {
+	p := Colors(b.c)
+	item := b.m.SubmenuItem()
+	if b.aim != nil {
+		b.aim.see(item)
+	}
+	b.m.Submenu(item, func(panel ui.Element) {
+		popupLayer(b.c, panel, popupRadius, popupInset, func() {
+			build(MenuBuilder{c: b.c, m: b.m})
+		})
+		if b.aim != nil {
+			b.aim.track(item, panel)
+		}
+	})
+	row(b.c, item)
+	item.Children(func() {
+		ui.Text(b.c, text).SingleLine().FontSize(TypeBodySM.Size).Grow(1)
+		ui.Icon(b.c, chevronRight).Size(14, 14).TextColor(p.MutedForeground)
+	})
+	return item
+}
+
+// menuAim is the safe triangle of a menu with an open submenu: from where
+// the pointer left the submenu's item to the submenu's two near corners.
+// While the pointer moves inside it, it is on its way to the submenu, and
+// the rows it crosses do not take over; resting for aimRest, or leaving
+// the triangle, gives them the pointer back. It keeps plain values only:
+// elements live one frame.
+type menuAim struct {
+	item    ui.Rect    // the submenu's item, in window DIPs
+	sub     ui.Rect    // the submenu
+	from    [2]float32 // where the pointer was as it left the item
+	last    [2]float32 // where it was when it last moved
+	moved   time.Time  // when it last moved
+	shown   bool       // a submenu showed in the last frame
+	showing bool       // one shows in the frame being built
+	// pointer is where the pointer is in this frame, nil until a row of the
+	// menu reports it.
+	pointer *[2]float32
+}
+
+// begin starts a frame of the menu.
+func (a *menuAim) begin() {
+	a.shown, a.showing, a.pointer = a.showing, false, nil
+}
+
+// track records the open submenu, from its item and panel.
+func (a *menuAim) track(item, panel ui.Element) {
+	a.item, a.sub, a.showing = item.Bounds(), panel.Bounds(), true
+}
+
+// see records where the pointer is, read through a row of the menu.
+func (a *menuAim) see(row ui.Element) {
+	if a.pointer != nil {
+		return
+	}
+	px, py, _ := row.PointerPosition()
+	r := row.Bounds()
+	if r.W == 0 {
+		return
+	}
+	a.pointer = &[2]float32{r.X + px, r.Y + py}
+}
+
+// takes reports whether the pointer at (x, y), at frame time now, is on
+// its way to the submenu: outside the item and the submenu, inside the
+// triangle, and moving, or still for less than aimRest.
+func (a *menuAim) takes(x, y float32, now time.Time) bool {
+	if !a.shown || a.sub.W == 0 || inRect(x, y, a.item) || inRect(x, y, a.sub) {
+		return false
+	}
+	if !inTriangle(x, y, a.from, a.sub) {
+		return false
+	}
+	if p := [2]float32{x, y}; p != a.last {
+		a.last, a.moved = p, now
+	}
+	return now.Sub(a.moved) < aimRest
+}
+
+// shield lays a transparent element over the rows of the menu that takes
+// the pointer while it is on its way to the open submenu, so the rows it
+// crosses are not hovered and do not take over. Its hit test runs with the
+// pointer as it is, so a row never sees the pointer first.
+func (a *menuAim) shield(c *ui.Context) {
+	if a.pointer != nil && inRect(a.pointer[0], a.pointer[1], a.item) {
+		// Still on the item: the triangle starts from here.
+		a.from, a.last, a.moved = *a.pointer, *a.pointer, c.Now()
+	}
+	if !a.shown {
+		return
+	}
+	now := c.Now()
+	if a.pointer != nil && a.takes(a.pointer[0], a.pointer[1], now) {
+		// Look again once a rest would be over, in case the pointer stops.
+		c.After(aimRest - now.Sub(a.moved))
+	}
+	ui.Box(c).Absolute().Top(0).Left(0).Right(0).Bottom(0).ZIndex(10).AccessHidden(true).
+		HitTest(func(x, y float32, _ ui.Rect) bool { return a.takes(x, y, now) })
+}
+
+func inRect(x, y float32, r ui.Rect) bool {
+	return x >= r.X && x < r.X+r.W && y >= r.Y && y < r.Y+r.H
+}
+
+// inTriangle reports whether (x, y) lies in the triangle from from to the
+// near side of sub: its left side, or its right one when sub opens to the
+// left (as it does right to left).
+func inTriangle(x, y float32, from [2]float32, sub ui.Rect) bool {
+	near := sub.X
+	if sub.X+sub.W/2 < from[0] {
+		near = sub.X + sub.W
+	}
+	// A few DIPs of slack, so a pointer starting at the item's edge counts.
+	const slack = 6
+	a := [2]float32{from[0], from[1]}
+	b := [2]float32{near, sub.Y - slack}
+	c := [2]float32{near, sub.Y + sub.H + slack}
+	side := func(p, q, r [2]float32) float32 {
+		return (p[0]-r[0])*(q[1]-r[1]) - (q[0]-r[0])*(p[1]-r[1])
+	}
+	pt := [2]float32{x, y}
+	d1, d2, d3 := side(pt, a, b), side(pt, b, c), side(pt, c, a)
+	neg := d1 < 0 || d2 < 0 || d3 < 0
+	pos := d1 > 0 || d2 > 0 || d3 > 0
+	return !(neg && pos)
 }
 
 // Separator adds a hairline between groups of items.
@@ -264,10 +410,33 @@ func Menu(c *ui.Context, open *bool, text string, build func(m MenuBuilder)) ui.
 		Center().Cursor(ui.CursorPointer).TextColor(Colors(c).Foreground)
 	Face(c, trigger)
 	trigger.Children(func() { label(c, text) })
+	aim := aims.of(open)
+	aim.begin()
 	m.Popup(func(panel ui.Element) {
-		popupLayer(c, panel, popupRadius, popupInset, func() { build(MenuBuilder{c: c, m: m}) })
+		popupLayer(c, panel, popupRadius, popupInset, func() {
+			build(MenuBuilder{c: c, m: m, aim: aim})
+			aim.shield(c)
+		})
 	})
+	if !*open {
+		*aim = menuAim{}
+	}
 	return trigger
+}
+
+// aimStore keeps each menu's safe triangle between frames, keyed by the
+// menu's open flag, which the app keeps.
+type aimStore map[*bool]*menuAim
+
+var aims = aimStore{}
+
+func (s aimStore) of(open *bool) *menuAim {
+	if a, ok := s[open]; ok {
+		return a
+	}
+	a := &menuAim{}
+	s[open] = a
+	return a
 }
 
 // Popover shows build's content in a raised layer below anchor while
@@ -368,5 +537,6 @@ var (
 	chevronDown    = lucide(`<path d="m6 9 6 6 6-6"/>`)
 	xMark          = lucide(`<path d="M18 6 6 18M6 6l12 12"/>`)
 	minus          = lucide(`<path d="M5 12h14"/>`)
+	chevronRight   = lucide(`<path d="m9 18 6-6-6-6"/>`)
 	plus           = lucide(`<path d="M5 12h14M12 5v14"/>`)
 )

@@ -19,6 +19,10 @@ import { Menu } from "@astrafoundry/design/ui";
 
 选值：用 Select。
 
+## 子菜单与安全三角
+
+打开子菜单后，指针从触发项斜向移向子菜单，路过的其它菜单项不会抢走高亮，子菜单也不会关闭（Base UI 的 `safePolygon`）。在别的菜单项上停留，或者明显走偏，才会切换过去。MyGo 的 `sunbeam.Menu` 用同样的规则，停留 300ms 后切换。
+
 ## 动效
 
 <MotionTable

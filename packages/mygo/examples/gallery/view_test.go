@@ -105,6 +105,12 @@ func TestOverlays(t *testing.T) {
 			if err := st.Click("Actions"); err != nil {
 				t.Fatal(err)
 			}
+			// Open Share's submenu: the row under Rename (the toolbar has a
+			// Share button too, which Find would match first).
+			if r, ok := st.Find("Rename"); ok {
+				st.Move(r.X+r.W/2, r.Y+r.H/2+34)
+				st.Frame()
+			}
 			st.Advance(DurationSettle)
 			st.Frame()
 			f, err := os.Create(dir + "/mygo-overlays-" + mode.name + ".png")
