@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * @deprecated Use `Popover` from `@astrafoundry/design/ui`, built on Base UI.
+ * This vendored beUI component stays for existing sites and will be removed
+ * in a later major version.
+ */
+
 import { AnimatePresence, motion } from "motion/react";
 import { useReducedMotion } from "../../lib/hooks/use-reduced-motion.js";
 import {

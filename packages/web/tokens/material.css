@@ -304,3 +304,95 @@
     transition-duration: 0ms;
   }
 }
+
+/*
+ * A toast in Base UI's stack. Toasts behind the front one peek out 10px
+ * and shrink; hovering or focusing the stack fans them out. A toast
+ * enters from its edge on a spring, follows a swipe, and leaves the way
+ * it was swiped. Base UI sets the --toast-* variables.
+ */
+@utility toast-motion {
+  --gap: 10px;
+  --peek: 10px;
+  --dir: 1;
+  --scale: calc(max(0, 1 - (var(--toast-index) * 0.05)));
+  --shrink: calc(1 - var(--scale));
+  --height: var(--toast-frontmost-height, var(--toast-height));
+  --offset-y: calc(
+    var(--toast-offset-y) * var(--dir) * -1 + var(--toast-index) * var(--gap) *
+      var(--dir) * -1 + var(--toast-swipe-movement-y)
+  );
+  bottom: 0;
+  z-index: calc(1000 - var(--toast-index));
+  height: var(--height);
+  transform-origin: bottom center;
+  transform: translateX(var(--toast-swipe-movement-x))
+    translateY(
+      calc(
+        var(--toast-swipe-movement-y) - var(--toast-index) * var(--peek) * var(--dir) -
+          var(--shrink) * var(--height) * var(--dir)
+      )
+    )
+    scale(var(--scale));
+  transition:
+    transform var(--duration-toast) var(--ease-spring),
+    opacity var(--duration-toast) var(--ease-out),
+    height var(--duration-press) var(--ease-out);
+
+  &[data-edge="top"] {
+    --dir: -1;
+    top: 0;
+    bottom: auto;
+    transform-origin: top center;
+  }
+
+  &::after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: calc(var(--gap) + 1px);
+    content: "";
+  }
+
+  &[data-expanded] {
+    height: var(--toast-height);
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--offset-y));
+  }
+
+  &[data-starting-style] {
+    transform: translateY(calc(150% * var(--dir)));
+  }
+
+  &[data-limited] {
+    opacity: 0;
+  }
+
+  &[data-ending-style] {
+    opacity: 0;
+    transition-duration: var(--duration-toast-exit);
+    transition-timing-function: var(--ease-out);
+  }
+
+  &[data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
+    transform: translateY(calc(150% * var(--dir)));
+  }
+
+  &[data-ending-style][data-swipe-direction="down"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+  }
+
+  &[data-ending-style][data-swipe-direction="up"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+  }
+
+  &[data-ending-style][data-swipe-direction="right"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%))
+      translateY(var(--offset-y));
+  }
+
+  &[data-ending-style][data-swipe-direction="left"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%))
+      translateY(var(--offset-y));
+  }
+}

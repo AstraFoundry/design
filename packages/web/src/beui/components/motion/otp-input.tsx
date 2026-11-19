@@ -1,4 +1,10 @@
 "use client";
+
+/**
+ * @deprecated Use `OTPField` from `@astrafoundry/design/ui`, built on Base UI.
+ * This vendored beUI component stays for existing sites and will be removed
+ * in a later major version.
+ */
 // beui.dev/components/blocks/otp-input
 // Local changes: `aria-label` is required (no English default) and the
 // success check carries no <title>, so copy stays in the project's

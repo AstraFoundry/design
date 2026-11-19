@@ -1,4 +1,10 @@
 "use client";
+
+/**
+ * @deprecated Use `Dialog` from `@astrafoundry/design/ui`, built on Base UI.
+ * This vendored beUI component stays for existing sites and will be removed
+ * in a later major version.
+ */
 // beui.dev/components/motion/center-morph-modal
 // Local changes: the backdrop and close-button accessible labels are required
 // props so copy stays in the project's dictionary; the content scrolls when it

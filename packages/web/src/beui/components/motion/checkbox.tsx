@@ -1,4 +1,10 @@
 "use client";
+
+/**
+ * @deprecated Use `Checkbox` from `@astrafoundry/design/ui`, built on Base UI.
+ * This vendored beUI component stays for existing sites and will be removed
+ * in a later major version.
+ */
 // beui.dev/components/motion/checkbox
 // Local changes: the mark carries no English <title> (it is aria-hidden; the
 // button's role and aria-checked announce the state); an optional `name`

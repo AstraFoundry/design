@@ -2,6 +2,22 @@
 
 The motion components come from [beUI](https://beui.dev), a shadcn-style registry of animated React components built on Motion. They are **vendored** (copied into the repository) under `src/beui/`, not installed as a package. They were migrated from `lyra-landing` (`frontend/src/shared/beui/`) with their local modifications intact.
 
+## Deprecated
+
+Sunbeam's own components, built on [Base UI](https://base-ui.com), replace seven of these. They stay for existing sites, marked `@deprecated`, and go in a later major version. New code uses the replacement from `@astrafoundry/design/ui`.
+
+| Vendored                    | Use instead      |
+| --------------------------- | ---------------- |
+| `motion/checkbox`           | `Checkbox`       |
+| `motion/input`              | `Input`, `Field` |
+| `motion/select`             | `Select`         |
+| `motion/otp-input`          | `OTPField`       |
+| `motion/bouncy-accordion`   | `Accordion`      |
+| `motion/popover-morph`      | `Popover`        |
+| `motion/center-morph-modal` | `Dialog`         |
+
+`LocaleSwitch` now opens a `Popover` instead of `motion/popover-morph`.
+
 ## What is vendored
 
 | Component                          | Typical use                                   |
@@ -20,7 +36,7 @@ The motion components come from [beUI](https://beui.dev), a shadcn-style registr
 | `motion/center-morph-modal`        | Dialogs                                       |
 | `motion/input`                     | Form fields                                   |
 | `motion/button` (`StatefulButton`) | Submit with loading state                     |
-| `motion/popover-morph`             | Popovers (`ui/LocaleSwitch`)                  |
+| `motion/popover-morph`             | Popovers (deprecated)                         |
 | `motion/otp-input`                 | Sign-in and authenticator codes               |
 | `motion/checkbox`                  | Portal form checkboxes                        |
 

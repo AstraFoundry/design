@@ -1,4 +1,10 @@
 "use client";
+
+/**
+ * @deprecated Use `Accordion` from `@astrafoundry/design/ui`, built on Base UI.
+ * This vendored beUI component stays for existing sites and will be removed
+ * in a later major version.
+ */
 // beui.dev/components/motion/bouncy-accordion
 
 import { motion, type Transition } from "motion/react";
