@@ -41,10 +41,10 @@ npm install @astrafoundry/design
 ```
 
 ```json
-{ "dependencies": { "@astrafoundry/design": "0.2.0" } }
+{ "dependencies": { "@astrafoundry/design": "0.2.1" } }
 ```
 
-`0.2.0` is the package version in this repository. The [release workflow](../../.github/workflows/release.yml) publishes it to GitHub Packages (`https://npm.pkg.github.com`) by running `make publish` when a `v*.*.*` tag is pushed. The workflow authenticates with `GITHUB_TOKEN`. Install from that registry:
+`0.2.1` is the package version in this repository. The [release workflow](../../.github/workflows/release.yml) publishes it to GitHub Packages (`https://npm.pkg.github.com`) by running `make publish` when a `v*.*.*` tag is pushed. The workflow authenticates with `GITHUB_TOKEN`. Install from that registry:
 
 ```sh
 npm install @astrafoundry/design --registry https://npm.pkg.github.com
@@ -261,7 +261,7 @@ make publish       # whoami, pnpm check, then publish to npm (from the repositor
 To release from CI, bump `version` in this package.json, merge, and push a matching tag. Actions publishes with its own `GITHUB_TOKEN`; do not add an npmjs token:
 
 ```sh
-git tag v0.2.0 && git push origin v0.2.0
+git tag v0.2.1 && git push origin v0.2.1
 ```
 
 The [release workflow](../../.github/workflows/release.yml) refuses a tag that does not match the version, runs `make publish`, then creates the GitHub release. Run it by hand from the Actions tab for a dry run. Where a tag cannot be pushed, run it by hand on `main` with `publish` checked: it publishes the version in this package.json, then creates the `vX.Y.Z` tag and the GitHub release (and refuses a version whose tag exists).
