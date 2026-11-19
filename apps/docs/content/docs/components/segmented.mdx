@@ -43,6 +43,17 @@ import { Segmented } from "@astrafoundry/design/ui";
   ]}
 />
 
+## 滑动的选中面
+
+一组等宽分段只有一个浮起的选中面，选择改变时它用 spring 滑到新位置，像落进档位一样停下。自己写分段轨道时用 `SegmentThumb`：
+
+```tsx
+<div className="material-well relative isolate inline-grid auto-cols-fr grid-flow-col gap-1 rounded-full p-1">
+  <SegmentThumb index={chosen} count={options.length} className="-z-10" />
+  {/* 分段按钮，本身不带面 */}
+</div>
+```
+
 ## API
 
 <TypeTable

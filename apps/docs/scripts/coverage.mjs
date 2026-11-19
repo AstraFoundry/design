@@ -12,7 +12,7 @@ const covers = {
   button: ["Button", "IconButton", "LinkButton"],
   toggle: ["Toggle"],
   "toggle-group": ["ToggleGroup"],
-  segmented: ["Segmented"],
+  segmented: ["Segmented", "SegmentThumb"],
   toolbar: ["Toolbar"],
   kbd: ["Kbd"],
   spinner: ["Spinner"],

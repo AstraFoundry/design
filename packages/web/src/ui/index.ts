@@ -40,3 +40,4 @@ export * from "./popover.js";
 export * from "./toast.js";
 export * from "./display.js";
 export * from "./navigation.js";
+export { SegmentThumb, type SegmentThumbProps } from "./segment-thumb.js";

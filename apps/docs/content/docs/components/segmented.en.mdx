@@ -43,6 +43,17 @@ With reduced motion every transition jumps to its end.
   ]}
 />
 
+## The sliding face
+
+A set of equal segments has one raised face. When the choice changes it slides to the new segment on the spring and settles like a detent. For a track of your own, use `SegmentThumb`:
+
+```tsx
+<div className="material-well relative isolate inline-grid auto-cols-fr grid-flow-col gap-1 rounded-full p-1">
+  <SegmentThumb index={chosen} count={options.length} className="-z-10" />
+  {/* the segment buttons, with no face of their own */}
+</div>
+```
+
 ## API
 
 <TypeTable
