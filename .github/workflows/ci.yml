@@ -42,3 +42,6 @@ jobs:
 
       - name: Check
         run: pnpm check
+
+      - name: Build the docs site
+        run: pnpm docs:build

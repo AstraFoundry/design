@@ -42,11 +42,12 @@ Sunbeam is one design language with two implementations that share every token: 
 
 ## Packages
 
-| Package                          | For                                                                       | Install                                               |
-| -------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------- |
-| [`packages/web`](packages/web)   | Next.js and React sites: Tailwind v4 tokens, components, mock demo stages | `npm install @astrafoundry/design`                    |
-| [`packages/mygo`](packages/mygo) | Native apps with MyGo's `ui` package: the same tokens and components      | `go get github.com/AstraFoundry/design/packages/mygo` |
-| [`examples`](examples)           | Taste examples that consume the web package (not published)               |                                                       |
+| Package                          | For                                                                                | Install                                               |
+| -------------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [`packages/web`](packages/web)   | Next.js and React sites: Tailwind v4 tokens, components, mock demo stages          | `npm install @astrafoundry/design`                    |
+| [`packages/mygo`](packages/mygo) | Native apps with MyGo's `ui` package: the same tokens and components               | `go get github.com/AstraFoundry/design/packages/mygo` |
+| [`apps/docs`](apps/docs)         | The documentation site: every component with live demos, zh and en (not published) | `pnpm --filter docs dev`                              |
+| [`examples`](examples)           | Taste examples that consume the web package (not published)                        |                                                       |
 
 ## Materials: flat and raised
 
@@ -77,15 +78,19 @@ Corners nest concentrically: a panel's 28px radius minus its 8px inset is the 20
   </picture>
 </p>
 
-| Component    | Web (`@astrafoundry/design/ui`)    | MyGo (`sunbeam`)                                       |
-| ------------ | ---------------------------------- | ------------------------------------------------------ |
-| Button       | `Button`, `LinkButton`             | `Button`, `PrimaryButton`, `GhostButton`               |
-| Icon button  | `IconButton`                       | `IconButton`                                           |
-| Segmented    | `Segmented`                        | `Segmented`, `SegmentedIcons`                          |
-| Panel        | `Panel`                            | `Panel`                                                |
-| Layers       | `data-material="raised"`           | `Layer(sunbeam.Raised, …)`                             |
-| Own controls | `material-face`, `material-well` … | `Face`, `PrimaryFace`, `Thumb`, `Well`, `PanelSurface` |
-| Scheme       | `.dark`, `.light`, `Panel scheme`  | `Use`, `Scheme`                                        |
+Over 60 web components, built on [Base UI](https://base-ui.com), cover actions, forms, dates, overlays, navigation and display. The [docs site](apps/docs) shows each one live, in Chinese and English (`pnpm --filter docs dev`).
+
+| Family       | Web (`@astrafoundry/design/ui`)                                                                                                                                   | MyGo (`sunbeam`)                                                              |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Actions      | `Button`, `IconButton`, `LinkButton`, `Toggle`, `ToggleGroup`, `Segmented`, `Toolbar`, `Kbd`, `Spinner`                                                           | `Button`, `PrimaryButton`, `GhostButton`, `IconButton`, `Toggle`, `Segmented` |
+| Forms        | `Field`, `Form`, `Input`, `InputGroup`, `Textarea`, `NumberField`, `OTPField`, `Checkbox`, `RadioGroup`, `Switch`, `Slider`, `Select`, `Combobox`, `Autocomplete` | `Field`, `TextInput`, `Checkbox`, `Switch`, `Slider`                          |
+| Dates        | `Calendar`, `DatePicker` (`@astrafoundry/design/ui/calendar`)                                                                                                     |                                                                               |
+| Overlays     | `Popover`, `Tooltip`, `PreviewCard`, `Menu`, `ContextMenu`, `Menubar`, `Dialog`, `AlertDialog`, `Drawer`, `ToastProvider`, `Command`                              |                                                                               |
+| Navigation   | `Tabs`, `Accordion`, `Collapsible`, `Breadcrumb`, `Pagination`, `NavigationMenu`, `Sidebar`, `ScrollArea`                                                         | `Tabs`                                                                        |
+| Display      | `Panel`, `Card`, `Alert`, `Badge`, `Avatar`, `Separator`, `Skeleton`, `Progress`, `Meter`, `Table`, `Empty`                                                       | `Panel`, `Card`, `Badge`, `Progress`, `Divider`                               |
+| Layers       | `data-material="raised"`                                                                                                                                          | `Layer(sunbeam.Raised, …)`                                                    |
+| Own controls | `material-face`, `material-well`, `material-field` …                                                                                                              | `Face`, `PrimaryFace`, `Thumb`, `Well`, `PanelSurface`                        |
+| Scheme       | `.dark`, `.light`, `Panel scheme`                                                                                                                                 | `Use`, `Scheme`                                                               |
 
 The web package also ships the site shell (`SiteHeaderShell`, `SiteFooterShell`, `LocaleSwitch`), mock product demos on photographs (`FloatingStage`, `AppWindow`, `BackdropCard`), and vendored [beUI](https://beui.dev) motion components.
 

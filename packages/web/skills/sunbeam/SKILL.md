@@ -10,7 +10,7 @@ Sunbeam is clear, quick and precise. Warm ink on a light ground, one yellow, pho
 ## 0. Before you build
 
 - Read the project first and build the way it already does (React, Tailwind, plain CSS, Go UI). Do not add an animation or UI library the project does not use.
-- If the project depends on `@astrafoundry/design`, use it: `styles.css` for tokens, `Backdrop`, `FloatingStage`, `AppWindow`, `useInViewOnce`, `useStepTimeline`, `Button`, `IconButton`, `LinkButton`, `Panel`, `Segmented`. A MyGo app uses `github.com/AstraFoundry/design/packages/mygo/sunbeam` for the same tokens and components. Otherwise copy the token values from section 2.
+- If the project depends on `@astrafoundry/design`, use it: `styles.css` for tokens, `Backdrop`, `FloatingStage`, `AppWindow`, `useInViewOnce`, `useStepTimeline`, and the components of `@astrafoundry/design/ui` (section 12) rather than another component library. A MyGo app uses `github.com/AstraFoundry/design/packages/mygo/sunbeam` for the same tokens and components. Otherwise copy the token values from section 2.
 - Every color is a token. No physical colors (`#fff`, `zinc-500`, `bg-white`) and no `dark:` branches in components; light and dark live in the token layer.
 - Every user-facing string comes from the project's dictionary. Art and mock UI carry no untranslated copy.
 
@@ -342,7 +342,8 @@ Pick the object the step is about (a key, a microphone). When the step has no ob
 | `--ease-in-out` | `cubic-bezier(.65, 0, .35, 1)`   | Something already on screen changing shape. |
 | `--ease-drawer` | `cubic-bezier(.32, .72, 0, 1)`   | Sheets and drawers.                         |
 
-- 150ms for hover and press (`scale(.97)` on press), 200–300ms for popovers, 250–600ms per scene move, under ~3s per scene.
+- Interactive durations are tokens: `--duration-press` 120ms (`scale(.97)` on press), `--duration-toggle` 200ms, `--duration-popup` 160ms / `-exit` 100ms, `--duration-dialog` 240 / 150ms, `--duration-drawer` 320 / 220ms, `--duration-toast` 260 / 160ms, `--duration-indicator` and `--duration-collapse` 220ms. Popovers grow from `--transform-origin` on `--ease-spring`. 250–600ms per scene move, under ~3s per scene.
+- Every input answers visibly within 100ms. A switch's knob runs on the spring, so it overshoots a hair into its detent.
 - Play when seen, once. Rest on the result. Loops are only for real waiting (a shimmer while working).
 - Exits are faster than entrances. Animate `transform`, `opacity` and `filter` only.
 - Reduced motion shows the final frame and hides replay buttons.
@@ -379,3 +380,23 @@ Pick the object the step is about (a key, a microphone). When the step has no ob
 6. A 3D figure: a real object at real proportions, solids painted back to front, at most one lit part, the three arrival slots done by 2.1s, one physical response, controls outside the drawing?
 7. Every string from the dictionary, none repeating a title or icon?
 8. Checked in light and dark, at phone width, with keyboard focus visible?
+
+## 12. Components
+
+`@astrafoundry/design/ui` is built on Base UI (`@base-ui/react`). Documentation with live demos: `apps/docs` in the repository.
+
+| Family     | Components                                                                                                                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Actions    | `Button` (with `loading`), `IconButton`, `LinkButton`, `Toggle`, `ToggleGroup`, `Segmented`, `Toolbar`, `Kbd`, `Spinner`                                                                                |
+| Forms      | `Field`, `Fieldset`, `Form`, `Label`, `Input`, `InputGroup`, `Textarea`, `NumberField`, `OTPField`, `Checkbox`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Slider`, `Select`, `Combobox`, `Autocomplete` |
+| Dates      | `Calendar`, `DatePicker` from `@astrafoundry/design/ui/calendar` (needs `react-day-picker`)                                                                                                             |
+| Overlays   | `Popover`, `Tooltip`, `PreviewCard`, `Menu`, `ContextMenu`, `Menubar`, `Dialog`, `AlertDialog`, `Drawer` / `Sheet`, `ToastProvider` + `useToast`, `Command`                                             |
+| Navigation | `Tabs` (underline, segmented), `Accordion`, `Collapsible`, `Breadcrumb`, `Pagination`, `NavigationMenu`, `Sidebar`, `ScrollArea`                                                                        |
+| Display    | `Panel`, `Card`, `Alert`, `Badge`, `StatusDot`, `Avatar`, `Separator`, `Skeleton`, `Progress`, `Meter`, `Table`, `Empty`                                                                                |
+
+1. Checked, on and chosen are ink; yellow stays for the one primary action. `Progress` turns yellow only with `tone="result"`.
+2. Popups portal to `body` and carry `data-material="raised"` themselves. Toolbars, menubars and sidebars are flat chrome even inside a raised layer.
+3. Every visible string and accessible name comes through props (`closeLabel`, `labels`, `characterLabel`, `decrementLabel`…). No component has an English default.
+4. A destructive action is a `secondary` button with a danger icon, confirmed by an `AlertDialog` whose title states the consequence. There is no red button.
+5. The seven overlapping beUI components (`motion/checkbox`, `input`, `select`, `otp-input`, `bouncy-accordion`, `popover-morph`, `center-morph-modal`) are deprecated in favor of these.
+6. In MyGo, `sunbeam.Switch`, `Checkbox`, `TextInput`, `Field`, `Tabs`, `Toggle`, `Slider`, `Badge`, `Progress`, `Divider` and `Card` follow the same rules.

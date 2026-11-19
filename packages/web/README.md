@@ -15,22 +15,22 @@ The package contains no user-facing copy. Every label, title and accessible name
 
 ## Contents
 
-| Path                   | What                                                                                                                                                                                                                                    |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens/sunbeam.json`  | Token values, the single source for both platforms. `tokens/sunbeam.css`, the skill's token tables, the DESIGN.md front matter and the MyGo package's `tokens_gen.go` are generated from it (`pnpm tokens:build`; tests fail on drift). |
-| `DESIGN.md`            | Sunbeam in the open DESIGN.md format (published at `/design.md`); see [DESIGN.md](#designmd).                                                                                                                                           |
-| `skills/sunbeam/`      | `SKILL.md`, the Sunbeam specification as an Agent Skill (published at `/design` and `/design/skill.md`).                                                                                                                                |
-| `tokens/sunbeam.css`   | `:root` / `.dark` semantic tokens, ink and yellow scales, the always-dark substrate, warm two-layer shadows.                                                                                                                            |
-| `tokens/theme.css`     | Tailwind v4 `@theme inline` mapping, `@custom-variant dark`, keyframes and utilities; `@source` for the package itself.                                                                                                                 |
-| `tokens/material.css`  | The flat and raised materials: layer toggles, `material-*` utilities and `rounded-continuous-*` corners; see [Materials](#materials).                                                                                                   |
-| `tokens/base.css`      | Document defaults: body colors and font, selection, focus ring, reduced motion.                                                                                                                                                         |
-| `fonts/cjk.css`        | Font stacks with Chinese (`:lang(zh)`) and Japanese (`:lang(ja)`) fallbacks.                                                                                                                                                            |
-| `styles.css`           | All of the above, in order.                                                                                                                                                                                                             |
-| `src/ui`               | `Button`, `IconButton`, `LinkButton`, `Panel`, `Segmented`, `Container`, `Reveal`, `Brand`, `BrandMark`, `ChatMessage`, `SiteHeaderShell`, `SiteFooterShell`, `LocaleSwitch`, `LocaleList`.                                             |
-| `src/mock`             | `Backdrop`, `BackdropCard`, `FloatingStage`, `AppWindow`, `DesktopWindow`, `MockFrame`, `useStepTimeline`, `useInViewOnce`.                                                                                                             |
-| `src/beui`             | Vendored beUI. See [`docs/beui.md`](docs/beui.md).                                                                                                                                                                                      |
-| `assets/`              | Backdrop manifest, originals and the image build script.                                                                                                                                                                                |
-| `../../examples/taste` | A consumer of this package. Add further taste examples beside it; they are not published.                                                                                                                                               |
+| Path                   | What                                                                                                                                                                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tokens/sunbeam.json`  | Token values, the single source for both platforms. `tokens/sunbeam.css`, the skill's token tables, the DESIGN.md front matter and the MyGo package's `tokens_gen.go` are generated from it (`pnpm tokens:build`; tests fail on drift).          |
+| `DESIGN.md`            | Sunbeam in the open DESIGN.md format (published at `/design.md`); see [DESIGN.md](#designmd).                                                                                                                                                    |
+| `skills/sunbeam/`      | `SKILL.md`, the Sunbeam specification as an Agent Skill (published at `/design` and `/design/skill.md`).                                                                                                                                         |
+| `tokens/sunbeam.css`   | `:root` / `.dark` semantic tokens, ink and yellow scales, the always-dark substrate, warm two-layer shadows.                                                                                                                                     |
+| `tokens/theme.css`     | Tailwind v4 `@theme inline` mapping, `@custom-variant dark`, keyframes and utilities; `@source` for the package itself.                                                                                                                          |
+| `tokens/material.css`  | The flat and raised materials: layer toggles, `material-*` utilities and `rounded-continuous-*` corners; see [Materials](#materials).                                                                                                            |
+| `tokens/base.css`      | Document defaults: body colors and font, selection, focus ring, reduced motion.                                                                                                                                                                  |
+| `fonts/cjk.css`        | Font stacks with Chinese (`:lang(zh)`) and Japanese (`:lang(ja)`) fallbacks.                                                                                                                                                                     |
+| `styles.css`           | All of the above, in order.                                                                                                                                                                                                                      |
+| `src/ui`               | Over 60 components on Base UI (forms, overlays, navigation, display; see the [docs site](../../apps/docs)), plus `Container`, `Reveal`, `Brand`, `BrandMark`, `ChatMessage`, `SiteHeaderShell`, `SiteFooterShell`, `LocaleSwitch`, `LocaleList`. |
+| `src/mock`             | `Backdrop`, `BackdropCard`, `FloatingStage`, `AppWindow`, `DesktopWindow`, `MockFrame`, `useStepTimeline`, `useInViewOnce`.                                                                                                                      |
+| `src/beui`             | Vendored beUI. See [`docs/beui.md`](docs/beui.md).                                                                                                                                                                                               |
+| `assets/`              | Backdrop manifest, originals and the image build script.                                                                                                                                                                                         |
+| `../../examples/taste` | A consumer of this package. Add further taste examples beside it; they are not published.                                                                                                                                                        |
 
 ## Use in a Next.js site
 
@@ -41,10 +41,10 @@ npm install @astrafoundry/design
 ```
 
 ```json
-{ "dependencies": { "@astrafoundry/design": "0.1.1" } }
+{ "dependencies": { "@astrafoundry/design": "0.2.0" } }
 ```
 
-`0.1.1` is the package version in this repository. The [release workflow](../../.github/workflows/release.yml) publishes it to GitHub Packages (`https://npm.pkg.github.com`) by running `make publish` when a `v*.*.*` tag is pushed. The workflow authenticates with `GITHUB_TOKEN`. Install from that registry:
+`0.2.0` is the package version in this repository. The [release workflow](../../.github/workflows/release.yml) publishes it to GitHub Packages (`https://npm.pkg.github.com`) by running `make publish` when a `v*.*.*` tag is pushed. The workflow authenticates with `GITHUB_TOKEN`. Install from that registry:
 
 ```sh
 npm install @astrafoundry/design --registry https://npm.pkg.github.com
@@ -261,7 +261,7 @@ make publish       # whoami, pnpm check, then publish to npm (from the repositor
 To release from CI, bump `version` in this package.json, merge, and push a matching tag. Actions publishes with its own `GITHUB_TOKEN`; do not add an npmjs token:
 
 ```sh
-git tag v0.1.1 && git push origin v0.1.1
+git tag v0.2.0 && git push origin v0.2.0
 ```
 
 The [release workflow](../../.github/workflows/release.yml) refuses a tag that does not match the version, runs `make publish`, then creates the GitHub release. Run it by hand from the Actions tab for a dry run. Where a tag cannot be pushed, run it by hand on `main` with `publish` checked: it publishes the version in this package.json, then creates the `vX.Y.Z` tag and the GitHub release (and refuses a version whose tag exists).

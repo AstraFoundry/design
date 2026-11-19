@@ -369,6 +369,7 @@ Sunbeam is AstraFoundry's design system, used by astrafoundry.si, Lyra, Arion an
 - **One solid focus.** On a photograph exactly one surface is solid; everything around it is tinted, muted or cut off by the edge.
 - **Concentric corners.** A rounded thing inside a rounded thing uses inner radius = outer radius − inset.
 - **Motion explains, then rests.** A scene plays once when it is seen, shows action then result, and stops on the result.
+- **Clear interface, friction in the photograph.** Sunbeam serves fast interaction. The interface is clear and quick: input answers within 100ms, state reads through ink and form, never stacked color. The humanist friction lives only in the impressionist photographs behind it; components carry no texture, grain or paper.
 
 The full specification, with feature tiles, 3D demonstration figures and a review checklist, is the Sunbeam agent skill at https://astrafoundry.si/design/skill.
 
@@ -428,10 +429,13 @@ The component tokens are recipes: color pairs, type and shape for the parts ever
 - **Backdrop card.** `backdrop-card` is a motion-blurred natural photograph (on {colors.substrate} until it loads) with one `backdrop-focus` surface, `backdrop-chip` neighbors that may bleed off the edges, and a `backdrop-caption`. Because the photograph does not change with the theme, these components have no dark variant.
 - **Stage.** `stage-panel` and `stage-raised` build mock product UI on the dark substrate.
 - **Feature tiles and figures.** Animated feature tiles and live 3D demonstration figures follow the Sunbeam skill, sections 6 and 7.
+- **Choices.** Checked, on and chosen are ink ({colors.foreground}), never yellow. A switch is a recessed track with a raised knob that fills with ink when on; a checkbox fills with ink and draws its mark; a slider fills its track with ink. Sets of choices (segmented controls, toggle groups, segmented tabs) are equal-width segments in a well.
+- **Floating layers.** Popovers, menus, selects, dialogs, drawers and toasts are raised layers, and so is every control inside them. A text field in a raised layer is recessed rather than solid. Tooltips are small ink labels with no material.
+- **Status.** Alerts, badges and toasts show status as a dot or icon in {colors.success}, {colors.danger} or {colors.info}; their text stays ink. Badges are never yellow.
 
 ## Motion
 
-Four curves: ease-out `cubic-bezier(.22, 1, .36, 1)` for anything entering or moving, a spring `cubic-bezier(.34, 1.4, .64, 1)` for small things appearing, ease-in-out `cubic-bezier(.65, 0, .35, 1)` for something already on screen changing shape, and a drawer curve `cubic-bezier(.32, .72, 0, 1)`. 150ms for hover and press, 200–300ms for popovers, 250–600ms per move, under about 3s per scene. Exits are faster than entrances. Animate transform, opacity and filter only. With reduced motion, show the final frame.
+Four curves: ease-out `cubic-bezier(.22, 1, .36, 1)` for anything entering or moving, a spring `cubic-bezier(.34, 1.4, .64, 1)` for small things appearing, ease-in-out `cubic-bezier(.65, 0, .35, 1)` for something already on screen changing shape, and a drawer curve `cubic-bezier(.32, .72, 0, 1)`. Interactive durations are tokens (`--duration-*`): 120ms for press and hover, 200ms for a switch or check, 160ms in and 100ms out for popovers and menus, 240ms in and 150ms out for dialogs, 320ms in and 220ms out for drawers, 260ms in and 160ms out for toasts, 220ms for indicators and disclosure. Popovers grow from their trigger on the spring. 250–600ms per scene move, under about 3s per scene. Exits are faster than entrances. Animate transform, opacity and filter only. With reduced motion, show the final frame.
 
 ## Do's and Don'ts
 

@@ -5,7 +5,9 @@
   "description": "Sunbeam, the AstraFoundry design system: the web package (@astrafoundry/design) and the MyGo package (github.com/AstraFoundry/design/packages/mygo).",
   "license": "MIT",
   "scripts": {
-    "check": "pnpm --filter @astrafoundry/design check && pnpm run mygo:check",
+    "check": "pnpm --filter @astrafoundry/design check && pnpm run mygo:check && pnpm --filter docs check",
+    "docs:dev": "pnpm --filter docs dev",
+    "docs:build": "pnpm --filter docs build",
     "build": "pnpm --filter @astrafoundry/design build",
     "typecheck": "pnpm --filter @astrafoundry/design typecheck",
     "lint": "pnpm --filter @astrafoundry/design lint",
