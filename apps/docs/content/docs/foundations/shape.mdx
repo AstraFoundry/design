@@ -1,0 +1,45 @@
+---
+title: "形状与间距"
+description: "同心圆角，4px 网格，1px 细线。"
+---
+
+<div className="not-prose my-6 flex flex-wrap items-end gap-4">
+  {[
+    ["xs", 2],
+    ["sm", 4],
+    ["md", 6],
+    ["lg", 10],
+    ["xl", 14],
+    ["2xl", 18],
+    ["3xl", 24],
+    ["tile", 28],
+    ["stage", 40],
+  ].map(([n, r]) => (
+    <div key={n} className="flex flex-col items-center gap-2">
+      <div className="size-16 border border-border bg-card" style={{ borderRadius: r }} />
+      <code className="text-xs text-muted-foreground">
+        {n} {r}
+      </code>
+    </div>
+  ))}
+</div>
+
+## 同心
+
+内圆角 = 外圆角 − 内边距。面板 28px、内边距 8px，里面 40px 高的胶囊正好 20px；弹层 14px、内边距 4px，行是 10px。内边距大于外圆角时，内部元素保留自己的圆角。
+
+## 连续曲率
+
+`rounded-continuous-*` 在支持 `corner-shape: squircle` 的浏览器上画出苹果式的连续曲率圆角，其它浏览器保持四分之一圆。用于面板和卡片，不用于胶囊。
+
+## 间距与线
+
+尺寸以 4px 为步长。线都是 1px `--border`：单元格之间用 1px 间隙露出底色，而不是每格各画边框，这样线不会叠成两倍，转角也不会断。
+
+## 控件高度
+
+| 尺寸 | 高度 | 用途                   |
+| ---- | ---- | ---------------------- |
+| sm   | 32px | 工具栏、表格内、紧凑行 |
+| md   | 40px | 默认                   |
+| lg   | 48px | 首屏主操作、移动端     |

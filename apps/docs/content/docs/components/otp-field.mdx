@@ -1,0 +1,44 @@
+---
+title: "OTPField"
+description: "一次性验证码：每个字符一个方格，可以粘贴。"
+---
+
+<Demo name="otp-field/basic" material />
+
+## 引入
+
+```tsx
+import { OTPField } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+登录与两步验证。
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["focus", "press", "spring", "scale 1.05"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## API
+
+<TypeTable
+  type={{
+    length: { type: "number", description: "字符数" },
+    characterLabel: {
+      type: "(index, length) => string",
+      description: "第 2 个起每格的名称",
+    },
+    groupSize: { type: "number", description: "每几位加一条分隔线" },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/otp-field)。

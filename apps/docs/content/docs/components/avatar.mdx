@@ -1,0 +1,28 @@
+---
+title: "Avatar"
+description: "人的圆形头像，加载中或失败时显示首字母。"
+---
+
+<Demo name="avatar/basic" />
+
+## 引入
+
+```tsx
+import { Avatar } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+成员、作者、评论者。
+
+## API
+
+<TypeTable
+  type={{
+    name: { type: "string", description: "替代文本与首字母来源" },
+    src: { type: "string", description: "图片地址" },
+    size: { type: '"sm" | "md" | "lg"', description: "24 / 32 / 40px", default: '"md"' },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/avatar)。

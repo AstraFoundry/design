@@ -1,0 +1,40 @@
+---
+title: "Calendar"
+description: "月历：今天用墨色圈，选中用墨色填充，区间是平面填充。基于可选依赖 react-day-picker。"
+---
+
+<Demo name="calendar/basic" material />
+
+## 引入
+
+```tsx
+import { Calendar, DatePicker } from "@astrafoundry/design/ui/calendar";
+```
+
+```sh
+pnpm add react-day-picker
+```
+
+## 何时使用
+
+选择日期或日期区间。
+
+## 示例
+
+<Demo name="calendar/range" />
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["← → ↑ ↓", "移动一天 / 一周"],
+    ["Page Up Page Down", "上 / 下个月"],
+    ["Enter Space", "选择"],
+  ]}
+/>

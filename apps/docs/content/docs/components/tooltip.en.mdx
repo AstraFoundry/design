@@ -1,0 +1,56 @@
+---
+title: "Tooltip"
+description: "A short ink label for an icon-only control, with no material."
+---
+
+<Demo name="tooltip/basic" material />
+
+## Import
+
+```tsx
+import { Tooltip } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Naming icon-only buttons.
+
+## When not to
+
+Important information: never hide it in a tip.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["show", "tooltip", "out", "fade, rise 2px, after 500ms"],
+    ["hide", "tooltip-exit", "out", "fade"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## API
+
+<TypeTable
+  type={{
+    content: { type: "ReactNode", description: "The tip" },
+    delay: {
+      type: "number",
+      description: "Milliseconds before it shows",
+      default: "500",
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/tooltip).
+
+## Do and don't
+
+<DoDont
+  doLabel="Do"
+  dontLabel="Don't"
+  do="Wrap a group in one TooltipProvider so neighbors show at once."
+  dont="Repeat a button's own label in a tip."
+/>

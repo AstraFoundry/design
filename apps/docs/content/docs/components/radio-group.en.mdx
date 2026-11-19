@@ -1,0 +1,37 @@
+---
+title: "RadioGroup"
+description: "Radios: Tab reaches the chosen one, the arrows choose."
+---
+
+<Demo name="radio-group/basic" material />
+
+## Import
+
+```tsx
+import { RadioGroup } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+2–6 exclusive choices in a form.
+
+## When not to
+
+Many choices: use Select.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["choose", "toggle", "spring", "dot scales in"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable keyLabel="Key" actionLabel="Does" rows={[["↑ ↓ ← →", "choose"]]} />

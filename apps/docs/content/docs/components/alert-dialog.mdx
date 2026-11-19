@@ -1,0 +1,25 @@
+---
+title: "AlertDialog"
+description: "在无法撤销的操作之前询问。标题写明后果，不会因点击外部而关闭。"
+---
+
+<Demo name="alert-dialog/basic" />
+
+## 引入
+
+```tsx
+import { AlertDialog } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+删除、覆盖、发布等不可逆操作。
+
+## 规范
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="标题写清后果：“删除 Atlas？”"
+  dont="标题写“确定吗？”，按钮写“确定 / 取消”。"
+/>

@@ -1,0 +1,45 @@
+---
+title: "Shape and spacing"
+description: "Concentric corners, a 4px grid, 1px hairlines."
+---
+
+<div className="not-prose my-6 flex flex-wrap items-end gap-4">
+  {[
+    ["xs", 2],
+    ["sm", 4],
+    ["md", 6],
+    ["lg", 10],
+    ["xl", 14],
+    ["2xl", 18],
+    ["3xl", 24],
+    ["tile", 28],
+    ["stage", 40],
+  ].map(([n, r]) => (
+    <div key={n} className="flex flex-col items-center gap-2">
+      <div className="size-16 border border-border bg-card" style={{ borderRadius: r }} />
+      <code className="text-xs text-muted-foreground">
+        {n} {r}
+      </code>
+    </div>
+  ))}
+</div>
+
+## Concentric
+
+Inner radius = outer radius − inset. A 28px panel with an 8px inset holds 40px pills at 20px; a 14px popup with a 4px inset holds 10px rows. When the inset is larger than the outer radius, the inner element keeps its own radius.
+
+## Continuous corners
+
+`rounded-continuous-*` draws Apple-style continuous corners where the browser supports `corner-shape: squircle`, and quarter circles elsewhere. Use it on panels and cards, not pills.
+
+## Spacing and lines
+
+Sizes step by 4px. Lines are 1px `--border`: show the border color through a 1px gap between cells instead of a border on each, so lines never double and corners never break.
+
+## Control heights
+
+| Size | Height | Use                              |
+| ---- | ------ | -------------------------------- |
+| sm   | 32px   | Toolbars, table rows, dense rows |
+| md   | 40px   | The default                      |
+| lg   | 48px   | A hero's primary action, mobile  |

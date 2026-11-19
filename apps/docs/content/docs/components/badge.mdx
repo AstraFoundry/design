@@ -1,0 +1,28 @@
+---
+title: "Badge"
+description: "简短的状态、计数或分类标签。永远不用黄色。"
+---
+
+<Demo name="badge/basic" />
+
+## 引入
+
+```tsx
+import { Badge } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+状态、版本、计数。
+
+## API
+
+<TypeTable
+  type={{
+    variant: { type: '"soft" | "outline"', description: "外观", default: '"soft"' },
+    tone: {
+      type: '"neutral" | "success" | "danger" | "info"',
+      description: "前面的状态点",
+    },
+  }}
+/>

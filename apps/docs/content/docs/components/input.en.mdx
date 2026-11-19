@@ -1,0 +1,51 @@
+---
+title: "Input"
+description: "A single-line text field: solid with a hairline on the page, recessed in a raised layer."
+---
+
+<Demo name="input/basic" material />
+
+## Import
+
+```tsx
+import { Input } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Names, emails, searches.
+
+## When not to
+
+Several lines: use Textarea.
+
+## Examples
+
+<Demo name="input/sizes" />
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["focus", "press", "out", "focus ring"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## API
+
+<TypeTable
+  type={{
+    size: {
+      type: '"sm" | "md" | "lg"',
+      description: "32, 40 or 48px tall",
+      default: '"md"',
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/input).

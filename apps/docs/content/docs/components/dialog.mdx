@@ -1,0 +1,55 @@
+---
+title: "Dialog"
+description: "占据焦点直到被回答或关闭的浮起层，从 0.96 用 spring 升起，离开得更快。"
+---
+
+<Demo name="dialog/basic" />
+
+## 引入
+
+```tsx
+import { Dialog } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+需要专注完成的小任务。
+
+## 何时不用
+
+破坏性确认：用 AlertDialog。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["open", "dialog", "spring", "scale 0.96 → 1, rise 8px, fade"],
+    ["close", "dialog-exit", "out", "scale 0.98, fade"],
+    ["scrim", "dialog", "out", "ink at 28%, fade"],
+  ]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["Tab", "在弹层内循环"],
+    ["Esc", "关闭"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    closeLabel: { type: "string", description: "右上角关闭按钮的名称；不给则不显示" },
+    size: { type: '"sm" | "md" | "lg"', description: "最大宽度", default: '"md"' },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/dialog)。

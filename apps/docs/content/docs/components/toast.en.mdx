@@ -1,0 +1,54 @@
+---
+title: "Toast"
+description: "Brief raised notes stacked at the screen's edge and announced. Hover to fan out; swipe to dismiss."
+---
+
+<Demo name="toast/basic" />
+
+## Import
+
+```tsx
+import { ToastProvider, useToast } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Results of saving, syncing, exporting.
+
+## When not to
+
+When the user must decide: use Dialog.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["enter", "toast", "spring", "rise from the edge"],
+    ["stack", "toast", "spring", "older ones peek 10px and shrink"],
+    ["leave", "toast-exit", "out", "the way it was swiped"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## API
+
+<TypeTable
+  type={{
+    closeLabel: { type: "string", description: "Names each close button" },
+    timeout: {
+      type: "number",
+      description: "Milliseconds it stays; 0 keeps it",
+      default: "5000",
+    },
+    limit: { type: "number", description: "How many show at once", default: "3" },
+    position: {
+      type: '"bottom-right" | "bottom-center" | "top-center"',
+      description: "Where the stack sits",
+      default: '"bottom-right"',
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/toast).

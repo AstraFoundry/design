@@ -1,0 +1,39 @@
+---
+title: "Accordion"
+description: "问答或分区，默认一次展开一个。"
+---
+
+<Demo name="accordion/basic" />
+
+## 引入
+
+```tsx
+import { Accordion } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+FAQ、长设置页。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["expand", "collapse", "in-out", "height, fade"],
+    ["collapse", "collapse-exit", "in-out", "height, fade"],
+  ]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["Enter Space", "展开 / 收起"],
+    ["↑ ↓", "在标题间移动"],
+  ]}
+/>

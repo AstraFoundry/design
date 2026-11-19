@@ -1,0 +1,29 @@
+---
+title: "Panel"
+description: "一层浮起的控件：28px 连续圆角、8px 内边距，与 40px 胶囊同心。"
+---
+
+<Demo name="panel/basic" />
+
+## 引入
+
+```tsx
+import { Panel } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+浮在内容上的工具面板。
+
+## 何时不用
+
+页面上的内容卡片：用 Card。
+
+## API
+
+<TypeTable
+  type={{
+    material: { type: '"raised" | "flat"', description: "材质", default: '"raised"' },
+    scheme: { type: '"light" | "dark"', description: "与页面不同的配色" },
+  }}
+/>

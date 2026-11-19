@@ -1,0 +1,25 @@
+---
+title: "PreviewCard"
+description: "悬停或聚焦链接时显示目标预览。"
+---
+
+<Demo name="preview-card/basic" />
+
+## 引入
+
+```tsx
+import { PreviewCard } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+人员、文档、链接预览。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["open", "popup", "spring", "scale, fade"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。

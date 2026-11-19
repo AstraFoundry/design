@@ -1,0 +1,56 @@
+---
+title: "Slider"
+description: "A slider: ink fills the recessed track to the value; thumbs are raised."
+---
+
+<Demo name="slider/basic" material />
+
+## Import
+
+```tsx
+import { Slider } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Continuous values, as volume or a price range.
+
+## When not to
+
+Exact numbers: use NumberField.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["drag", "press", "out", "thumb scales 1.1"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["← → ↑ ↓", "step"],
+    ["Page Up Page Down", "large step"],
+    ["Home End", "min / max"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    thumbLabels: { type: "string[]", description: "Names each thumb of a range" },
+    step: { type: "number", description: "Step", default: "1" },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/slider).

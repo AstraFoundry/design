@@ -1,0 +1,39 @@
+---
+title: "Command"
+description: "A command palette: a search field and the list it filters, the first match always highlighted so Enter runs it."
+---
+
+<Demo name="command/basic" />
+
+## Import
+
+```tsx
+import { Command } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+A ⌘K entry to every action.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["⌘K", "open"],
+    ["↑ ↓", "move"],
+    ["Enter", "run"],
+    ["Esc", "close"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    open: { type: "boolean", description: "Whether it is open" },
+    items: { type: "T[] | { items: T[] }[]", description: "Commands, or groups" },
+    label: { type: "string", description: "Names the search field" },
+  }}
+/>

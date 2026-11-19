@@ -1,0 +1,39 @@
+---
+title: "Accordion"
+description: "Questions and answers, or sections, one open at a time."
+---
+
+<Demo name="accordion/basic" />
+
+## Import
+
+```tsx
+import { Accordion } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+FAQs, long settings.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["expand", "collapse", "in-out", "height, fade"],
+    ["collapse", "collapse-exit", "in-out", "height, fade"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["Enter Space", "toggle"],
+    ["↑ ↓", "move"],
+  ]}
+/>

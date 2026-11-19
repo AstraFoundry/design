@@ -1,0 +1,70 @@
+---
+title: "Select"
+description: "从短列表中选一个值。列表是浮起层，从触发点长出。"
+---
+
+<Demo name="select/basic" material />
+
+## 引入
+
+```tsx
+import { Select } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+5–15 个选项。
+
+## 何时不用
+
+需要搜索的长列表：用 Combobox。
+
+## 示例
+
+<Demo name="select/groups" />
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["open", "popup", "spring", "scale 0.96 → 1, fade"],
+    ["close", "popup-exit", "out", "scale 0.98, fade"],
+  ]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["Enter Space ↓", "打开"],
+    ["↑ ↓", "移动"],
+    ["Enter", "选择"],
+    ["Esc", "关闭"],
+    ["a–z", "按首字母跳转"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    items: { type: "Record<string, ReactNode>", description: "值到标签，供触发器显示" },
+    multiple: { type: "boolean", description: "多选", default: "false" },
+    alignItemWithTrigger: {
+      type: "boolean",
+      description: "像 macOS 那样把选中项对齐触发器",
+      default: "false",
+    },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/select)。

@@ -1,0 +1,41 @@
+---
+title: "Spinner"
+description: "A turning ring for real waiting, the one loop Sunbeam allows."
+---
+
+<Demo name="spinner/basic" />
+
+## Import
+
+```tsx
+import { Spinner } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Loading buttons and lists.
+
+## When not to
+
+When progress is measurable: use Progress.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["turn", "popup", "out", "rotate, 700ms per turn; still under reduced motion"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## API
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "Announces the wait; without it the spinner is decoration",
+    },
+    size: { type: '"sm" | "md" | "lg"', description: "Size", default: '"md"' },
+  }}
+/>

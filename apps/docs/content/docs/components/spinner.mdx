@@ -1,0 +1,38 @@
+---
+title: "Spinner"
+description: "一个转动的环，表示真实的等待；Sunbeam 唯一允许的循环。"
+---
+
+<Demo name="spinner/basic" />
+
+## 引入
+
+```tsx
+import { Spinner } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+按钮加载、列表加载。
+
+## 何时不用
+
+可以估计进度时：用 Progress。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["turn", "popup", "out", "rotate, 700ms per turn; still under reduced motion"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## API
+
+<TypeTable
+  type={{
+    label: { type: "string", description: "播报等待；不给则仅作装饰" },
+    size: { type: '"sm" | "md" | "lg"', description: "尺寸", default: '"md"' },
+  }}
+/>

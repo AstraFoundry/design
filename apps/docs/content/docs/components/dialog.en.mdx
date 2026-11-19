@@ -1,0 +1,58 @@
+---
+title: "Dialog"
+description: "A raised layer that holds the focus until answered; it rises from 0.96 on a spring and leaves faster."
+---
+
+<Demo name="dialog/basic" />
+
+## Import
+
+```tsx
+import { Dialog } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+A short task that needs focus.
+
+## When not to
+
+Destructive confirmation: use AlertDialog.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["open", "dialog", "spring", "scale 0.96 → 1, rise 8px, fade"],
+    ["close", "dialog-exit", "out", "scale 0.98, fade"],
+    ["scrim", "dialog", "out", "ink at 28%, fade"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["Tab", "cycle"],
+    ["Esc", "close"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    closeLabel: {
+      type: "string",
+      description: "Names the corner close button; omit for none",
+    },
+    size: { type: '"sm" | "md" | "lg"', description: "Maximum width", default: '"md"' },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/dialog).

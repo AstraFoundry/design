@@ -1,0 +1,43 @@
+---
+title: "Popover"
+description: "由按钮打开的浮起内容层。"
+---
+
+<Demo name="popover/basic" />
+
+## 引入
+
+```tsx
+import { Popover } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+分享、快速设置、小表单。
+
+## 何时不用
+
+只是动作列表：用 Menu。只读的提示：用 Tooltip。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["open", "popup", "spring", "scale 0.96 → 1 from the trigger, fade"],
+    ["close", "popup-exit", "out", "scale 0.98, fade"],
+  ]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["Enter Space", "打开"],
+    ["Esc", "关闭并把焦点还给触发器"],
+  ]}
+/>

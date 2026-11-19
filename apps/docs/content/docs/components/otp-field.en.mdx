@@ -1,0 +1,44 @@
+---
+title: "OTPField"
+description: "A one-time code: one square per character, pasteable."
+---
+
+<Demo name="otp-field/basic" material />
+
+## Import
+
+```tsx
+import { OTPField } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Sign-in and two-step codes.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["focus", "press", "spring", "scale 1.05"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## API
+
+<TypeTable
+  type={{
+    length: { type: "number", description: "Number of characters" },
+    characterLabel: {
+      type: "(index, length) => string",
+      description: "Names each input after the first",
+    },
+    groupSize: { type: "number", description: "Puts a separator after this many" },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/otp-field).

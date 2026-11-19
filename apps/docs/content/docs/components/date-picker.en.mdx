@@ -1,0 +1,37 @@
+---
+title: "DatePicker"
+description: "A field that opens a calendar in a raised popover."
+---
+
+<Demo name="date-picker/basic" material />
+
+## Import
+
+```tsx
+import { Calendar, DatePicker } from "@astrafoundry/design/ui/calendar";
+```
+
+```sh
+pnpm add react-day-picker
+```
+
+## When to use
+
+A single date in a form.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## API
+
+<TypeTable
+  type={{
+    label: { type: "string", description: "The field's name" },
+    placeholder: { type: "string", description: "Shown before a choice" },
+    format: {
+      type: "(day: Date) => string",
+      description: "Writes the date in the page's language",
+    },
+  }}
+/>

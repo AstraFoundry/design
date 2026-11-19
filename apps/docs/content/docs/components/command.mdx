@@ -1,0 +1,39 @@
+---
+title: "Command"
+description: "命令面板：浮起对话框里一个搜索框和它过滤的列表，第一项始终高亮，回车即执行。"
+---
+
+<Demo name="command/basic" />
+
+## 引入
+
+```tsx
+import { Command } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+⌘K 全局操作入口。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["⌘K", "打开（由你绑定）"],
+    ["↑ ↓", "移动"],
+    ["Enter", "执行"],
+    ["Esc", "关闭"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    open: { type: "boolean", description: "是否打开" },
+    items: { type: "T[] | { items: T[] }[]", description: "命令或分组" },
+    label: { type: "string", description: "搜索框名称" },
+  }}
+/>

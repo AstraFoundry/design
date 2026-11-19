@@ -1,0 +1,34 @@
+---
+title: "DatePicker"
+description: "点击后在浮起的弹层中打开日历的字段。"
+---
+
+<Demo name="date-picker/basic" material />
+
+## 引入
+
+```tsx
+import { Calendar, DatePicker } from "@astrafoundry/design/ui/calendar";
+```
+
+```sh
+pnpm add react-day-picker
+```
+
+## 何时使用
+
+表单里的单个日期。
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## API
+
+<TypeTable
+  type={{
+    label: { type: "string", description: "字段名称" },
+    placeholder: { type: "string", description: "未选时显示" },
+    format: { type: "(day: Date) => string", description: "日期格式，按页面语言" },
+  }}
+/>

@@ -1,6 +1,78 @@
 ---
-title: Button
-description: 按钮。
+title: "Button"
+description: "触发一个操作。每屏只有一个黄色主按钮。"
 ---
 
 <Demo name="button/variants" material />
+
+## 引入
+
+```tsx
+import { Button } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+提交、保存、创建——任何立即生效的动作。
+
+## 何时不用
+
+跳转到别的页面：用 LinkButton 或链接。
+
+## 示例
+
+<Demo name="button/sizes" />
+
+<Demo name="button/with-icon" material />
+
+<Demo name="button/loading" />
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["press", "press", "out", "scale 0.97"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable keyLabel="按键" actionLabel="作用" rows={[["Enter Space", "按下"]]} />
+
+## API
+
+<TypeTable
+  type={{
+    variant: {
+      type: '"primary" | "secondary" | "ghost" | "inverse"',
+      description: "外观；primary 每屏一个",
+      default: '"primary"',
+    },
+    size: {
+      type: '"sm" | "md" | "lg"',
+      description: "32 / 40 / 48px 高",
+      default: '"md"',
+    },
+    loading: {
+      type: "boolean",
+      description: "显示转圈并阻止再次按下，宽度不变",
+      default: "false",
+    },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/button)。
+
+## 规范
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="一屏只放一个 primary 按钮，其余用 secondary 或 ghost。"
+  dont="把一排按钮都做成黄色。"
+/>

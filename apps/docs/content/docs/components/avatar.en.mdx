@@ -1,0 +1,28 @@
+---
+title: "Avatar"
+description: "A round picture of a person, or their initials."
+---
+
+<Demo name="avatar/basic" />
+
+## Import
+
+```tsx
+import { Avatar } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Members, authors, commenters.
+
+## API
+
+<TypeTable
+  type={{
+    name: { type: "string", description: "Alt text and initials" },
+    src: { type: "string", description: "Image URL" },
+    size: { type: '"sm" | "md" | "lg"', description: "24, 32 or 40px", default: '"md"' },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/avatar).

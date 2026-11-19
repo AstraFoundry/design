@@ -1,0 +1,58 @@
+---
+title: "Combobox"
+description: "Choose from a list filtered as you type."
+---
+
+<Demo name="combobox/basic" material />
+
+## Import
+
+```tsx
+import { Combobox } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Long lists: time zones, countries, people.
+
+## When not to
+
+Free text with suggestions: use Autocomplete.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["open", "popup", "spring", "scale 0.96 → 1, fade"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["↓", "open"],
+    ["↑ ↓", "move"],
+    ["Enter", "choose"],
+    ["Esc", "close / clear"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    items: { type: "T[]", description: "Items" },
+    triggerLabel: { type: "string", description: "Names the open button; omit for none" },
+    clearLabel: { type: "string", description: "Names the clear button" },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/combobox).

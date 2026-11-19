@@ -1,0 +1,22 @@
+---
+title: "Typography"
+description: "Fraunces for display, IBM Plex Sans for everything else, JetBrains Mono for code."
+---
+
+<div className="not-prose my-6 flex flex-col gap-5 rounded-3xl border border-border bg-card p-8">
+  <p className="font-display text-6xl tracking-tight">Clear, quick</p>
+  <p className="font-display text-4xl tracking-tight">Clear, quick and precise</p>
+  <p className="text-2xl font-medium tracking-tight">Block heading 24</p>
+  <p className="text-lg text-muted-foreground">A lead in muted ink, 18</p>
+  <p className="text-base">
+    Running text, 16. Figures that line up are tabular: 1,284.50
+  </p>
+  <p className="text-sm font-medium">Label 14 / 500</p>
+  <p className="text-[13px] text-muted-foreground">Caption 13</p>
+  <p className="font-mono text-sm">pnpm add @astrafoundry/design</p>
+</div>
+
+- Headlines are Fraunces 400: never bold, never italic for emphasis. The display size scales from 48 to 96px.
+- Chinese and Japanese fall back to system faces and take no tracking on headings.
+- Numbers that change or line up use `tabular-nums`. Titles are balanced, paragraphs pretty, about 65 characters a line at most.
+- Sentence case, no exclamation marks, no emoji.

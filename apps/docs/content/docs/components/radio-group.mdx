@@ -1,0 +1,37 @@
+---
+title: "RadioGroup"
+description: "一组单选项：Tab 进入已选项，方向键切换。"
+---
+
+<Demo name="radio-group/basic" material />
+
+## 引入
+
+```tsx
+import { RadioGroup } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+表单里 2–6 个互斥选项。
+
+## 何时不用
+
+选项很多：用 Select。
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["choose", "toggle", "spring", "dot scales in"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable keyLabel="按键" actionLabel="作用" rows={[["↑ ↓ ← →", "选择相邻项"]]} />

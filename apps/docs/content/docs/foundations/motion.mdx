@@ -1,0 +1,54 @@
+---
+title: "动效"
+description: "四条曲线，一组时长 token；快速回应，播一次，停在结果上。"
+---
+
+<Demo name="foundations/motion" height={260} />
+
+## 曲线
+
+| Token           | 曲线                             | 用途                                 |
+| --------------- | -------------------------------- | ------------------------------------ |
+| `--ease-out`    | `cubic-bezier(.22, 1, .36, 1)`   | 进入或移动的东西；离开               |
+| `--ease-spring` | `cubic-bezier(.34, 1.4, .64, 1)` | 小东西出现、开关的档位、浮层弹出     |
+| `--ease-in-out` | `cubic-bezier(.65, 0, .35, 1)`   | 已在屏上的东西改变形状：指示器、折叠 |
+| `--ease-drawer` | `cubic-bezier(.32, .72, 0, 1)`   | 抽屉与 sheet                         |
+
+## 时长
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["按下 / 悬停", "press", "out", "scale 0.97, color"],
+    ["开关、勾选", "toggle", "spring", "knob, mark"],
+    ["提示出现", "tooltip", "out", "fade, rise 2px"],
+    ["弹层出现", "popup", "spring", "scale 0.96 → 1"],
+    ["弹层离开", "popup-exit", "out", "scale 0.98, fade"],
+    ["对话框出现", "dialog", "spring", "scale, rise 8px"],
+    ["对话框离开", "dialog-exit", "out", "fade"],
+    ["抽屉出现", "drawer", "drawer", "slide"],
+    ["抽屉离开", "drawer-exit", "drawer", "slide"],
+    ["Toast 出现", "toast", "spring", "rise"],
+    ["Toast 离开", "toast-exit", "out", "slide, fade"],
+    ["指示器", "indicator", "in-out", "translate, width"],
+    ["展开", "collapse", "in-out", "height"],
+    ["收起", "collapse-exit", "in-out", "height"],
+  ]}
+/>
+
+时长来自 `sunbeam.json` 的 `motion`，生成为 CSS 变量 `--duration-*` 和 Go 常量 `sunbeam.Duration*`。
+
+## 规则
+
+- 每次输入 100ms 内有可见反馈。
+- 离开比进入快。只动 `transform`、`opacity`、`filter`（折叠的 `height` 是唯一例外）。
+- 浮层从触发点（`--transform-origin`）长出，而不是从屏幕中心。
+- 场景被看到时播一次，停在结果上。只有真实等待才循环（Spinner、Skeleton）。
+- 开启减少动态效果时，直接显示终态。
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="用 spring 让开关的旋钮轻微过冲后停在档位。"
+  dont="让元素持续弹跳、呼吸或闪烁。"
+/>

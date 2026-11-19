@@ -3,7 +3,7 @@
 import { Autocomplete as BaseAutocomplete } from "@base-ui/react/autocomplete";
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import { Search } from "lucide-react";
-import type { ComponentProps, ReactNode } from "react";
+import { useRef, type ComponentProps, type ReactNode } from "react";
 import { cn } from "../lib/cn.js";
 import { groupLabelClasses, itemClasses, separatorClasses } from "./styles.js";
 
@@ -43,6 +43,7 @@ export function Command<Item>({
   className,
   ...rest
 }: CommandProps<Item>) {
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
     <BaseDialog.Root open={open} onOpenChange={(next) => onOpenChange?.(next)}>
       <BaseDialog.Portal>
@@ -51,6 +52,7 @@ export function Command<Item>({
           <BaseDialog.Popup
             data-material="raised"
             aria-label={label}
+            initialFocus={inputRef}
             className={cn(
               "material-panel dialog-motion flex h-fit max-h-[min(30rem,70dvh)] w-full max-w-xl flex-col overflow-hidden rounded-continuous-[22px] text-foreground outline-none",
               className,
@@ -66,6 +68,7 @@ export function Command<Item>({
               <div className="flex h-12 shrink-0 items-center gap-2.5 border-b border-border px-4">
                 <Search aria-hidden className="size-4 shrink-0 text-muted-foreground" />
                 <BaseAutocomplete.Input
+                  ref={inputRef}
                   aria-label={label}
                   placeholder={placeholder}
                   className="h-full min-w-0 flex-1 bg-transparent text-[15px] text-foreground outline-none placeholder:text-muted-foreground/80"

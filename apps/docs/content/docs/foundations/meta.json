@@ -1,0 +1,15 @@
+{
+  "title": "基础",
+  "pages": [
+    "language",
+    "color",
+    "typography",
+    "material",
+    "shape",
+    "motion",
+    "photographs",
+    "copy",
+    "agents"
+  ],
+  "defaultOpen": true
+}

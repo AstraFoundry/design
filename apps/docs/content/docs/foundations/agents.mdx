@@ -1,0 +1,12 @@
+---
+title: "给 Agent"
+description: "规范以 Agent Skill 和 DESIGN.md 发布，生成的界面从一开始就符合 Sunbeam。"
+---
+
+```sh
+npx skills add https://github.com/AstraFoundry/design/tree/main/packages/web/skills/sunbeam
+```
+
+- **Skill**：`packages/web/skills/sunbeam/SKILL.md`，完整规范，含审查清单。
+- **DESIGN.md**：开放格式的 token 与规则，供其它 agent 和设计工具读取。
+- **Agent 组件**：消息、Prompt 输入、工具结果、待办、推理文字等动效组件来自 beUI，见 [beUI](../components/beui)。

@@ -1,0 +1,45 @@
+---
+title: "Field"
+description: "Ties a control to its label, description and error."
+---
+
+<Demo name="field/basic" material />
+
+## Import
+
+```tsx
+import { Field } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Every labelled form control.
+
+## Examples
+
+<Demo name="field/invalid" />
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## API
+
+<TypeTable
+  type={{
+    invalid: { type: "boolean", description: "Forces the invalid state" },
+    validate: { type: "(value) => string | null", description: "Custom validation" },
+    name: { type: "string", description: "Form field name" },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/field).
+
+## Do and don't
+
+<DoDont
+  doLabel="Do"
+  dontLabel="Don't"
+  do="Write errors in ink with a red dot."
+  dont="Color the whole error sentence red."
+/>

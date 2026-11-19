@@ -1,0 +1,40 @@
+---
+title: "Calendar"
+description: "A month of days: today ringed in ink, the choice filled with ink, a range a flat fill. Built on the optional react-day-picker."
+---
+
+<Demo name="calendar/basic" material />
+
+## Import
+
+```tsx
+import { Calendar, DatePicker } from "@astrafoundry/design/ui/calendar";
+```
+
+```sh
+pnpm add react-day-picker
+```
+
+## When to use
+
+Choosing a day or a range.
+
+## Examples
+
+<Demo name="calendar/range" />
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["← → ↑ ↓", "move a day / week"],
+    ["Page Up Page Down", "month"],
+    ["Enter Space", "choose"],
+  ]}
+/>

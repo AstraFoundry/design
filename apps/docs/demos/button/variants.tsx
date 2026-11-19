@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@astrafoundry/design/ui";
 
 export default function ButtonVariants() {

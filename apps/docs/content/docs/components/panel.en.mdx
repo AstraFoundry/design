@@ -1,0 +1,29 @@
+---
+title: "Panel"
+description: "A raised layer of controls: 28px continuous corners and an 8px inset, concentric with 40px pills."
+---
+
+<Demo name="panel/basic" />
+
+## Import
+
+```tsx
+import { Panel } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Tool panels floating over content.
+
+## When not to
+
+Content cards on the page: use Card.
+
+## API
+
+<TypeTable
+  type={{
+    material: { type: '"raised" | "flat"', description: "Material", default: '"raised"' },
+    scheme: { type: '"light" | "dark"', description: "A scheme of its own" },
+  }}
+/>

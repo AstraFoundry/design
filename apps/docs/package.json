@@ -4,11 +4,12 @@
   "type": "module",
   "description": "The Sunbeam documentation site: every component with live demos, in Chinese and English.",
   "scripts": {
-    "dev": "pnpm backdrops && next dev --webpack",
-    "build": "pnpm backdrops && next build --webpack",
+    "dev": "node scripts/demos-index.mjs && pnpm backdrops && next dev --webpack",
+    "build": "pnpm check && pnpm backdrops && next build --webpack",
     "start": "serve out",
     "backdrops": "node ../../packages/web/scripts/build-backdrops.mjs public/backdrops",
-    "typecheck": "next typegen && tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit",
+    "check": "node scripts/demos-index.mjs --check && node scripts/coverage.mjs"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.5",

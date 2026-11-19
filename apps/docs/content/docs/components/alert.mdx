@@ -1,0 +1,32 @@
+---
+title: "Alert"
+description: "关于页面或任务的提示。状态色只给圆点，文字保持墨色。"
+---
+
+<Demo name="alert/tones" />
+
+## 引入
+
+```tsx
+import { Alert } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+维护通知、验证结果、付款失败。
+
+## 何时不用
+
+短暂反馈：用 Toast。
+
+## API
+
+<TypeTable
+  type={{
+    tone: {
+      type: '"neutral" | "success" | "danger" | "info"',
+      description: "状态；danger 会打断（role=alert）",
+      default: '"neutral"',
+    },
+  }}
+/>

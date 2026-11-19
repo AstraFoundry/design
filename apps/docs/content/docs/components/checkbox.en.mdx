@@ -1,0 +1,64 @@
+---
+title: "Checkbox"
+description: "A checkbox that fills with ink and draws its mark when checked."
+---
+
+<Demo name="checkbox/basic" material />
+
+## Import
+
+```tsx
+import { Checkbox } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Several choices, agreements.
+
+## When not to
+
+Settings that take effect at once: use Switch.
+
+## Examples
+
+<Demo name="checkbox/indeterminate" />
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["check", "toggle", "out", "mark draws in"],
+    ["press", "press", "out", "scale 0.9"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable keyLabel="Key" actionLabel="Does" rows={[["Space", "toggle"]]} />
+
+## API
+
+<TypeTable
+  type={{
+    checked: { type: "boolean", description: "Controlled" },
+    indeterminate: { type: "boolean", description: "Partly checked", default: "false" },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/checkbox).
+
+## Do and don't
+
+<DoDont
+  doLabel="Do"
+  dontLabel="Don't"
+  do="Check in ink."
+  dont="Check in yellow: yellow is for the primary action."
+/>

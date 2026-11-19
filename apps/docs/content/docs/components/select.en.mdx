@@ -1,0 +1,73 @@
+---
+title: "Select"
+description: "Choose a value from a short list, which grows from its trigger as a raised layer."
+---
+
+<Demo name="select/basic" material />
+
+## Import
+
+```tsx
+import { Select } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+5–15 options.
+
+## When not to
+
+Long lists that need search: use Combobox.
+
+## Examples
+
+<Demo name="select/groups" />
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["open", "popup", "spring", "scale 0.96 → 1, fade"],
+    ["close", "popup-exit", "out", "scale 0.98, fade"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["Enter Space ↓", "open"],
+    ["↑ ↓", "move"],
+    ["Enter", "choose"],
+    ["Esc", "close"],
+    ["a–z", "jump"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    items: {
+      type: "Record<string, ReactNode>",
+      description: "Values to labels, for the trigger",
+    },
+    multiple: { type: "boolean", description: "Several values", default: "false" },
+    alignItemWithTrigger: {
+      type: "boolean",
+      description: "Aligns the chosen item with the trigger, as macOS does",
+      default: "false",
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/select).

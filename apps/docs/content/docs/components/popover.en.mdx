@@ -1,0 +1,43 @@
+---
+title: "Popover"
+description: "A raised layer of content opened by a button."
+---
+
+<Demo name="popover/basic" />
+
+## Import
+
+```tsx
+import { Popover } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Sharing, quick settings, small forms.
+
+## When not to
+
+Just a list of actions: use Menu. A read-only hint: use Tooltip.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["open", "popup", "spring", "scale 0.96 → 1 from the trigger, fade"],
+    ["close", "popup-exit", "out", "scale 0.98, fade"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["Enter Space", "open"],
+    ["Esc", "close"],
+  ]}
+/>

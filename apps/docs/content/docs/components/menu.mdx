@@ -1,0 +1,45 @@
+---
+title: "Menu"
+description: "由按钮打开的浮起动作列表。弹层 14px 圆角减 4px 内边距，正好是行的 10px。"
+---
+
+<Demo name="menu/basic" />
+
+## 引入
+
+```tsx
+import { Menu } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+对一个对象的一组动作。
+
+## 何时不用
+
+选值：用 Select。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["open", "popup", "spring", "scale 0.96 → 1, fade"],
+    ["close", "popup-exit", "out", "fade"],
+  ]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["Enter Space ↓", "打开"],
+    ["↑ ↓", "移动"],
+    ["→ ←", "进入 / 退出子菜单"],
+    ["Esc", "关闭"],
+  ]}
+/>

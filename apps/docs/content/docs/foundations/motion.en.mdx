@@ -1,0 +1,51 @@
+---
+title: "Motion"
+description: "Four curves and a set of duration tokens: answer fast, play once, rest on the result."
+---
+
+<Demo name="foundations/motion" height={260} />
+
+## Curves
+
+| Token           | Curve                            | Use                                                        |
+| --------------- | -------------------------------- | ---------------------------------------------------------- |
+| `--ease-out`    | `cubic-bezier(.22, 1, .36, 1)`   | Anything entering or moving; leaving                       |
+| `--ease-spring` | `cubic-bezier(.34, 1.4, .64, 1)` | Small things appearing, a switch's detent, popups          |
+| `--ease-in-out` | `cubic-bezier(.65, 0, .35, 1)`   | Something on screen changing shape: indicators, disclosure |
+| `--ease-drawer` | `cubic-bezier(.32, .72, 0, 1)`   | Drawers and sheets                                         |
+
+## Durations
+
+<MotionTable
+  rows={[
+    ["Press, hover", "press", "out", "scale 0.97, color"],
+    ["Switch, check", "toggle", "spring", "knob, mark"],
+    ["Tooltip in", "tooltip", "out", "fade, rise 2px"],
+    ["Popup in", "popup", "spring", "scale 0.96 → 1"],
+    ["Popup out", "popup-exit", "out", "scale 0.98, fade"],
+    ["Dialog in", "dialog", "spring", "scale, rise 8px"],
+    ["Dialog out", "dialog-exit", "out", "fade"],
+    ["Drawer in", "drawer", "drawer", "slide"],
+    ["Drawer out", "drawer-exit", "drawer", "slide"],
+    ["Toast in", "toast", "spring", "rise"],
+    ["Toast out", "toast-exit", "out", "slide, fade"],
+    ["Indicator", "indicator", "in-out", "translate, width"],
+    ["Expand", "collapse", "in-out", "height"],
+    ["Collapse", "collapse-exit", "in-out", "height"],
+  ]}
+/>
+
+Durations live in `motion` in `sunbeam.json` and generate the CSS variables `--duration-*` and the Go constants `sunbeam.Duration*`.
+
+## Rules
+
+- Every input answers visibly within 100ms.
+- Exits are faster than entrances. Animate `transform`, `opacity` and `filter` (and `height` for disclosure, the one exception).
+- Popups grow from their trigger (`--transform-origin`), not the screen's center.
+- A scene plays once when it is seen and rests on its result. Only real waiting loops (Spinner, Skeleton).
+- With reduced motion, show the final frame.
+
+<DoDont
+  do="Let a switch's knob overshoot a hair and settle into its detent, on the spring."
+  dont="Bounce, breathe or pulse forever."
+/>

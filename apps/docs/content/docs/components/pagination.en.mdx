@@ -1,0 +1,30 @@
+---
+title: "Pagination"
+description: "A list's pages as links. The current page is a solid flat face; every page button is the same width."
+---
+
+<Demo name="pagination/basic" />
+
+## Import
+
+```tsx
+import { Pagination } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Long lists with shareable URLs.
+
+## When not to
+
+Feeds: load more instead.
+
+## API
+
+<TypeTable
+  type={{
+    "page / pageCount": { type: "number", description: "Current page and count" },
+    href: { type: "(page) => string", description: "A page's URL" },
+    labels: { type: "{ nav, previous, next, page }", description: "All accessible copy" },
+  }}
+/>

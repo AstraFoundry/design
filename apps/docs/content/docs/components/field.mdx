@@ -1,0 +1,45 @@
+---
+title: "Field"
+description: "把一个控件和它的标签、说明、错误连在一起。"
+---
+
+<Demo name="field/basic" material />
+
+## 引入
+
+```tsx
+import { Field } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+所有带标签的表单控件。
+
+## 示例
+
+<Demo name="field/invalid" />
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## API
+
+<TypeTable
+  type={{
+    invalid: { type: "boolean", description: "强制显示为无效" },
+    validate: { type: "(value) => string | null", description: "自定义校验" },
+    name: { type: "string", description: "表单字段名" },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/field)。
+
+## 规范
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="错误文字用墨色加一个红点。"
+  dont="把错误文字整句染成红色。"
+/>

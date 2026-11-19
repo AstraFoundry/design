@@ -1,0 +1,45 @@
+---
+title: "Menu"
+description: "A raised list of actions opened by a button. Its 14px corners less the 4px inset are its rows' 10px."
+---
+
+<Demo name="menu/basic" />
+
+## Import
+
+```tsx
+import { Menu } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Actions on one object.
+
+## When not to
+
+Choosing a value: use Select.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["open", "popup", "spring", "scale 0.96 → 1, fade"],
+    ["close", "popup-exit", "out", "fade"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["Enter Space ↓", "open"],
+    ["↑ ↓", "move"],
+    ["→ ←", "submenu"],
+    ["Esc", "close"],
+  ]}
+/>

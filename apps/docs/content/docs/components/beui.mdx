@@ -1,0 +1,54 @@
+---
+title: "beUI"
+description: "Agent 与文字动效组件，vendored 自 beUI。"
+---
+
+<Demo name="beui/agent" />
+
+<Demo name="motion/text-reveal" />
+
+## 引入
+
+按组件路径引入：
+
+```tsx
+import { TextReveal } from "@astrafoundry/design/beui/motion/text-reveal";
+import { ThinkingShimmer } from "@astrafoundry/design/beui/agents/loading-states";
+```
+
+## 保留的组件
+
+| 组件                             | 用途             |
+| -------------------------------- | ---------------- |
+| `motion/text-reveal`             | 标题逐词显现     |
+| `motion/text-shimmer`            | 生成中状态       |
+| `motion/marquee`                 | Logo 跑马灯      |
+| `motion/theme-toggle`            | 主题切换         |
+| `motion/button (StatefulButton)` | 带状态的提交按钮 |
+| `agents/message, message-bubble` | 对话消息         |
+| `agents/prompt-input`            | 输入框           |
+| `agents/agent-activity`          | 工具与搜索活动   |
+| `agents/todo-list`               | 计划             |
+| `agents/tool-result`             | 终端输出         |
+| `agents/code-block`              | 命令             |
+| `agents/loading-states`          | 思考、推理、进度 |
+
+## 已弃用
+
+以下组件由基于 Base UI 的 Sunbeam 组件取代，仍可使用，将在之后的大版本移除。
+
+| 旧组件                      | 改用           |
+| --------------------------- | -------------- |
+| `motion/checkbox`           | `Checkbox`     |
+| `motion/input`              | `Input, Field` |
+| `motion/select`             | `Select`       |
+| `motion/otp-input`          | `OTPField`     |
+| `motion/bouncy-accordion`   | `Accordion`    |
+| `motion/popover-morph`      | `Popover`      |
+| `motion/center-morph-modal` | `Dialog`       |
+
+## 规则
+
+- `src/beui` 是第三方代码，内部可能使用物理颜色或 `dark:`，不要在项目代码里模仿。
+- 所有文案都通过 props 传入。
+- `agents/code-block` 需要 `shiki`，`motion/theme-toggle` 需要 `next-themes`，都是可选依赖。

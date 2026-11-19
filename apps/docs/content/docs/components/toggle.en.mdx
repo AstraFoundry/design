@@ -1,0 +1,48 @@
+---
+title: "Toggle"
+description: "A button that stays pressed."
+---
+
+<Demo name="toggle/basic" material />
+
+## Import
+
+```tsx
+import { Toggle } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Turning a format or view on and off, as bold.
+
+## When not to
+
+A setting that turns on and off: use Switch.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["press", "press", "out", "scale 0.97, thumb face"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable keyLabel="Key" actionLabel="Does" rows={[["Enter Space", "toggle"]]} />
+
+## API
+
+<TypeTable
+  type={{
+    pressed: { type: "boolean", description: "Controlled pressed state" },
+    size: { type: '"sm" | "md" | "lg"', description: "Height", default: '"md"' },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/toggle).

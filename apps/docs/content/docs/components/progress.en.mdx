@@ -1,0 +1,44 @@
+---
+title: "Progress"
+description: "Progress of a task, and a measure within a range. The bar is ink; it is yellow only when it is the screen's result."
+---
+
+<Demo name="progress/basic" />
+
+## Import
+
+```tsx
+import { Progress, Meter } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Uploads, exports, storage used.
+
+## When not to
+
+Unknown durations: use Spinner.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["advance", "indicator", "out", "width"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## API
+
+<TypeTable
+  type={{
+    value: { type: "number | null", description: "Current value; null is indeterminate" },
+    tone: {
+      type: '"ink" | "result"',
+      description: "Yellow when it is the result",
+      default: '"ink"',
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/progress).

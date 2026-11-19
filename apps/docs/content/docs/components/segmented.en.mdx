@@ -1,0 +1,63 @@
+---
+title: "Segmented"
+description: "A segmented control: the one raised face in a recessed track."
+---
+
+<Demo name="segmented/basic" material />
+
+## Import
+
+```tsx
+import { Segmented } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Switching between 2–5 exclusive views.
+
+## When not to
+
+Navigating to other pages: use Tabs or links.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["choose", "press", "out", "thumb face"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["← → ↑ ↓", "choose"],
+    ["Home End", "first / last"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    options: { type: "SegmentedOption[]", description: "Options: value, label, icon" },
+    label: { type: "string", description: "The group's accessible name" },
+    iconOnly: { type: "boolean", description: "Icons alone", default: "false" },
+  }}
+/>
+
+## Do and don't
+
+<DoDont
+  doLabel="Do"
+  dontLabel="Don't"
+  do="Size every segment to the widest."
+  dont="Let the chosen face grow and shrink with its label."
+/>

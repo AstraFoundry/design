@@ -1,0 +1,58 @@
+---
+title: "Combobox"
+description: "输入过滤的列表选择。"
+---
+
+<Demo name="combobox/basic" material />
+
+## 引入
+
+```tsx
+import { Combobox } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+时区、国家、成员等长列表。
+
+## 何时不用
+
+自由文本加建议：用 Autocomplete。
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["open", "popup", "spring", "scale 0.96 → 1, fade"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["↓", "打开"],
+    ["↑ ↓", "移动"],
+    ["Enter", "选择"],
+    ["Esc", "关闭 / 清空"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    items: { type: "T[]", description: "选项" },
+    triggerLabel: { type: "string", description: "打开按钮的名称；不给则不显示" },
+    clearLabel: { type: "string", description: "清空按钮的名称" },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/combobox)。

@@ -1,0 +1,78 @@
+---
+title: "Button"
+description: "Runs an action. One yellow primary button per screen."
+---
+
+<Demo name="button/variants" material />
+
+## Import
+
+```tsx
+import { Button } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Submitting, saving, creating: anything that takes effect now.
+
+## When not to
+
+Going to another page: use LinkButton or a link.
+
+## Examples
+
+<Demo name="button/sizes" />
+
+<Demo name="button/with-icon" material />
+
+<Demo name="button/loading" />
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["press", "press", "out", "scale 0.97"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable keyLabel="Key" actionLabel="Does" rows={[["Enter Space", "press"]]} />
+
+## API
+
+<TypeTable
+  type={{
+    variant: {
+      type: '"primary" | "secondary" | "ghost" | "inverse"',
+      description: "Look; one primary per screen",
+      default: '"primary"',
+    },
+    size: {
+      type: '"sm" | "md" | "lg"',
+      description: "32, 40 or 48px tall",
+      default: '"md"',
+    },
+    loading: {
+      type: "boolean",
+      description: "Shows a spinner and blocks presses, keeping the width",
+      default: "false",
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/button).
+
+## Do and don't
+
+<DoDont
+  doLabel="Do"
+  dontLabel="Don't"
+  do="One primary button per screen; the rest secondary or ghost."
+  dont="Make a row of buttons all yellow."
+/>

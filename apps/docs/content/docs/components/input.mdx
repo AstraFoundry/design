@@ -1,0 +1,51 @@
+---
+title: "Input"
+description: "单行文本输入。页面上是带细线的实心面，浮起层里是凹陷的槽。"
+---
+
+<Demo name="input/basic" material />
+
+## 引入
+
+```tsx
+import { Input } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+名称、邮箱、搜索等单行文本。
+
+## 何时不用
+
+多行文本：用 Textarea。
+
+## 示例
+
+<Demo name="input/sizes" />
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["focus", "press", "out", "focus ring"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## API
+
+<TypeTable
+  type={{
+    size: {
+      type: '"sm" | "md" | "lg"',
+      description: "32 / 40 / 48px 高",
+      default: '"md"',
+    },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/input)。

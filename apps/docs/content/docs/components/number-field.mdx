@@ -1,0 +1,47 @@
+---
+title: "NumberField"
+description: "带加减按钮的数字输入。"
+---
+
+<Demo name="number-field/basic" material />
+
+## 引入
+
+```tsx
+import { NumberField } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+数量、座位数等有步长的整数。
+
+## 何时不用
+
+很大的范围：用 Slider 或 Input。
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["↑ ↓", "加减一个步长"],
+    ["Shift ↑ ↓", "加减十个步长"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    decrementLabel: { type: "string", description: "减按钮的名称" },
+    incrementLabel: { type: "string", description: "加按钮的名称" },
+    "min / max / step": { type: "number", description: "范围和步长" },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/number-field)。

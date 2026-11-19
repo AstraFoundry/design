@@ -271,6 +271,8 @@ describe("command", () => {
     );
     const input = await screen.findByRole("combobox", { name: "Command" });
     raisedLayer(input);
+    // Opening the palette puts the cursor in its search field, ready to type.
+    await waitFor(() => expect(document.activeElement).toBe(input));
     await user.type(input, "set");
     await waitFor(() =>
       expect(screen.getAllByRole("option").map((o) => o.textContent)).toEqual([

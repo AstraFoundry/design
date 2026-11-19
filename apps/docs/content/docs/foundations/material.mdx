@@ -1,0 +1,39 @@
+---
+title: "材质"
+description: "平面与浮起：一个层只有一种材质，层里的控件随之而定。"
+---
+
+<Demo name="foundations/materials" height={280} />
+
+|          | 平面                                           | 浮起                                                                  |
+| -------- | ---------------------------------------------- | --------------------------------------------------------------------- |
+| 用在     | 页面和窗口外框：标题栏、工具栏、侧栏、内容卡片 | 浮在上面的层：面板、弹层、菜单、对话框、抽屉、Toast，以及其中所有控件 |
+| 控件     | 一层半透明填充，无边、无影                     | 由上而下的淡渐变、1px 半透明边、顶部 1px 高光、分层阴影               |
+| 一组选项 | 填充，选中项是实心块                           | 凹陷的槽，选中项是其中唯一的浮起面                                    |
+| 输入框   | 实心卡片色加细线                               | 凹陷的槽                                                              |
+| 暗色     | 半透明白色填充                                 | 比面板更亮的灰面、近黑的边、半黑的阴影                                |
+
+## 规则
+
+1. 一个层只有一种材质。浮起层里的平面部分（例如 Toolbar）自成一个平面层。
+2. 只有控件和浮动层会浮起；文字、内容、页面卡片和整个窗口不会。图片和缩略图不带材质。
+3. 弹出层通过 portal 渲染到 `body`，所以每个弹层自己带上 `data-material="raised"`。
+4. 暗色下，浮起面比它下面的更亮，阴影更暗。
+
+## 在自己的组件里使用
+
+```tsx
+<div data-material="raised" className="material-panel rounded-continuous-tile p-2">
+  <button className="material-face rounded-full px-4">…</button>
+  <input className="material-field rounded-lg px-3" />
+</div>
+```
+
+可用工具类：`material-face`、`material-face-primary`、`material-thumb`、`material-well`、`material-field`、`material-panel`、`rounded-continuous-*`。
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="工具栏整排平面，浮动面板整块浮起。"
+  dont="只把工具栏里的一个按钮做成浮起。"
+/>

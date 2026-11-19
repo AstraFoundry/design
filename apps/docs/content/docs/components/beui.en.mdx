@@ -1,0 +1,54 @@
+---
+title: "beUI"
+description: "Agent and text motion components, vendored from beUI."
+---
+
+<Demo name="beui/agent" />
+
+<Demo name="motion/text-reveal" />
+
+## Import
+
+Import a component by its path:
+
+```tsx
+import { TextReveal } from "@astrafoundry/design/beui/motion/text-reveal";
+import { ThinkingShimmer } from "@astrafoundry/design/beui/agents/loading-states";
+```
+
+## Kept
+
+| Component                        | Use                           |
+| -------------------------------- | ----------------------------- |
+| `motion/text-reveal`             | Headlines appear word by word |
+| `motion/text-shimmer`            | Generating states             |
+| `motion/marquee`                 | Logo strips                   |
+| `motion/theme-toggle`            | Theme switch                  |
+| `motion/button (StatefulButton)` | Submit with a state           |
+| `agents/message, message-bubble` | Chat messages                 |
+| `agents/prompt-input`            | Composer                      |
+| `agents/agent-activity`          | Tool and search activity      |
+| `agents/todo-list`               | Plans                         |
+| `agents/tool-result`             | Terminal output               |
+| `agents/code-block`              | Commands                      |
+| `agents/loading-states`          | Thinking, reasoning, progress |
+
+## Deprecated
+
+Sunbeam's own components, built on Base UI, replace these. They still work and go in a later major version.
+
+| Vendored                    | Use instead    |
+| --------------------------- | -------------- |
+| `motion/checkbox`           | `Checkbox`     |
+| `motion/input`              | `Input, Field` |
+| `motion/select`             | `Select`       |
+| `motion/otp-input`          | `OTPField`     |
+| `motion/bouncy-accordion`   | `Accordion`    |
+| `motion/popover-morph`      | `Popover`      |
+| `motion/center-morph-modal` | `Dialog`       |
+
+## Rules
+
+- `src/beui` is third-party code and may use physical colors or `dark:` inside; don't copy those patterns.
+- Pass every string through props.
+- `agents/code-block` needs `shiki` and `motion/theme-toggle` needs `next-themes`, both optional peers.

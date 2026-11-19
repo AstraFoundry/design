@@ -1,6 +1,51 @@
 ---
-title: Introduction
-description: Sunbeam is AstraFoundry's design system.
+title: "Introduction"
+description: "Sunbeam is AstraFoundry's design system, made for fast interaction: clear, quick and precise."
 ---
 
-<Demo name="button/variants" material />
+Sunbeam helps people and agents get things done quickly. The interface itself is clear and quick: feedback comes fast, state reads at a glance, and each screen has one yellow. The humanist friction lives in the background, in impressionist, motion-blurred photographs of nature; the UI set on them carries no texture and no nostalgia.
+
+<Demo name="panel/basic" />
+
+## Four things
+
+<Steps>
+  <Step>
+    **Ink, and one yellow.** Neutrals are warm ink. Yellow marks the one primary action or
+    result on a screen; chosen, on and checked are ink.
+  </Step>
+  <Step>
+    **Flat and raised, side by side.** The page and the window's chrome are flat. Layers
+    floating above them (panels, popovers, menus, dialogs) are raised, and so is every
+    control inside. Material follows the layer, not the component.
+  </Step>
+  <Step>
+    **Concentric corners.** Inner radius = outer radius − inset. A 28px panel less its 8px
+    inset is the 20px of a 40px pill.
+  </Step>
+  <Step>
+    **Quick motion that lands.** Input answers within 100ms; popups grow from their
+    trigger on a spring and leave faster; a scene plays once and rests on its result.
+  </Step>
+</Steps>
+
+## Install
+
+```sh
+pnpm add @astrafoundry/design @base-ui/react
+```
+
+```css title="app/globals.css"
+@import "tailwindcss";
+@import "@astrafoundry/design/styles.css";
+```
+
+```tsx
+import { Button, Panel } from "@astrafoundry/design/ui";
+```
+
+Components use semantic tokens only, never physical colors or `dark:`. A `.dark` class on `<html>` switches the scheme. Every visible string comes in through props; components carry no English defaults.
+
+## Related systems
+
+Sunbeam's interaction primitives come from [Base UI](https://base-ui.com). Its coverage follows [coss ui](https://coss.com/ui) and the [Vercel UI SDK](https://github.com/vercel-labs/ui); its text and agent motion come from [beUI](https://beui.dev). The same tokens and components are written in Go for native windows drawn by [MyGo](https://github.com/egoist/mygo).

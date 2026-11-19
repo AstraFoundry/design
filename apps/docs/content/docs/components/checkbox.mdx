@@ -1,0 +1,64 @@
+---
+title: "Checkbox"
+description: "复选框。勾选后填满墨色，勾线随之画出。"
+---
+
+<Demo name="checkbox/basic" material />
+
+## 引入
+
+```tsx
+import { Checkbox } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+多选、同意条款、单个开关项。
+
+## 何时不用
+
+立即生效的设置：用 Switch。
+
+## 示例
+
+<Demo name="checkbox/indeterminate" />
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["check", "toggle", "out", "mark draws in"],
+    ["press", "press", "out", "scale 0.9"],
+  ]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable keyLabel="按键" actionLabel="作用" rows={[["Space", "切换"]]} />
+
+## API
+
+<TypeTable
+  type={{
+    checked: { type: "boolean", description: "受控勾选" },
+    indeterminate: { type: "boolean", description: "部分选中", default: "false" },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/checkbox)。
+
+## 规范
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="勾选用墨色。"
+  dont="勾选用黄色：黄色只给主操作。"
+/>

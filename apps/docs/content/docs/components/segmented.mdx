@@ -1,0 +1,63 @@
+---
+title: "Segmented"
+description: "在几个视图之间切换的分段控件：凹槽里唯一的浮起面。"
+---
+
+<Demo name="segmented/basic" material />
+
+## 引入
+
+```tsx
+import { Segmented } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+2–5 个互斥视图之间切换。
+
+## 何时不用
+
+导航到别的页面：用 Tabs 或链接。
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["choose", "press", "out", "thumb face"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["← → ↑ ↓", "选择相邻项"],
+    ["Home End", "第一个 / 最后一个"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    options: { type: "SegmentedOption[]", description: "选项：value、label、icon" },
+    label: { type: "string", description: "整组的无障碍名称" },
+    iconOnly: { type: "boolean", description: "只显示图标", default: "false" },
+  }}
+/>
+
+## 规范
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="所有分段等宽，按最宽的那个。"
+  dont="让选中的面随文字长短伸缩。"
+/>

@@ -1,0 +1,59 @@
+---
+title: "ToggleGroup"
+description: "Toggles in one recessed track, all the same width."
+---
+
+<Demo name="toggle-group/basic" material />
+
+## Import
+
+```tsx
+import { ToggleGroup } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+A few exclusive or combinable options, as alignment.
+
+## When not to
+
+A choice in a form: use RadioGroup.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[["choose", "press", "out", "thumb face"]]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## Accessibility
+
+<KeyTable
+  keyLabel="Key"
+  actionLabel="Does"
+  rows={[
+    ["← →", "move"],
+    ["Enter Space", "toggle"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    value: { type: "string[]", description: "Pressed items" },
+    multiple: {
+      type: "boolean",
+      description: "Allows several pressed at once",
+      default: "false",
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/toggle-group).

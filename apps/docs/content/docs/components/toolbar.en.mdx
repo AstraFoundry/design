@@ -1,0 +1,42 @@
+---
+title: "Toolbar"
+description: "A row of controls in a window's chrome, always flat."
+---
+
+<Demo name="toolbar/basic" material />
+
+## Import
+
+```tsx
+import { Toolbar } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+An editor's format bar, a canvas's tools.
+
+## When not to
+
+Actions inside a floating layer: use buttons directly.
+
+## Material
+
+On a flat layer it is a fill; inside a Panel or any `data-material="raised"` layer it is raised, by itself. Flip the material switch at the demo's top right to compare.
+
+## Accessibility
+
+<KeyTable keyLabel="Key" actionLabel="Does" rows={[["← →", "move"]]} />
+
+## API
+
+<TypeTable
+  type={{
+    orientation: {
+      type: '"horizontal" | "vertical"',
+      description: "Direction",
+      default: '"horizontal"',
+    },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/toolbar).

@@ -1,0 +1,32 @@
+---
+title: "Alert"
+description: "A message about the page or a task. The status color is a dot; the text stays ink."
+---
+
+<Demo name="alert/tones" />
+
+## Import
+
+```tsx
+import { Alert } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Maintenance, verification, failed payments.
+
+## When not to
+
+Brief feedback: use Toast.
+
+## API
+
+<TypeTable
+  type={{
+    tone: {
+      type: '"neutral" | "success" | "danger" | "info"',
+      description: "Status; danger interrupts (role alert)",
+      default: '"neutral"',
+    },
+  }}
+/>

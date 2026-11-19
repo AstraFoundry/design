@@ -1,0 +1,67 @@
+---
+title: "Tabs"
+description: "同一事物的多个视图。下划线式用于页面分区；分段式用于少量视图，等宽。"
+---
+
+<Demo name="tabs/underline" />
+
+## 引入
+
+```tsx
+import { Tabs } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+设置分区、详情的不同面。
+
+## 何时不用
+
+导航到别的页面：用链接。
+
+## 示例
+
+<Demo name="tabs/segmented" material />
+
+## 材质
+
+平面层里它是一层填充；放进 Panel 或任何 `data-material="raised"` 的层，它会自动浮起。切换示例右上角的材质按钮对比。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[["indicator", "indicator", "in-out", "slides to the chosen tab"]]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## 可访问性
+
+<KeyTable
+  keyLabel="按键"
+  actionLabel="作用"
+  rows={[
+    ["← →", "选择相邻标签"],
+    ["Home End", "第一个 / 最后一个"],
+  ]}
+/>
+
+## API
+
+<TypeTable
+  type={{
+    variant: {
+      type: '"underline" | "segmented"',
+      description: "样式",
+      default: '"underline"',
+    },
+    activateOnFocus: {
+      type: "boolean",
+      description: "方向键到达即显示；面板需要加载时关掉",
+      default: "true",
+    },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/tabs)。

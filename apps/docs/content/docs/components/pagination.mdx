@@ -1,0 +1,30 @@
+---
+title: "Pagination"
+description: "列表的分页链接。当前页是平面实心面；所有页码按钮等宽。"
+---
+
+<Demo name="pagination/basic" />
+
+## 引入
+
+```tsx
+import { Pagination } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+可分享 URL 的长列表。
+
+## 何时不用
+
+流式内容：用加载更多。
+
+## API
+
+<TypeTable
+  type={{
+    "page / pageCount": { type: "number", description: "当前页与总页数" },
+    href: { type: "(page) => string", description: "某页的 URL" },
+    labels: { type: "{ nav, previous, next, page }", description: "全部无障碍文案" },
+  }}
+/>

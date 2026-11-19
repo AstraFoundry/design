@@ -1,0 +1,52 @@
+---
+title: "Tooltip"
+description: "纯图标控件的简短墨色标签，不带材质。"
+---
+
+<Demo name="tooltip/basic" material />
+
+## 引入
+
+```tsx
+import { Tooltip } from "@astrafoundry/design/ui";
+```
+
+## 何时使用
+
+解释只有图标的按钮。
+
+## 何时不用
+
+重要信息：不要藏在提示里。
+
+## 动效
+
+<MotionTable
+  head={["时刻", "时长", "曲线", "变化"]}
+  rows={[
+    ["show", "tooltip", "out", "fade, rise 2px, after 500ms"],
+    ["hide", "tooltip-exit", "out", "fade"],
+  ]}
+/>
+
+开启减少动态效果时，所有过渡直接跳到终态。
+
+## API
+
+<TypeTable
+  type={{
+    content: { type: "ReactNode", description: "提示文字" },
+    delay: { type: "number", description: "显示前的延迟（毫秒）", default: "500" },
+  }}
+/>
+
+其余属性透传给 Base UI 对应部件，见 [Base UI 文档](https://base-ui.com/react/components/tooltip)。
+
+## 规范
+
+<DoDont
+  doLabel="这样做"
+  dontLabel="不要这样"
+  do="把一组按钮包进同一个 TooltipProvider，相邻移动时立即显示。"
+  dont="给有文字的按钮再加一个重复文字的提示。"
+/>

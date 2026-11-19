@@ -1,0 +1,44 @@
+---
+title: "Drawer"
+description: "A raised sheet that slides from an edge and follows the finger when swiped away."
+---
+
+<Demo name="drawer/sides" />
+
+## Import
+
+```tsx
+import { Drawer } from "@astrafoundry/design/ui";
+```
+
+## When to use
+
+Mobile sheets, side filters, details.
+
+## Motion
+
+<MotionTable
+  head={["Moment", "Duration", "Curve", "Moves"]}
+  rows={[
+    ["open", "drawer", "drawer", "slide from the edge"],
+    ["swipe", "press", "drawer", "follows the finger"],
+    ["close", "drawer-exit", "drawer", "faster after a fast swipe"],
+  ]}
+/>
+
+With reduced motion every transition jumps to its end.
+
+## API
+
+<TypeTable
+  type={{
+    side: {
+      type: '"top" | "right" | "bottom" | "left"',
+      description: "The edge it slides from",
+      default: '"bottom"',
+    },
+    closeLabel: { type: "string", description: "Names the close button" },
+  }}
+/>
+
+Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/drawer).

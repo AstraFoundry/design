@@ -1,0 +1,20 @@
+---
+title: "字体"
+description: "Fraunces 用于标题，IBM Plex Sans 用于其它一切，JetBrains Mono 用于代码。"
+---
+
+<div className="not-prose my-6 flex flex-col gap-5 rounded-3xl border border-border bg-card p-8">
+  <p className="font-display text-6xl tracking-tight">清晰，明快</p>
+  <p className="font-display text-4xl tracking-tight">Clear, quick and precise</p>
+  <p className="text-2xl font-medium tracking-tight">区块标题 · Block heading 24</p>
+  <p className="text-lg text-muted-foreground">导语 · A lead in muted ink, 18</p>
+  <p className="text-base">正文 · Running text, 16. 数字对齐用等宽数字 1,284.50</p>
+  <p className="text-sm font-medium">标签 · Label 14 / 500</p>
+  <p className="text-[13px] text-muted-foreground">说明 · Caption 13</p>
+  <p className="font-mono text-sm">pnpm add @astrafoundry/design</p>
+</div>
+
+- 标题用 Fraunces 400，从不加粗、不用斜体强调。展示字号随视口在 48–96px 间缩放。
+- 中文和日文回落到系统字体（苹方、冬青、Noto），标题不加字距。
+- 变化或需要对齐的数字用 `tabular-nums`。标题 `text-balance`，段落 `text-pretty`，每行不超过约 65 个字符。
+- 句首大写（英文），不用感叹号和 emoji。
