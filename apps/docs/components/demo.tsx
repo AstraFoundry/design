@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { ServerCodeBlock } from "fumadocs-ui/components/codeblock.rsc";
+import { highlight } from "fumadocs-core/highlight";
+import { CodeBlock } from "./code-block";
 import { demos } from "@/demos";
 import { DemoFrame, type DemoFrameProps } from "./demo-frame";
 
@@ -17,7 +18,12 @@ export async function Demo({ name, ...rest }: DemoProps) {
   const source = (await readFile(file, "utf8")).trim();
   return (
     <DemoFrame
-      code={<ServerCodeBlock lang="tsx" code={source} codeblock={{ allowCopy: true }} />}
+      code={await highlight(source, {
+        lang: "tsx",
+        themes: { light: "github-light", dark: "github-dark-default" },
+        defaultColor: false,
+        components: { pre: (props) => <CodeBlock {...props} /> },
+      })}
       {...rest}
     >
       <Component />

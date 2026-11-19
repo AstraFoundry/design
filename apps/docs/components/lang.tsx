@@ -1,11 +1,24 @@
 "use client";
 
-import { useI18n } from "fumadocs-ui/contexts/i18n";
+import { createContext, useContext, type ReactNode } from "react";
 
-export type DocsLang = "zh" | "en";
+import type { DocsLang } from "@/lib/lang";
+
+export type { DocsLang };
+
+const LangContext = createContext<DocsLang>("zh");
+
+export function LangProvider({
+  lang,
+  children,
+}: {
+  lang: DocsLang;
+  children: ReactNode;
+}) {
+  return <LangContext.Provider value={lang}>{children}</LangContext.Provider>;
+}
 
 /** The page's language, for copy inside client components. */
 export function useDocsLang(): DocsLang {
-  const { locale } = useI18n();
-  return locale === "en" ? "en" : "zh";
+  return useContext(LangContext);
 }

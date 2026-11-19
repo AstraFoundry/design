@@ -297,6 +297,10 @@ describe("locale switch", () => {
     await act(async () => {
       await user.click(screen.getByRole("button", { name: "Language" }));
     });
+    // The trigger keeps its size in a crowded header.
+    expect(screen.getByRole("button", { name: "Language" }).className).toContain(
+      "shrink-0",
+    );
     const link = await screen.findByRole("link", { name: "简体中文" });
     raisedLayer(link);
     expect(

@@ -1,11 +1,20 @@
 import { loader } from "fumadocs-core/source";
 import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
+import { applyMdxPreset } from "fumadocs-mdx/config";
 import { defineDocs } from "fumadocs-mdx/macro";
 import { i18n } from "./i18n";
 
 const docs = defineDocs({
   dir: "content/docs",
-  docs: { schema: pageSchema },
+  docs: {
+    schema: pageSchema,
+    mdxOptions: applyMdxPreset({
+      rehypeCodeOptions: {
+        themes: { light: "github-light", dark: "github-dark-default" },
+        defaultColor: false,
+      },
+    }),
+  },
   meta: { schema: metaSchema },
 });
 

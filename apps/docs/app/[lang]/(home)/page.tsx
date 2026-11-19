@@ -1,7 +1,7 @@
 import { Backdrop } from "@astrafoundry/design/mock";
 import { LinkButton } from "@astrafoundry/design/ui";
 import { Showcase } from "@/components/home/showcase";
-import type { DocsLang } from "@/components/lang";
+import type { DocsLang } from "@/lib/lang";
 
 const COPY = {
   zh: {

@@ -52,7 +52,7 @@ export function LocaleSwitch({ label, links, className }: LocaleSwitchProps) {
       <PopoverTrigger
         aria-label={label}
         className={cn(
-          "grid size-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-flat-face-hover hover:text-foreground",
+          "grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-flat-face-hover hover:text-foreground",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           className,
         )}

@@ -6,6 +6,8 @@ import { NavigationMenu as BaseNavigationMenu } from "@base-ui/react/navigation-
 import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRender } from "@base-ui/react/use-render";
+import { mergeProps } from "@base-ui/react/merge-props";
 import {
   createContext,
   useContext,
@@ -292,17 +294,26 @@ export function BreadcrumbItem({
   );
 }
 
-export function BreadcrumbLink({ className, ...rest }: ComponentPropsWithoutRef<"a">) {
-  return (
-    <a
-      className={cn(
-        "rounded-sm transition-colors hover:text-foreground",
-        focusRing,
-        className,
-      )}
-      {...rest}
-    />
-  );
+export interface BreadcrumbLinkProps extends ComponentPropsWithoutRef<"a"> {
+  /** Render through the app's own link, as `render={<Link href="/" />}`. */
+  render?: useRender.RenderProp;
+}
+
+export function BreadcrumbLink({ className, render, ...rest }: BreadcrumbLinkProps) {
+  return useRender({
+    defaultTagName: "a",
+    render,
+    props: mergeProps<"a">(
+      {
+        className: cn(
+          "rounded-sm transition-colors hover:text-foreground",
+          focusRing,
+          className,
+        ),
+      },
+      rest,
+    ),
+  });
 }
 
 export function BreadcrumbPage({ className, ...rest }: ComponentPropsWithoutRef<"span">) {
@@ -510,7 +521,7 @@ export function NavigationMenuLink({
 /* --------------------------------------------------------------- Sidebar */
 
 /** A window's side navigation: flat chrome, grouped links, one current. */
-export function Sidebar({ className, ...rest }: ComponentPropsWithoutRef<"nav">) {
+export function Sidebar({ className, ...rest }: ComponentProps<"nav">) {
   return (
     <nav
       data-material="flat"
@@ -539,7 +550,7 @@ export function SidebarSection({
   return (
     <div className={cn("flex flex-col gap-0.5", className)} {...rest}>
       {title ? (
-        <div className="px-2.5 pb-1 text-xs font-medium text-muted-foreground">
+        <div className="px-2.5 pt-1 pb-1.5 text-[13px] font-semibold text-foreground">
           {title}
         </div>
       ) : null}
@@ -550,6 +561,8 @@ export function SidebarSection({
 
 export interface SidebarItemProps extends ComponentPropsWithoutRef<"a"> {
   current?: boolean;
+  /** Render through the app's own link, as `render={<Link href="/a" />}`. */
+  render?: useRender.RenderProp;
   icon?: ReactNode;
   /** A count or status at the row's end. */
   badge?: ReactNode;
@@ -562,28 +575,37 @@ export function SidebarItem({
   badge,
   className,
   children,
+  render,
   ...rest
 }: SidebarItemProps) {
-  return (
-    <a
-      aria-current={current ? "page" : undefined}
-      className={cn(
-        "flex h-8 items-center gap-2.5 rounded-lg border border-transparent px-2.5 text-sm text-muted-foreground transition-colors",
-        "hover:bg-flat-face-hover hover:text-foreground",
-        "aria-[current=page]:material-thumb aria-[current=page]:font-medium aria-[current=page]:text-foreground",
-        "[&_svg]:size-4 [&_svg]:shrink-0",
-        focusRing,
-        className,
-      )}
-      {...rest}
-    >
-      {icon}
-      <span className="truncate">{children}</span>
-      {badge ? (
-        <span className="ml-auto text-xs tabular-nums text-muted-foreground">
-          {badge}
-        </span>
-      ) : null}
-    </a>
-  );
+  return useRender({
+    defaultTagName: "a",
+    render,
+    props: mergeProps<"a">(
+      {
+        "aria-current": current ? "page" : undefined,
+        className: cn(
+          "flex h-8 items-center gap-2.5 rounded-lg border border-transparent px-2.5 text-sm text-muted-foreground",
+          "transition-[background-color,color] duration-(--duration-press)",
+          "hover:bg-flat-face-hover hover:text-foreground",
+          "aria-[current=page]:material-thumb aria-[current=page]:font-medium aria-[current=page]:text-foreground",
+          "[&_svg]:size-4 [&_svg]:shrink-0",
+          focusRing,
+          className,
+        ),
+        children: (
+          <>
+            {icon}
+            <span className="truncate">{children}</span>
+            {badge ? (
+              <span className="ml-auto text-xs tabular-nums text-muted-foreground">
+                {badge}
+              </span>
+            ) : null}
+          </>
+        ),
+      },
+      rest,
+    ),
+  });
 }

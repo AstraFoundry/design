@@ -4,8 +4,31 @@
     {
       "name": "docs",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "docs", "exec", "next", "dev", "--webpack", "-p", "3100"],
+      "runtimeArgs": [
+        "--filter",
+        "docs",
+        "exec",
+        "next",
+        "dev",
+        "--webpack",
+        "-p",
+        "3100"
+      ],
       "port": 3100
+    },
+    {
+      "name": "docs-static",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "docs",
+        "exec",
+        "serve",
+        "out",
+        "-l",
+        "3200"
+      ],
+      "port": 3200
     }
   ]
 }

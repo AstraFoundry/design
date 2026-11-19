@@ -196,6 +196,54 @@ describe("navigation", () => {
     );
   });
 
+  it("a sidebar item and a breadcrumb link render through the app's own link", () => {
+    function AppLink(props: React.ComponentProps<"a">) {
+      return <a data-router="yes" {...props} />;
+    }
+    render(
+      <>
+        <Sidebar aria-label="Nav">
+          <SidebarItem href="/a" current render={<AppLink />}>
+            Atlas
+          </SidebarItem>
+        </Sidebar>
+        <Breadcrumb label="Trail">
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/" render={<AppLink />}>
+              Home
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </>,
+    );
+    const atlas = screen.getByRole("link", { name: "Atlas" });
+    expect(atlas.getAttribute("data-router")).toBe("yes");
+    expect(atlas.getAttribute("aria-current")).toBe("page");
+    expect(atlas.className).toContain("aria-[current=page]:material-thumb");
+    expect(screen.getByRole("link", { name: "Home" }).getAttribute("data-router")).toBe(
+      "yes",
+    );
+  });
+
+  it("a sidebar section title reads as a heading, not as another row", () => {
+    render(
+      <Sidebar aria-label="Nav">
+        <SidebarSection title="Projects">
+          <SidebarItem href="/a">Atlas</SidebarItem>
+        </SidebarSection>
+      </Sidebar>,
+    );
+    const title = screen.getByText("Projects");
+    const row = screen.getByRole("link", { name: "Atlas" });
+    // Ink and semibold, where rows are muted and regular.
+    expect(title.className).toContain("text-foreground");
+    expect(title.className).toContain("font-semibold");
+    expect(row.className).toContain("text-muted-foreground");
+    expect(row.className).not.toContain("font-semibold");
+    // Sections stand apart from one another.
+    expect(title.closest("nav")!.className).toContain("gap-5");
+  });
+
   it("a scroll area wraps its content", () => {
     render(
       <ScrollArea className="h-20">
