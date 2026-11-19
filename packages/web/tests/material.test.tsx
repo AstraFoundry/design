@@ -76,21 +76,37 @@ describe("Segmented", () => {
     );
   }
 
-  it("is a radio group whose chosen segment is the raised thumb", () => {
+  it("is a radio group whose chosen segment sits under the one raised thumb", () => {
     render(<Picker />);
-    expect(screen.getByRole("radiogroup", { name: "Background" })).toBeTruthy();
+    const group = screen.getByRole("radiogroup", { name: "Background" });
     const image = screen.getByRole("radio", { name: "Image" });
     const theme = screen.getByRole("radio", { name: "Theme" });
     expect(image.getAttribute("aria-checked")).toBe("true");
-    expect(image.className).toContain("material-thumb");
     expect(image.tabIndex).toBe(0);
     expect(theme.tabIndex).toBe(-1);
-    expect(theme.className).not.toContain("material-thumb");
+    // One thumb for the whole track, so it can slide; the segments have no face.
+    const thumb = group.querySelector<HTMLElement>("[data-slot=thumb]")!;
+    expect(thumb.className).toContain("material-thumb");
+    expect(thumb.getAttribute("aria-hidden")).toBe("true");
+    expect(thumb.style.getPropertyValue("--index")).toBe("1");
+    expect(thumb.style.getPropertyValue("--count")).toBe("2");
+    expect(image.className).not.toContain("material-thumb");
     // Equal columns, so the raised pill keeps its size as the choice moves.
     expect(screen.getByRole("radiogroup").className).toContain("auto-cols-fr");
     // A tight flex row must not squeeze the segments, their labels or icons.
     expect(screen.getByRole("radiogroup").className).toContain("shrink-0");
     expect(image.className).toContain("[&_svg]:shrink-0");
+  });
+
+  it("slides its thumb to the new choice on the indicator's timing", () => {
+    render(<Picker />);
+    const thumb = screen
+      .getByRole("radiogroup")
+      .querySelector<HTMLElement>("[data-slot=thumb]")!;
+    expect(thumb.className).toContain("transition-[translate]");
+    expect(thumb.className).toContain("duration-(--duration-indicator)");
+    fireEvent.click(screen.getByRole("radio", { name: "Theme" }));
+    expect(thumb.style.getPropertyValue("--index")).toBe("0");
   });
 
   it("chooses with a click and with the arrows, Home and End", () => {

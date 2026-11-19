@@ -50,19 +50,40 @@ describe("actions", () => {
     expect(toggle.getAttribute("aria-pressed")).toBe("true");
   });
 
-  it("a toggle group is a well of equal segments, its pressed ones raised thumbs", () => {
+  it("a toggle group is a well of equal segments whose one thumb slides to the pressed one", () => {
     render(
       <ToggleGroup aria-label="Align" defaultValue={["left"]}>
         <ToggleGroupItem value="left">Left</ToggleGroupItem>
         <ToggleGroupItem value="center">Center</ToggleGroupItem>
+        <ToggleGroupItem value="right">Right</ToggleGroupItem>
       </ToggleGroup>,
     );
     const group = screen.getByRole("group", { name: "Align" });
     expect(group.className).toContain("material-well");
     expect(group.className).toContain("auto-cols-fr");
+    const thumb = group.querySelector<HTMLElement>("[data-slot=thumb]")!;
+    expect(thumb.className).toContain("material-thumb");
+    expect(thumb.style.getPropertyValue("--index")).toBe("0");
+    expect(thumb.style.getPropertyValue("--count")).toBe("3");
     const left = screen.getByRole("button", { name: "Left" });
     expect(left.getAttribute("aria-pressed")).toBe("true");
-    expect(left.className).toContain("data-pressed:material-thumb");
+    expect(left.className).not.toContain("material-thumb");
+    fireEvent.click(screen.getByRole("button", { name: "Right" }));
+    expect(thumb.style.getPropertyValue("--index")).toBe("2");
+  });
+
+  it("a toggle group that allows several keeps a face on each pressed item", () => {
+    render(
+      <ToggleGroup aria-label="Style" multiple defaultValue={["bold"]}>
+        <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
+        <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
+      </ToggleGroup>,
+    );
+    const group = screen.getByRole("group", { name: "Style" });
+    expect(group.querySelector("[data-slot=thumb]")).toBeNull();
+    expect(screen.getByRole("button", { name: "Bold" }).className).toContain(
+      "data-pressed:material-thumb",
+    );
   });
 
   it("a toolbar is a flat row of buttons", () => {

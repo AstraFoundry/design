@@ -66,10 +66,10 @@ export function TabsList({
         <BaseTabs.Indicator
           className={cn(
             "absolute left-0 -z-10 w-(--active-tab-width) translate-x-(--active-tab-left)",
-            "transition-[translate,width] duration-(--duration-indicator) ease-in-out",
+            "transition-[translate,width] duration-(--duration-indicator) motion-reduce:transition-none",
             segmented
-              ? "material-thumb top-1 h-8 rounded-full"
-              : "-bottom-px h-0.5 rounded-full bg-foreground",
+              ? "material-thumb top-1 h-8 rounded-full ease-spring"
+              : "-bottom-px h-0.5 rounded-full bg-foreground ease-in-out",
           )}
         />
       </BaseTabs.List>

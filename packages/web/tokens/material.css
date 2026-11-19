@@ -396,3 +396,24 @@
       translateY(var(--offset-y));
   }
 }
+
+/*
+ * The one raised thumb of a track of equal segments (a segmented control,
+ * a toggle group, segmented tabs). It sits under the chosen segment and
+ * slides to the next one on the spring, settling like a detent. Set
+ * --index (the chosen segment, from 0) and --count on it; the track has a
+ * 4px inset and 4px gaps.
+ */
+@utility segment-thumb {
+  position: absolute;
+  inset-block: 4px;
+  inset-inline-start: 4px;
+  width: calc((100% - 8px - (var(--count) - 1) * 4px) / var(--count));
+  translate: calc(var(--index) * (100% + 4px) * var(--dir, 1)) 0;
+  border-radius: 9999px;
+  pointer-events: none;
+
+  &:where(:dir(rtl), [dir="rtl"] *) {
+    --dir: -1;
+  }
+}

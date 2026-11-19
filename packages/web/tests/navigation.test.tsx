@@ -72,7 +72,9 @@ describe("tabs", () => {
     const segmented = screen.getByRole("tablist", { name: "Segmented" });
     expect(segmented.className).toContain("material-well");
     expect(segmented.className).toContain("auto-cols-fr");
-    expect(segmented.querySelector(".material-thumb")).toBeTruthy();
+    const thumb = segmented.querySelector(".material-thumb")!;
+    // The raised thumb slides on the spring, like Segmented's and ToggleGroup's.
+    expect(thumb.className).toContain("ease-spring");
     const underline = screen.getByRole("tablist", { name: "Underline" });
     expect(underline.className).not.toContain("material-well");
   });

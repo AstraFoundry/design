@@ -137,3 +137,70 @@ func TestMotionTokensAreGenerated(t *testing.T) {
 		t.Errorf("popup %v, exit %v: want an exit faster than the entrance", DurationPopup, DurationPopupExit)
 	}
 }
+
+// A segmented control's raised face slides to the new choice rather than
+// jumping there: a frame after the click it is between the two segments.
+func TestSegmentedThumbSlides(t *testing.T) {
+	choice := 0
+	var thumbX float32
+	view := func(c *ui.Context) {
+		Use(c)
+		Segmented(c, &choice, "Day", "Week", "Month").Label("Range")
+		thumbX = lastThumbX
+	}
+	tt := ui.NewTester(view, 400, 80)
+	start := thumbX
+	if err := tt.Click("Month"); err != nil {
+		t.Fatal(err)
+	}
+	tt.Advance(DurationIndicator / 4)
+	tt.Frame()
+	mid := thumbX
+	tt.Advance(2 * DurationIndicator)
+	tt.Frame()
+	end := thumbX
+	if !(mid > start && mid < end) {
+		t.Errorf("thumb at %v, %v, %v: want it between the segments partway through", start, mid, end)
+	}
+	tt.SetPreferences(ui.Preferences{ReduceMotion: true})
+	if err := tt.Click("Day"); err != nil {
+		t.Fatal(err)
+	}
+	tt.Frame()
+	if thumbX != start {
+		t.Errorf("with less motion the thumb is at %v after one frame, want %v at once", thumbX, start)
+	}
+}
+
+// The sliding thumb sits under the labels: the chosen label still shows.
+func TestSegmentedLabelsShowOverTheThumb(t *testing.T) {
+	choice := 1
+	img := ui.Render(func(c *ui.Context) {
+		Use(c)
+		ui.Column(c).Padding(20).Children(func() {
+			Segmented(c, &choice, "Day", "Week").Label("Range")
+		})
+	}, 300, 80, 1)
+	tt := ui.NewTester(func(c *ui.Context) {
+		Use(c)
+		ui.Column(c).Padding(20).Children(func() {
+			Segmented(c, &choice, "Day", "Week").Label("Range")
+		})
+	}, 300, 80)
+	week, ok := tt.AccessByRole(ui.RoleRadio, "Week")
+	if !ok {
+		t.Fatal("no Week segment")
+	}
+	// Some pixel of the chosen segment is as dark as ink: its label.
+	dark := false
+	for y := int(week.Bounds.Y) + 4; y < int(week.Bounds.Y+week.Bounds.H)-4; y++ {
+		for x := int(week.Bounds.X) + 4; x < int(week.Bounds.X+week.Bounds.W)-4; x++ {
+			if px := img.RGBAAt(x, y); int(px.R)+int(px.G)+int(px.B) < 300 {
+				dark = true
+			}
+		}
+	}
+	if !dark {
+		t.Error("the chosen segment shows no label: the thumb covers it")
+	}
+}

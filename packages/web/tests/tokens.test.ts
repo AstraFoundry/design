@@ -92,7 +92,10 @@ describe("Sunbeam tokens", () => {
       "toast-offset-y",
       "toast-swipe-movement-x",
       "toast-swipe-movement-y",
-      // Local to the toast-motion utility.
+      // Set on a segment thumb by its component.
+      "index",
+      "count",
+      // Local to the toast-motion and segment-thumb utilities.
       "dir",
       "peek",
       "scale",

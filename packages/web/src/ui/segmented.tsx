@@ -2,6 +2,7 @@
 
 import { useRef, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "../lib/cn.js";
+import { SegmentThumb } from "./segment-thumb.js";
 
 export interface SegmentedOption<V extends string = string> {
   value: V;
@@ -23,7 +24,8 @@ export interface SegmentedProps<V extends string = string> {
 
 /**
  * A segmented control: a recessed track (a well) whose chosen segment is
- * the one raised face, as a switch between a few views. In a flat layer the
+ * the one raised face, as a switch between a few views. The face slides
+ * from choice to choice on the spring. In a flat layer the
  * track is a flat fill and the chosen segment a flat solid one.
  *
  * Segments are as wide as the widest, so the raised pill keeps its size as
@@ -73,10 +75,11 @@ export function Segmented<V extends string>({
       role="radiogroup"
       aria-label={label}
       className={cn(
-        "material-well inline-grid shrink-0 auto-cols-fr grid-flow-col gap-1 rounded-full p-1",
+        "material-well relative isolate inline-grid shrink-0 auto-cols-fr grid-flow-col gap-1 rounded-full p-1",
         className,
       )}
     >
+      <SegmentThumb index={chosen} count={options.length} className="-z-10" />
       {options.map((option, index) => {
         const selected = index === chosen;
         return (
@@ -94,12 +97,12 @@ export function Segmented<V extends string>({
             onKeyDown={onKeyDown}
             className={cn(
               "inline-flex h-8 select-none items-center justify-center gap-1.5 rounded-full border border-transparent text-sm font-medium whitespace-nowrap",
-              "transition-[background-color,color,box-shadow] duration-150 ease-out",
+              "transition-colors duration-(--duration-press) ease-out",
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
               "[&_svg]:size-4 [&_svg]:shrink-0",
               iconOnly ? "w-10" : "px-3",
               selected
-                ? "material-thumb text-foreground"
+                ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground",
             )}
           >

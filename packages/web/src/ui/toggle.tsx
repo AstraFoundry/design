@@ -3,9 +3,19 @@
 import { Toggle as BaseToggle } from "@base-ui/react/toggle";
 import { ToggleGroup as BaseToggleGroup } from "@base-ui/react/toggle-group";
 import { Toolbar as BaseToolbar } from "@base-ui/react/toolbar";
-import type { ComponentProps, ComponentPropsWithoutRef } from "react";
+import {
+  Children,
+  createContext,
+  isValidElement,
+  useContext,
+  useState,
+  type ComponentProps,
+  type ComponentPropsWithoutRef,
+  type ReactElement,
+} from "react";
 import { cn } from "../lib/cn.js";
 import { buttonClasses, type ButtonSize } from "./button-styles.js";
+import { SegmentThumb } from "./segment-thumb.js";
 import { focusRing } from "./styles.js";
 
 export interface SpinnerProps extends ComponentPropsWithoutRef<"span"> {
@@ -105,31 +115,66 @@ export function Toggle({ className, size = "md", ...rest }: ToggleProps) {
 
 export type ToggleGroupProps = ComponentProps<typeof BaseToggleGroup>;
 
+/* A single-choice group tells its items whether they draw their own face. */
+const GroupContext = createContext<{ sliding: boolean }>({ sliding: false });
+
 /**
  * A set of toggles in one recessed track. Its items are all as wide as the
- * widest, so a pressed face keeps its size wherever it moves.
+ * widest, so a pressed face keeps its size wherever it moves. With one
+ * choice, the raised thumb slides from item to item on the spring; with
+ * `multiple`, each pressed item takes a face of its own.
  */
-export function ToggleGroup({ className, ...rest }: ToggleGroupProps) {
+export function ToggleGroup({
+  className,
+  children,
+  value,
+  defaultValue,
+  onValueChange,
+  multiple = false,
+  ...rest
+}: ToggleGroupProps) {
+  const [inner, setInner] = useState<readonly unknown[]>(defaultValue ?? []);
+  const current = value ?? inner;
+  const items = Children.toArray(children).filter(isValidElement) as ReactElement<{
+    value?: unknown;
+  }>[];
+  const index = items.findIndex((item) => current.includes(item.props.value));
   return (
-    <BaseToggleGroup
-      className={cn(
-        "material-well inline-grid shrink-0 auto-cols-fr grid-flow-col gap-1 rounded-full p-1",
-        className as string,
-      )}
-      {...rest}
-    />
+    <GroupContext.Provider value={{ sliding: !multiple }}>
+      <BaseToggleGroup
+        className={cn(
+          "material-well relative isolate inline-grid shrink-0 auto-cols-fr grid-flow-col gap-1 rounded-full p-1",
+          className as string,
+        )}
+        value={value}
+        defaultValue={defaultValue}
+        multiple={multiple}
+        onValueChange={(next, details) => {
+          setInner(next);
+          onValueChange?.(next, details);
+        }}
+        {...rest}
+      >
+        {multiple ? null : (
+          <SegmentThumb index={index} count={items.length} className="-z-10" />
+        )}
+        {children}
+      </BaseToggleGroup>
+    </GroupContext.Provider>
   );
 }
 
 export type ToggleGroupItemProps = ComponentProps<typeof BaseToggle>;
 
 export function ToggleGroupItem({ className, ...rest }: ToggleGroupItemProps) {
+  const { sliding } = useContext(GroupContext);
   return (
     <BaseToggle
       className={cn(
         "inline-flex h-8 select-none items-center justify-center gap-1.5 rounded-full border border-transparent px-3 text-sm font-medium whitespace-nowrap text-muted-foreground",
         "transition-[background-color,color,box-shadow] duration-(--duration-press) ease-out",
-        "hover:text-foreground data-pressed:material-thumb data-pressed:text-foreground",
+        "hover:text-foreground data-pressed:text-foreground",
+        !sliding && "data-pressed:material-thumb",
         "data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:size-4",
         focusRing,
         className as string,

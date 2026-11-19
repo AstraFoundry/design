@@ -105,16 +105,17 @@ func segmented(c *ui.Context, selected *int, labels []string, icons []*ui.SVG) u
 	track := parts.Track.Padding(wellInset).Gap(wellInset).Radius(segmentHeight/2 + wellInset)
 	Well(c, track)
 	return track.Children(func() {
+		slidingThumb(c, track, *selected, width)
 		for i, text := range labels {
 			s := parts.Segment(i).Height(segmentHeight).Radius(segmentHeight / 2).Center().Cursor(ui.CursorPointer)
-			s.Width(width)
+			s.Width(width).Border(1, ui.Transparent).ZIndex(1)
 			if icons != nil {
 				s.Label(text)
 			}
 			if i == *selected {
-				Thumb(c, s).TextColor(p.Foreground)
+				s.TextColor(p.Foreground)
 			} else {
-				s.Border(1, ui.Transparent).TextColor(p.MutedForeground)
+				s.TextColor(p.MutedForeground)
 			}
 			s.Children(func() {
 				if icons != nil {
@@ -125,4 +126,22 @@ func segmented(c *ui.Context, selected *int, labels []string, icons []*ui.SVG) u
 			})
 		}
 	})
+}
+
+// lastThumbX is where the last sliding thumb was drawn, for the tests.
+var lastThumbX float32
+
+// thumbSpring moves a sliding thumb to its new segment and lets it settle
+// like a detent, as the web's --ease-spring over --duration-indicator.
+var thumbSpring = ui.SpringOptions{Duration: DurationIndicator, Bounce: 0.2}
+
+// slidingThumb draws the one raised face of a track of equal segments
+// under segment index, sliding there on a spring from where it was. With
+// less motion it moves at once.
+func slidingThumb(c *ui.Context, track ui.Element, index int, width float32) {
+	x := track.AnimateTo("thumb", float32(index)*(width+wellInset), ui.Animation{Spring: thumbSpring})
+	lastThumbX = x
+	thumb := ui.Box(c).Width(width).Height(segmentHeight).Radius(segmentHeight / 2).
+		Absolute().Left(wellInset + x).Top(wellInset).PassThrough()
+	Thumb(c, thumb)
 }

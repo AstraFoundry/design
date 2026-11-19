@@ -123,13 +123,14 @@ func Tabs(c *ui.Context, selected *int, labels ...string) ui.Element {
 	track := parts.List.Row().Padding(wellInset).Gap(wellInset).Radius(tabHeight/2 + wellInset)
 	Well(c, track)
 	return track.Children(func() {
+		slidingThumb(c, track, *selected, width)
 		for i, text := range labels {
-			tab := parts.Tab(i).Width(width).Height(tabHeight).Radius(tabHeight / 2).
-				Center().Cursor(ui.CursorPointer)
+			tab := parts.Tab(i).Width(width).Height(tabHeight).Radius(tabHeight/2).
+				Center().Cursor(ui.CursorPointer).Border(1, ui.Transparent).ZIndex(1)
 			if i == *selected {
-				Thumb(c, tab).TextColor(p.Foreground)
+				tab.TextColor(p.Foreground)
 			} else {
-				tab.Border(1, ui.Transparent).TextColor(p.MutedForeground)
+				tab.TextColor(p.MutedForeground)
 			}
 			tab.Children(func() { label(c, text) })
 		}
