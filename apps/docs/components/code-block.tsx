@@ -12,6 +12,58 @@ export interface CodeBlockProps extends ComponentProps<"pre"> {
    * hairline. `flush` fills its container, as the code view of a demo.
    */
   variant?: "card" | "flush";
+  /**
+   * Where the wrap and copy buttons go. `overlay` (the default) floats them
+   * at the block's top end; a container that has a toolbar of its own puts
+   * them there with CodeActions and passes `none`.
+   */
+  actions?: "overlay" | "none";
+  /** Wrap long lines, when the actions live elsewhere. */
+  wrap?: boolean;
+}
+
+/** The wrap-lines and copy buttons of a code block. */
+export function CodeActions({
+  wrap,
+  onWrapChange,
+  getText,
+}: {
+  wrap: boolean;
+  onWrapChange: (wrap: boolean) => void;
+  getText: () => string;
+}) {
+  const t = UI[useDocsLang()];
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="flex items-center gap-1">
+      <Tooltip content={wrap ? t.unwrap : t.wrap}>
+        <IconButton
+          label={wrap ? t.unwrap : t.wrap}
+          variant="ghost"
+          size="sm"
+          aria-pressed={wrap}
+          className="aria-pressed:bg-flat-face-pressed aria-pressed:text-foreground"
+          onClick={() => onWrapChange(!wrap)}
+        >
+          <WrapText aria-hidden />
+        </IconButton>
+      </Tooltip>
+      <Tooltip content={copied ? t.copied : t.copy}>
+        <IconButton
+          label={copied ? t.copied : t.copy}
+          variant="ghost"
+          size="sm"
+          onClick={async () => {
+            await navigator.clipboard.writeText(getText());
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1200);
+          }}
+        >
+          {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
+        </IconButton>
+      </Tooltip>
+    </div>
+  );
 }
 
 /**
@@ -23,12 +75,13 @@ export function CodeBlock({
   children,
   className,
   variant = "card",
+  actions = "overlay",
+  wrap: wrapProp,
   ...rest
 }: CodeBlockProps) {
-  const t = UI[useDocsLang()];
   const ref = useRef<HTMLPreElement>(null);
-  const [copied, setCopied] = useState(false);
-  const [wrap, setWrap] = useState(false);
+  const [wrapState, setWrap] = useState(false);
+  const wrap = wrapProp ?? wrapState;
   const flush = variant === "flush";
   return (
     <div
@@ -43,7 +96,8 @@ export function CodeBlock({
         <pre
           ref={ref}
           className={
-            "shiki m-0 px-5 py-4 pr-24 font-mono text-[13px] leading-relaxed [&_code]:font-mono " +
+            "shiki m-0 px-5 py-4 font-mono text-[13px] leading-relaxed [&_code]:font-mono " +
+            (actions === "overlay" ? "pr-24 " : "") +
             (wrap ? "whitespace-pre-wrap break-words" : "w-max min-w-full") +
             " " +
             (className ?? "")
@@ -53,39 +107,15 @@ export function CodeBlock({
           {children}
         </pre>
       </ScrollArea>
-      <div className="absolute top-2.5 right-2.5 z-20 flex gap-1 opacity-0 transition-opacity duration-(--duration-press) group-hover:opacity-100 focus-within:opacity-100 [@media(hover:none)]:opacity-100">
-        <Tooltip content={wrap ? t.unwrap : t.wrap}>
-          <IconButton
-            label={wrap ? t.unwrap : t.wrap}
-            variant="ghost"
-            size="sm"
-            aria-pressed={wrap}
-            className="size-7 aria-pressed:bg-flat-face-pressed aria-pressed:text-foreground"
-            onClick={() => setWrap((w) => !w)}
-          >
-            <WrapText aria-hidden className="size-3.5" />
-          </IconButton>
-        </Tooltip>
-        <Tooltip content={copied ? t.copied : t.copy}>
-          <IconButton
-            label={copied ? t.copied : t.copy}
-            variant="ghost"
-            size="sm"
-            className="size-7"
-            onClick={async () => {
-              await navigator.clipboard.writeText(ref.current?.textContent ?? "");
-              setCopied(true);
-              setTimeout(() => setCopied(false), 1200);
-            }}
-          >
-            {copied ? (
-              <Check aria-hidden className="size-3.5" />
-            ) : (
-              <Copy aria-hidden className="size-3.5" />
-            )}
-          </IconButton>
-        </Tooltip>
-      </div>
+      {actions === "overlay" ? (
+        <div className="absolute top-2.5 right-2.5 z-20 opacity-0 transition-opacity duration-(--duration-press) group-hover:opacity-100 focus-within:opacity-100 [@media(hover:none)]:opacity-100 [&_button]:size-7 [&_svg]:size-3.5!">
+          <CodeActions
+            wrap={wrap}
+            onWrapChange={setWrap}
+            getText={() => ref.current?.textContent ?? ""}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
