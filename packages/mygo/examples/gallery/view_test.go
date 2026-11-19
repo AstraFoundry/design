@@ -4,6 +4,7 @@ import (
 	"image/png"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/egoist/mygo/ui"
 )
@@ -81,3 +82,42 @@ func TestControls(t *testing.T) {
 		}
 	}
 }
+
+// TestOverlays opens the floating parts and, with SUNBEAM_SNAPSHOT set,
+// writes them, light and dark, with the menu open.
+func TestOverlays(t *testing.T) {
+	app := newOverlays()
+	tt := ui.NewTester(app.view, 1100, 460)
+	if err := tt.Click("Actions"); err != nil {
+		t.Fatal(err)
+	}
+	if !tt.HasText("Duplicate") {
+		t.Fatal("the menu did not open")
+	}
+	if dir := os.Getenv("SUNBEAM_SNAPSHOT"); dir != "" {
+		for _, mode := range []struct {
+			name string
+			dark bool
+		}{{"light", false}, {"dark", true}} {
+			shot := newOverlays()
+			st := ui.NewTesterWith(shot.view, 1100, 460, ui.TesterOptions{Dark: mode.dark})
+			st.SetScale(2)
+			if err := st.Click("Actions"); err != nil {
+				t.Fatal(err)
+			}
+			st.Advance(DurationSettle)
+			st.Frame()
+			f, err := os.Create(dir + "/mygo-overlays-" + mode.name + ".png")
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := png.Encode(f, st.Image()); err != nil {
+				t.Fatal(err)
+			}
+			f.Close()
+		}
+	}
+}
+
+// DurationSettle lets a popup finish its entrance before a snapshot.
+const DurationSettle = 500 * time.Millisecond

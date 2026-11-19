@@ -399,4 +399,4 @@ Pick the object the step is about (a key, a microphone). When the step has no ob
 3. Every visible string and accessible name comes through props (`closeLabel`, `labels`, `characterLabel`, `decrementLabel`…). No component has an English default.
 4. A destructive action is a `secondary` button with a danger icon, confirmed by an `AlertDialog` whose title states the consequence. There is no red button.
 5. The seven overlapping beUI components (`motion/checkbox`, `input`, `select`, `otp-input`, `bouncy-accordion`, `popover-morph`, `center-morph-modal`) are deprecated in favor of these.
-6. In MyGo, `sunbeam.Switch`, `Checkbox`, `TextInput`, `Field`, `Tabs`, `Toggle`, `Slider`, `Badge`, `Progress`, `Divider` and `Card` follow the same rules.
+6. In MyGo, `sunbeam.Switch`, `Checkbox`, `RadioGroup`, `TextInput`, `NumberInput`, `Field`, `Select`, `Combobox`, `Tabs`, `Toggle`, `Slider`, `Menu`, `Popover`, `Dialog`, `Toasts`, `Accordion`, `Avatar`, `Badge`, `Progress`, `Meter`, `Spinner`, `Divider` and `Card` follow the same rules: their popups are raised layers, checked choices are ink.

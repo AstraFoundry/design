@@ -49,7 +49,13 @@ func (app *App) view(c *ui.Context) {
 | `Radius…`, `Space…`, `Type…`                           | Radii, spacing and text styles, in DIPs.                                                 |
 | `Button`, `PrimaryButton`, `GhostButton`, `IconButton` | Buttons that take their layer's material.                                                |
 | `Panel`                                                | A floating raised layer.                                                                 |
-| `Segmented`, `SegmentedIcons`                          | A well of choices whose chosen segment is its one raised face.                           |
+| `Segmented`, `SegmentedIcons`, `Tabs`, `Toggle`        | A well of choices whose one raised face slides to the chosen segment.                    |
+| `Field`, `TextInput`, `NumberInput`                    | Text and number fields: solid with a hairline in the window, recessed in a raised layer. |
+| `Checkbox`, `RadioGroup`, `Switch`, `Slider`           | Choices, checked and on in ink; the switch's knob settles on a spring.                   |
+| `Select`, `Combobox`, `Menu`, `Popover`, `Dialog`      | Raised floating layers; their controls are raised with them.                             |
+| `Toasts`, `Tooltip`                                    | Raised notes at the window's edge, and short labels for icon buttons.                    |
+| `Card`, `Accordion`, `Avatar`, `Badge`, `Divider`      | Content on the window: flat, with hairlines.                                             |
+| `Progress`, `Meter`, `Spinner`                         | Ink in a recessed track, and the one loop Sunbeam allows.                                |
 | `Layer`, `Current`, `Flat`, `Raised`                   | Open a layer of a material, and read the current one.                                    |
 | `Face`, `PrimaryFace`, `Thumb`, `Well`, `PanelSurface` | The materials for elements of your own.                                                  |
 
