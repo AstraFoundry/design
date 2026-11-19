@@ -38,3 +38,5 @@ export * from "./dialog.js";
 export * from "./menu.js";
 export * from "./popover.js";
 export * from "./toast.js";
+export * from "./display.js";
+export * from "./navigation.js";

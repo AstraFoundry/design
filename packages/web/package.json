@@ -41,6 +41,10 @@
       "types": "./src/ui/index.ts",
       "import": "./src/ui/index.ts"
     },
+    "./ui/calendar": {
+      "types": "./src/ui/calendar.tsx",
+      "import": "./src/ui/calendar.tsx"
+    },
     "./mock": {
       "types": "./src/mock/index.ts",
       "import": "./src/mock/index.ts"
@@ -84,6 +88,10 @@
       "./ui": {
         "types": "./dist/ui/index.d.ts",
         "import": "./dist/ui/index.js"
+      },
+      "./ui/calendar": {
+        "types": "./dist/ui/calendar.d.ts",
+        "import": "./dist/ui/calendar.js"
       },
       "./mock": {
         "types": "./dist/mock/index.d.ts",
@@ -137,6 +145,7 @@
     "motion": "^13.4.2",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
+    "react-day-picker": "^10.0.0",
     "react-dom": "^19.0.0",
     "sharp": ">=0.34.0",
     "shiki": "^4.4.3",
@@ -144,6 +153,9 @@
   },
   "peerDependenciesMeta": {
     "next-themes": {
+      "optional": true
+    },
+    "react-day-picker": {
       "optional": true
     },
     "sharp": {
@@ -172,6 +184,7 @@
     "postcss": "^8.5.32",
     "prettier": "^3.6.2",
     "react": "^19.3.0",
+    "react-day-picker": "^10.0.2",
     "react-dom": "^19.3.0",
     "sharp": "^0.34.4",
     "shiki": "^4.4.3",
