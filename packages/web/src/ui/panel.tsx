@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "../lib/cn.js";
+import { SchemeContext } from "./scheme.js";
 
 /** The two surface materials: see tokens/material.css. */
 export type Material = "flat" | "raised";
@@ -24,7 +25,7 @@ export interface PanelProps extends ComponentPropsWithoutRef<"div"> {
  * 28px outer radius − 8px inset = 20px, a pill's radius.
  */
 export function Panel({ material = "raised", scheme, className, ...rest }: PanelProps) {
-  return (
+  const panel = (
     <div
       data-material={material}
       className={cn(
@@ -35,5 +36,11 @@ export function Panel({ material = "raised", scheme, className, ...rest }: Panel
       )}
       {...rest}
     />
+  );
+  // Popups opened inside portal to body; they read the scheme from here.
+  return scheme ? (
+    <SchemeContext.Provider value={scheme}>{panel}</SchemeContext.Provider>
+  ) : (
+    panel
   );
 }

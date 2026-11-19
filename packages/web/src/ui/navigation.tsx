@@ -14,6 +14,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "../lib/cn.js";
+import { useSchemeClass } from "./scheme.js";
 import { buttonClasses, iconButtonClasses } from "./button-styles.js";
 import { focusRing, popupClasses } from "./styles.js";
 
@@ -417,6 +418,7 @@ export function NavigationMenu({
   children,
   ...rest
 }: ComponentProps<typeof BaseNavigationMenu.Root>) {
+  const scheme = useSchemeClass();
   return (
     <BaseNavigationMenu.Root className={cn("relative", className as string)} {...rest}>
       <BaseNavigationMenu.List className="flex items-center gap-1">
@@ -431,6 +433,7 @@ export function NavigationMenu({
           <BaseNavigationMenu.Popup
             data-material="raised"
             className={cn(
+              scheme,
               popupClasses,
               "relative h-(--popup-height) w-(--popup-width) overflow-hidden rounded-continuous-[22px] p-0",
               "transition-[width,height,opacity,scale] duration-(--duration-popup)",

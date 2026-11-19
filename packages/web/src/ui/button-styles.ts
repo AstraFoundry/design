@@ -35,7 +35,7 @@ const BASE = [
   "inline-flex shrink-0 select-none items-center justify-center rounded-full font-medium whitespace-nowrap",
   "transition-[background-color,color,box-shadow,scale] duration-150 ease-out active:scale-[0.97]",
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-  "disabled:pointer-events-none disabled:opacity-60 aria-busy:opacity-100",
+  "disabled:pointer-events-none disabled:opacity-60 aria-busy:cursor-progress",
 ];
 
 /** Shared look for buttons and links that act as buttons. */

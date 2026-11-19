@@ -6,6 +6,7 @@ import { Drawer as BaseDrawer } from "@base-ui/react/drawer";
 import { X } from "lucide-react";
 import { createContext, useContext, type ComponentProps, type ReactNode } from "react";
 import { cn } from "../lib/cn.js";
+import { useSchemeClass } from "./scheme.js";
 import { iconButtonClasses } from "./button-styles.js";
 
 /* ---------------------------------------------------------------- shared */
@@ -70,6 +71,7 @@ export function DialogPopup({
   size = "md",
   ...rest
 }: DialogPopupProps) {
+  const scheme = useSchemeClass();
   return (
     <BaseDialog.Portal>
       <BaseDialog.Backdrop className="backdrop-motion fixed inset-0 z-50" />
@@ -77,6 +79,7 @@ export function DialogPopup({
         <BaseDialog.Popup
           data-material="raised"
           className={cn(
+            scheme,
             "material-panel dialog-motion relative w-full rounded-continuous-tile p-6 text-foreground outline-none",
             DIALOG_SIZE[size],
             className as string,
@@ -131,6 +134,7 @@ export function AlertDialogPopup({
   className,
   ...rest
 }: ComponentProps<typeof BaseAlertDialog.Popup>) {
+  const scheme = useSchemeClass();
   return (
     <BaseAlertDialog.Portal>
       <BaseAlertDialog.Backdrop className="backdrop-motion fixed inset-0 z-50" />
@@ -138,6 +142,7 @@ export function AlertDialogPopup({
         <BaseAlertDialog.Popup
           data-material="raised"
           className={cn(
+            scheme,
             "material-panel dialog-motion relative w-full max-w-sm rounded-continuous-tile p-6 text-foreground outline-none",
             className as string,
           )}
@@ -230,6 +235,7 @@ export function DrawerPopup({
   closeLabel,
   ...rest
 }: DrawerPopupProps) {
+  const scheme = useSchemeClass();
   const side = useContext(SideContext);
   return (
     <BaseDrawer.Portal>
@@ -239,6 +245,7 @@ export function DrawerPopup({
           data-material="raised"
           data-side={side}
           className={cn(
+            scheme,
             "material-panel drawer-motion fixed flex flex-col overflow-y-auto overscroll-contain p-6 text-foreground outline-none",
             DRAWER_SIDE[side],
             className as string,

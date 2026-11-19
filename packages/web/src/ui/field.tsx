@@ -83,17 +83,19 @@ export type FieldErrorProps = ComponentProps<typeof BaseField.Error>;
  * colors mark icons and dots only, never text.
  */
 export function FieldError({ className, children, ...rest }: FieldErrorProps) {
+  // Without children, Base UI writes its own message (a server error from
+  // Form, a validate() result); passing `children: undefined` would hide it.
+  const content = children === undefined ? {} : { children };
   return (
     <BaseField.Error
       className={cn(
         "flex items-center gap-1.5 text-[13px] leading-snug text-foreground",
+        "before:size-1.5 before:shrink-0 before:rounded-full before:bg-danger before:content-['']",
         className as string,
       )}
       {...rest}
-    >
-      <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-danger" />
-      {children}
-    </BaseField.Error>
+      {...content}
+    />
   );
 }
 

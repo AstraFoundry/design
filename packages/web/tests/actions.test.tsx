@@ -25,7 +25,7 @@ describe("actions", () => {
     );
     const button = screen.getByRole("button", { name: "Save" });
     expect(button.getAttribute("aria-busy")).toBe("true");
-    expect((button as HTMLButtonElement).disabled).toBe(true);
+    expect(button.getAttribute("aria-disabled")).toBe("true");
     fireEvent.click(button);
     expect(presses).toBe(0);
     expect(button.querySelector("[data-slot=spinner]")).toBeTruthy();

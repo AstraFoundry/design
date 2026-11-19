@@ -6,6 +6,7 @@ import { Menubar as BaseMenubar } from "@base-ui/react/menubar";
 import { Check, ChevronRight } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "../lib/cn.js";
+import { useSchemeClass } from "./scheme.js";
 import {
   groupLabelClasses,
   itemClasses,
@@ -37,10 +38,11 @@ function MenuLayer({
   children,
   ...rest
 }: ComponentProps<typeof BaseMenu.Popup>) {
+  const scheme = useSchemeClass();
   return (
     <BaseMenu.Popup
       data-material="raised"
-      className={cn(popupClasses, "min-w-44", className as string)}
+      className={cn(scheme, popupClasses, "min-w-44", className as string)}
       {...rest}
     >
       {children}

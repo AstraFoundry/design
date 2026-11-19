@@ -55,7 +55,7 @@ const covers = {
   card: ["Card"],
   alert: ["Alert"],
   badge: ["Badge", "StatusDot"],
-  avatar: ["Avatar"],
+  avatar: ["Avatar", "AvatarGroup"],
   progress: ["Progress", "Meter"],
   skeleton: ["Skeleton"],
   separator: ["Separator"],
@@ -64,6 +64,8 @@ const covers = {
 };
 
 /** Root components (no prefix of another export) the docs must cover. */
+// Internal parts that sources export for their siblings.
+const INTERNAL = new Set(["SchemeContext"]);
 const SITE = new Set([
   "Brand",
   "BrandMark",
@@ -89,6 +91,7 @@ const exported = new Set(
 const roots = [...exported].filter(
   (name) =>
     !SITE.has(name) &&
+    !INTERNAL.has(name) &&
     ![...exported].some((other) => other !== name && name.startsWith(other)),
 );
 const covered = new Set(Object.values(covers).flat());

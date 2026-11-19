@@ -7,7 +7,8 @@ export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   size?: ButtonSize;
   /**
    * Shows a spinner before the label and stops further presses while the
-   * action runs. The label stays, so the button keeps its width.
+   * action runs. The label stays, so the button keeps its width, and the
+   * button keeps the focus.
    */
   loading?: boolean;
 }
@@ -21,14 +22,25 @@ export function Button({
   loading = false,
   disabled,
   children,
+  onClick,
   ...rest
 }: ButtonProps) {
+  // While loading the button stays focusable (aria-disabled, not disabled),
+  // so a keyboard user who pressed it keeps their place.
   return (
     <button
       type={type}
       className={buttonClasses(variant, size, className)}
-      disabled={disabled || loading}
+      disabled={disabled}
+      aria-disabled={loading || undefined}
       aria-busy={loading || undefined}
+      onClick={(event) => {
+        if (loading) {
+          event.preventDefault();
+          return;
+        }
+        onClick?.(event);
+      }}
       {...rest}
     >
       {loading ? <Spinner size={size === "lg" ? "md" : "sm"} /> : null}

@@ -5,6 +5,7 @@ import { PreviewCard as BasePreviewCard } from "@base-ui/react/preview-card";
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { cn } from "../lib/cn.js";
+import { useSchemeClass } from "./scheme.js";
 import { popupClasses } from "./styles.js";
 
 interface PositionProps {
@@ -36,6 +37,7 @@ export function PopoverPopup({
   alignOffset,
   ...rest
 }: PopoverPopupProps) {
+  const scheme = useSchemeClass();
   return (
     <BasePopover.Portal>
       <BasePopover.Positioner
@@ -48,6 +50,7 @@ export function PopoverPopup({
         <BasePopover.Popup
           data-material="raised"
           className={cn(
+            scheme,
             popupClasses,
             "max-w-(--available-width) rounded-continuous-[22px] p-4",
             className as string,
@@ -119,6 +122,7 @@ export function Tooltip({
   onOpenChange,
   className,
 }: TooltipProps) {
+  const scheme = useSchemeClass();
   return (
     <BaseTooltip.Root open={open} onOpenChange={onOpenChange}>
       <BaseTooltip.Trigger delay={delay} render={children} />
@@ -132,6 +136,7 @@ export function Tooltip({
         >
           <BaseTooltip.Popup
             className={cn(
+              scheme,
               "tooltip-motion max-w-64 rounded-lg bg-foreground px-2 py-1 text-xs leading-snug font-medium text-background",
               className,
             )}
@@ -175,6 +180,7 @@ export function PreviewCardPopup({
   alignOffset,
   ...rest
 }: PreviewCardPopupProps) {
+  const scheme = useSchemeClass();
   return (
     <BasePreviewCard.Portal>
       <BasePreviewCard.Positioner
@@ -187,6 +193,7 @@ export function PreviewCardPopup({
         <BasePreviewCard.Popup
           data-material="raised"
           className={cn(
+            scheme,
             popupClasses,
             "w-72 rounded-continuous-[22px] p-4",
             className as string,

@@ -2,7 +2,7 @@
 
 import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, type ComponentProps } from "react";
-import { DayPicker, type DayPickerProps } from "react-day-picker";
+import { DayPicker, type DayPickerProps, type Locale } from "react-day-picker";
 import { cn } from "../lib/cn.js";
 import { fieldClasses } from "./styles.js";
 import { Popover, PopoverPopup, PopoverTrigger } from "./popover.js";
@@ -77,11 +77,19 @@ export interface DatePickerProps {
   placeholder: string;
   /** Writes a chosen date, in the page's language. */
   format: (day: Date) => string;
-  value?: Date;
+  /**
+   * The calendar's language: month and weekday names, the first day of the
+   * week, and its navigation labels. Import it from `react-day-picker/locale`.
+   */
+  locale?: Partial<Locale>;
+  /** The chosen day; pass `null` for none. Omit to let the picker keep it. */
+  value?: Date | null;
   defaultValue?: Date;
   onValueChange?: (day: Date | undefined) => void;
   defaultMonth?: Date;
   disabled?: boolean;
+  /** Anything else the calendar takes: `labels`, `disabled` days, `startMonth`… */
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "locale">;
   className?: string;
 }
 
@@ -90,16 +98,18 @@ export function DatePicker({
   label,
   placeholder,
   format,
+  locale,
   value,
   defaultValue,
   onValueChange,
   defaultMonth,
   disabled,
+  calendarProps,
   className,
 }: DatePickerProps) {
   const [inner, setInner] = useState<Date | undefined>(defaultValue);
   const [open, setOpen] = useState(false);
-  const day = value ?? inner;
+  const day = value === undefined ? inner : (value ?? undefined);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
@@ -119,10 +129,16 @@ export function DatePicker({
       </PopoverTrigger>
       <PopoverPopup align="start" className="p-3">
         <Calendar
+          {...(calendarProps as object)}
           mode="single"
+          required
+          locale={locale}
           selected={day}
           defaultMonth={day ?? defaultMonth}
           onSelect={(next: Date | undefined) => {
+            // Choosing the chosen day again keeps it: required mode never
+            // clears, so a tap to confirm does not lose the date.
+            if (!next) return;
             setInner(next);
             onValueChange?.(next);
             setOpen(false);

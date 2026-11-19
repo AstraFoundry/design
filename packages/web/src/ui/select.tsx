@@ -6,6 +6,7 @@ import { Select as BaseSelect } from "@base-ui/react/select";
 import { Check, ChevronsUpDown, X } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "../lib/cn.js";
+import { useSchemeClass } from "./scheme.js";
 import {
   fieldClasses,
   groupLabelClasses,
@@ -91,6 +92,7 @@ export function SelectPopup({
   alignItemWithTrigger = false,
   ...rest
 }: SelectPopupProps) {
+  const scheme = useSchemeClass();
   return (
     <BaseSelect.Portal>
       <BaseSelect.Positioner
@@ -103,6 +105,7 @@ export function SelectPopup({
         <BaseSelect.Popup
           data-material="raised"
           className={cn(
+            scheme,
             popupClasses,
             "min-w-(--anchor-width) data-[side=none]:min-w-[calc(var(--anchor-width)+8px)]",
             className as string,
@@ -231,6 +234,7 @@ export function ComboboxPopup({
   sideOffset = 6,
   ...rest
 }: ComboboxPopupProps) {
+  const scheme = useSchemeClass();
   return (
     <BaseCombobox.Portal>
       <BaseCombobox.Positioner
@@ -242,6 +246,7 @@ export function ComboboxPopup({
         <BaseCombobox.Popup
           data-material="raised"
           className={cn(
+            scheme,
             popupClasses,
             "w-(--anchor-width) max-w-(--available-width)",
             className as string,
@@ -343,6 +348,7 @@ export function AutocompletePopup({
   sideOffset = 6,
   ...rest
 }: AutocompletePopupProps) {
+  const scheme = useSchemeClass();
   return (
     <BaseAutocomplete.Portal>
       <BaseAutocomplete.Positioner
@@ -354,6 +360,7 @@ export function AutocompletePopup({
         <BaseAutocomplete.Popup
           data-material="raised"
           className={cn(
+            scheme,
             popupClasses,
             "w-(--anchor-width) max-w-(--available-width)",
             className as string,

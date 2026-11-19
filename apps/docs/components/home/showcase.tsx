@@ -2,6 +2,7 @@
 
 import {
   Avatar,
+  AvatarGroup,
   Badge,
   Button,
   Card,
@@ -170,11 +171,11 @@ export function Showcase({ lang }: { lang: DocsLang }) {
           </div>
           <Meter value={72} aria-label={t.storage} />
           <div className="flex items-center justify-between">
-            <div className="flex -space-x-2">
+            <AvatarGroup label={t.storage}>
               {["Ada Lovelace", "Grace Hopper", "Alan Turing"].map((n) => (
-                <Avatar key={n} name={n} size="sm" className="ring-2 ring-card" />
+                <Avatar key={n} name={n} size="sm" />
               ))}
-            </div>
+            </AvatarGroup>
             <Button variant="secondary" size="sm">
               {t.manage}
             </Button>

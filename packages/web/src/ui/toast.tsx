@@ -4,6 +4,7 @@ import { Toast as BaseToast } from "@base-ui/react/toast";
 import { X } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "../lib/cn.js";
+import { useSchemeClass } from "./scheme.js";
 import { buttonClasses, iconButtonClasses } from "./button-styles.js";
 import { Spinner } from "./toggle.js";
 
@@ -77,6 +78,7 @@ const DOT: Record<string, string> = {
 };
 
 function ToastList({ closeLabel, top }: { closeLabel: string; top: boolean }) {
+  const scheme = useSchemeClass();
   const { toasts } = BaseToast.useToastManager();
   return toasts.map((toast) => (
     <BaseToast.Root
@@ -85,7 +87,10 @@ function ToastList({ closeLabel, top }: { closeLabel: string; top: boolean }) {
       swipeDirection={top ? ["up", "right"] : ["down", "right"]}
       data-material="raised"
       data-edge={top ? "top" : "bottom"}
-      className="material-panel toast-motion absolute inset-x-0 rounded-continuous-[22px] text-foreground select-none"
+      className={cn(
+        scheme,
+        "material-panel toast-motion absolute inset-x-0 rounded-continuous-[22px] text-foreground select-none",
+      )}
     >
       <BaseToast.Content className="flex items-start gap-3 overflow-hidden p-3.5 pr-11 transition-opacity duration-(--duration-toast) data-behind:opacity-0 data-expanded:opacity-100">
         {toast.type === "loading" ? (

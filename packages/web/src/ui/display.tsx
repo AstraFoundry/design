@@ -4,7 +4,12 @@ import { Avatar as BaseAvatar } from "@base-ui/react/avatar";
 import { Meter as BaseMeter } from "@base-ui/react/meter";
 import { Progress as BaseProgress } from "@base-ui/react/progress";
 import { Separator as BaseSeparator } from "@base-ui/react/separator";
-import type { ComponentProps, ComponentPropsWithoutRef, ReactNode } from "react";
+import type {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  CSSProperties,
+  ReactNode,
+} from "react";
 import { cn } from "../lib/cn.js";
 
 /* ------------------------------------------------------------------ Card */
@@ -177,13 +182,19 @@ export function initials(name: string) {
   return letters.join("").toUpperCase();
 }
 
-/** A round picture of a person, or their initials while it loads or fails. */
+/**
+ * A round picture of a person, or their initials while it loads or fails.
+ * Avatars are content, so they take no material: initials sit on a flat
+ * fill, and a photograph gets only the faint image outline every picture
+ * has, never a line in the text's color.
+ */
 export function Avatar({ name, src, size = "md", className, ...rest }: AvatarProps) {
   return (
     <BaseAvatar.Root
       className={cn(
-        "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-secondary align-middle font-medium text-secondary-foreground select-none",
-        "outline outline-1 -outline-offset-1 outline-image-outline",
+        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full align-middle font-medium select-none",
+        "bg-flat-face text-muted-foreground",
+        "has-[img]:after:pointer-events-none has-[img]:after:absolute has-[img]:after:inset-0 has-[img]:after:rounded-full has-[img]:after:shadow-[inset_0_0_0_1px_var(--image-outline)] has-[img]:after:content-['']",
         AVATAR_SIZE[size],
         className as string,
       )}
@@ -196,6 +207,28 @@ export function Avatar({ name, src, size = "md", className, ...rest }: AvatarPro
         {initials(name)}
       </BaseAvatar.Fallback>
     </BaseAvatar.Root>
+  );
+}
+
+export interface AvatarGroupProps extends ComponentPropsWithoutRef<"div"> {
+  /** Names the group, as "Reviewers". */
+  label: string;
+}
+
+/**
+ * Avatars that overlap, each cut out of the surface behind with a ring of
+ * that surface's color (set `--avatar-cutout`; the card color by default),
+ * so the gap between them reads as space, not a line.
+ */
+export function AvatarGroup({ label, className, style, ...rest }: AvatarGroupProps) {
+  return (
+    <div
+      role="group"
+      aria-label={label}
+      className={cn("flex -space-x-2 *:ring-2 *:ring-(--avatar-cutout)", className)}
+      style={{ "--avatar-cutout": "var(--card)", ...style } as CSSProperties}
+      {...rest}
+    />
   );
 }
 

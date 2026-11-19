@@ -5,6 +5,7 @@ import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import { Search } from "lucide-react";
 import { useRef, type ComponentProps, type ReactNode } from "react";
 import { cn } from "../lib/cn.js";
+import { useSchemeClass } from "./scheme.js";
 import { groupLabelClasses, itemClasses, separatorClasses } from "./styles.js";
 
 export interface CommandProps<Item> extends Omit<
@@ -43,6 +44,7 @@ export function Command<Item>({
   className,
   ...rest
 }: CommandProps<Item>) {
+  const scheme = useSchemeClass();
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <BaseDialog.Root open={open} onOpenChange={(next) => onOpenChange?.(next)}>
@@ -54,6 +56,7 @@ export function Command<Item>({
             aria-label={label}
             initialFocus={inputRef}
             className={cn(
+              scheme,
               "material-panel dialog-motion flex h-fit max-h-[min(30rem,70dvh)] w-full max-w-xl flex-col overflow-hidden rounded-continuous-[22px] text-foreground outline-none",
               className,
             )}

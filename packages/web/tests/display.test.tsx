@@ -6,6 +6,7 @@ import {
   AlertDescription,
   AlertTitle,
   Avatar,
+  AvatarGroup,
   Badge,
   Card,
   CardDescription,
@@ -68,6 +69,28 @@ describe("display", () => {
   it("an avatar falls back to initials", () => {
     render(<Avatar name="Ada Lovelace" />);
     expect(screen.getByText("AL")).toBeTruthy();
+  });
+
+  it("an avatar is flat content: no outline or ring of ink around initials", () => {
+    render(<Avatar name="Ada Lovelace" />);
+    const avatar = screen.getByText("AL").parentElement!;
+    // Content takes no material and draws no line in the text color.
+    expect(avatar.className).not.toMatch(/(^| )outline(-1)?( |$)/);
+    expect(avatar.className).not.toContain("outline-image-outline");
+    expect(avatar.className).toContain("bg-flat-face");
+  });
+
+  it("an avatar group overlaps its avatars, cut out of the surface behind", () => {
+    render(
+      <AvatarGroup label="Reviewers">
+        <Avatar name="Ada Lovelace" />
+        <Avatar name="Grace Hopper" />
+      </AvatarGroup>,
+    );
+    const group = screen.getByRole("group", { name: "Reviewers" });
+    expect(group.className).toContain("-space-x-2");
+    // The gap between overlapping avatars is the surface's color, not a line.
+    expect(group.className).toContain("*:ring-(--avatar-cutout)");
   });
 
   it("progress and meter report their values", () => {
