@@ -244,6 +244,25 @@ describe("navigation", () => {
     expect(title.closest("nav")!.className).toContain("gap-5");
   });
 
+  it("a scroll area's bars float over the content and show only while used", () => {
+    render(
+      <ScrollArea className="h-20" viewportClassName="max-h-20" data-testid="area">
+        <p>Long content</p>
+      </ScrollArea>,
+    );
+    const area = screen.getByTestId("area");
+    const viewport = screen.getByText("Long content").parentElement!;
+    expect(viewport.className).toContain("max-h-20");
+    // No native bars: Sunbeam draws its own thin ones over the content.
+    expect(viewport.className).toContain("scrollbar-hide");
+    const bars = area.querySelectorAll("[data-orientation]");
+    for (const bar of bars) {
+      expect(bar.className).toContain("absolute");
+      expect(bar.className).toContain("opacity-0");
+      expect(bar.className).toContain("data-scrolling:opacity-100");
+    }
+  });
+
   it("a scroll area wraps its content", () => {
     render(
       <ScrollArea className="h-20">

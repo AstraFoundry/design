@@ -1,4 +1,5 @@
 import { findNeighbour } from "fumadocs-core/page-tree";
+import { ScrollArea } from "@astrafoundry/design/ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -66,8 +67,10 @@ export default async function Page({ params }: { params: Params }) {
             )}
           </nav>
         </main>
-        <aside className="sticky top-24 hidden h-fit max-h-[calc(100dvh-8rem)] w-52 shrink-0 overflow-y-auto pl-3 xl:block">
-          <TocList toc={toc} />
+        <aside className="sticky top-24 hidden h-fit w-52 shrink-0 xl:block">
+          <ScrollArea viewportClassName="max-h-[calc(100dvh-8rem)] pl-3">
+            <TocList toc={toc} />
+          </ScrollArea>
         </aside>
       </div>
     </DocsToc>

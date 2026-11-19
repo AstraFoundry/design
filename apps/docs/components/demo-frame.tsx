@@ -149,9 +149,7 @@ export function DemoFrame({
             )}
           </div>
         ) : (
-          <div className="max-h-[32rem] overflow-auto text-[13px] [&_figure]:my-0 [&_figure]:rounded-none [&_figure]:border-0">
-            {code}
-          </div>
+          code
         )}
       </div>
     </TooltipProvider>

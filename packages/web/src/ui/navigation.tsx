@@ -229,30 +229,50 @@ export function CollapsiblePanel({
 
 /* ------------------------------------------------------------ ScrollArea */
 
-/** A scrolling region with thin overlay scrollbars that show while used. */
+export interface ScrollAreaProps extends ComponentProps<typeof BaseScrollArea.Root> {
+  /** Classes for the scrolling viewport, as a max height. */
+  viewportClassName?: string;
+}
+
+/**
+ * A scrolling region whose scrollbars float over the content instead of
+ * taking room beside it: a 6px ink thumb, no track, shown while the region
+ * scrolls or the pointer is over it, and gone a moment after. The native
+ * bars are hidden, so the content never jumps when they come and go.
+ */
 export function ScrollArea({
   className,
+  viewportClassName,
   children,
   ...rest
-}: ComponentProps<typeof BaseScrollArea.Root>) {
+}: ScrollAreaProps) {
   const bar = cn(
-    "flex touch-none p-0.5 opacity-0 transition-opacity duration-(--duration-popup) select-none",
-    "data-hovering:opacity-100 data-scrolling:opacity-100 data-scrolling:duration-0",
-    "data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5 data-[orientation=horizontal]:flex-col",
+    "absolute z-10 flex touch-none p-0.5 select-none",
+    "opacity-0 transition-opacity duration-(--duration-popup) delay-500",
+    "data-hovering:opacity-100 data-hovering:delay-0 data-scrolling:opacity-100 data-scrolling:delay-0 data-scrolling:duration-0",
+    "data-[orientation=vertical]:inset-y-0 data-[orientation=vertical]:right-0 data-[orientation=vertical]:w-2.5",
+    "data-[orientation=horizontal]:inset-x-0 data-[orientation=horizontal]:bottom-0 data-[orientation=horizontal]:h-2.5 data-[orientation=horizontal]:flex-col",
   );
+  const thumb =
+    "rounded-full bg-foreground/25 transition-colors duration-(--duration-press) hover:bg-foreground/40 active:bg-foreground/50";
   return (
     <BaseScrollArea.Root
       className={cn("relative overflow-hidden", className as string)}
       {...rest}
     >
-      <BaseScrollArea.Viewport className="size-full overscroll-contain rounded-[inherit] outline-none focus-visible:outline-2 focus-visible:outline-ring">
+      <BaseScrollArea.Viewport
+        className={cn(
+          "scrollbar-hide size-full overscroll-contain rounded-[inherit] outline-none focus-visible:outline-2 focus-visible:outline-ring",
+          viewportClassName,
+        )}
+      >
         {children}
       </BaseScrollArea.Viewport>
       <BaseScrollArea.Scrollbar orientation="vertical" className={bar}>
-        <BaseScrollArea.Thumb className="w-full rounded-full bg-foreground/25" />
+        <BaseScrollArea.Thumb className={cn(thumb, "w-full")} />
       </BaseScrollArea.Scrollbar>
       <BaseScrollArea.Scrollbar orientation="horizontal" className={bar}>
-        <BaseScrollArea.Thumb className="h-full rounded-full bg-foreground/25" />
+        <BaseScrollArea.Thumb className={cn(thumb, "h-full")} />
       </BaseScrollArea.Scrollbar>
     </BaseScrollArea.Root>
   );

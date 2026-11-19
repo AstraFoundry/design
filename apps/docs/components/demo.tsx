@@ -22,7 +22,7 @@ export async function Demo({ name, ...rest }: DemoProps) {
         lang: "tsx",
         themes: { light: "github-light", dark: "github-dark-default" },
         defaultColor: false,
-        components: { pre: (props) => <CodeBlock {...props} /> },
+        components: { pre: (props) => <CodeBlock variant="flush" {...props} /> },
       })}
       {...rest}
     >
