@@ -28,7 +28,7 @@ export default function ComboboxBasic() {
         clearLabel="Clear"
         className="w-64"
       />
-      <ComboboxPopup empty="No matching time zone">
+      <ComboboxPopup empty="Try another time zone">
         <ComboboxList>
           {(zone: string) => (
             <ComboboxItem key={zone} value={zone}>

@@ -12,7 +12,7 @@ export default function BackdropDemo() {
         <Button className="self-start">Apply</Button>
       </div>
       <p className="absolute bottom-8 left-8 text-lg text-substrate-tint-muted">
-        Photographs, not gradients
+        Impressionist photographs, in place of gradients
       </p>
     </div>
   );

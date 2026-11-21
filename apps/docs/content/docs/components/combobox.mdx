@@ -15,7 +15,7 @@ import { Combobox } from "@astrafoundry/design/ui";
 
 时区、国家、成员等长列表。
 
-## 何时不用
+## 换用这个
 
 自由文本加建议：用 Autocomplete。
 
@@ -51,7 +51,7 @@ import { Combobox } from "@astrafoundry/design/ui";
   head={["属性", "类型", "默认值"]}
   type={{
     items: { type: "T[]", description: "选项" },
-    triggerLabel: { type: "string", description: "打开按钮的名称；不给则不显示" },
+    triggerLabel: { type: "string", description: "打开按钮的名称；省略则隐藏该按钮" },
     clearLabel: { type: "string", description: "清空按钮的名称" },
   }}
 />

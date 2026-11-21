@@ -15,9 +15,9 @@ import { Progress, Meter } from "@astrafoundry/design/ui";
 
 上传、导出、存储用量。
 
-## 何时不用
+## 换用这个
 
-未知时长：用 Spinner。
+耗时待定的任务：用 Spinner。
 
 ## 动效
 
@@ -33,7 +33,7 @@ import { Progress, Meter } from "@astrafoundry/design/ui";
 <TypeTable
   head={["属性", "类型", "默认值"]}
   type={{
-    value: { type: "number | null", description: "当前值；null 为不确定" },
+    value: { type: "number | null", description: "当前值；null 表示待定进度" },
     tone: { type: '"ink" | "result"', description: "result 时用黄色", default: '"ink"' },
   }}
 />

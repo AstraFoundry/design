@@ -41,11 +41,11 @@ Durations live in `motion` in `sunbeam.json` and generate the CSS variables `--d
 
 - Every input answers visibly within 100ms.
 - Exits are faster than entrances. Animate `transform`, `opacity` and `filter` (and `height` for disclosure, the one exception).
-- Popups grow from their trigger (`--transform-origin`), not the screen's center.
+- Popups grow directly from their trigger (`--transform-origin`).
 - A scene plays once when it is seen and rests on its result. Only real waiting loops (Spinner, Skeleton).
 - With reduced motion, show the final frame.
 
 <DoDont
   do="Let a switch's knob overshoot a hair and settle into its detent, on the spring."
-  dont="Bounce, breathe or pulse forever."
+  dont="Play a transition once and rest on the final state; reserve loops for Spinner and Skeleton."
 />

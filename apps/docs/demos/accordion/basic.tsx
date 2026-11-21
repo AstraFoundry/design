@@ -10,7 +10,7 @@ import {
 const faq = [
   ["Can I use Sunbeam outside AstraFoundry?", "Yes. It is MIT licensed."],
   [
-    "Does it work without Tailwind?",
+    "Does it work with a different CSS setup?",
     "The tokens are plain CSS variables; the components need Tailwind v4.",
   ],
   ["Is there a native version?", "The MyGo package draws the same components in Go."],

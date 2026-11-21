@@ -7,7 +7,7 @@ export default function EmptyBasic() {
   return (
     <Empty
       icon={<FolderPlus aria-hidden />}
-      title="No projects yet"
+      title="Projects will show up here"
       description="Projects keep a team's documents, boards and agents together."
       action={<Button>New project</Button>}
     />

@@ -30,11 +30,11 @@ description: "同心圆角，4px 网格，1px 细线。"
 
 ## 连续曲率
 
-`rounded-continuous-*` 在支持 `corner-shape: squircle` 的浏览器上画出苹果式的连续曲率圆角，其它浏览器保持四分之一圆。用于面板和卡片，不用于胶囊。
+`rounded-continuous-*` 在支持 `corner-shape: squircle` 的浏览器上画出苹果式的连续曲率圆角，其它浏览器保持四分之一圆。面板和卡片使用连续曲率圆角，胶囊使用 `rounded-full`。
 
 ## 间距与线
 
-尺寸以 4px 为步长。线都是 1px `--border`：单元格之间用 1px 间隙露出底色，而不是每格各画边框，这样线不会叠成两倍，转角也不会断。
+尺寸以 4px 为步长。线都是 1px `--border`：单元格之间用 1px 间隙露出底色来分格，保持线条始终是单层 1px，转角也干净闭合。
 
 ## 控件高度
 

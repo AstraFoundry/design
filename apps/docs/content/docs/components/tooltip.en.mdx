@@ -1,6 +1,6 @@
 ---
 title: "Tooltip"
-description: "A short ink label for an icon-only control, with no material."
+description: "A short, solid ink label for an icon-only control."
 ---
 
 <Demo name="tooltip/basic" material />
@@ -15,9 +15,9 @@ import { Tooltip } from "@astrafoundry/design/ui";
 
 Naming icon-only buttons.
 
-## When not to
+## Use this instead
 
-Important information: never hide it in a tip.
+Important information: put it directly on the page or in a Popover.
 
 ## Motion
 
@@ -46,11 +46,11 @@ With reduced motion every transition jumps to its end.
 
 Other props go to the matching Base UI part; see the [Base UI docs](https://base-ui.com/react/components/tooltip).
 
-## Do and don't
+## Do, and the alternative
 
 <DoDont
   doLabel="Do"
-  dontLabel="Don't"
+  dontLabel="Try this instead"
   do="Wrap a group in one TooltipProvider so neighbors show at once."
-  dont="Repeat a button's own label in a tip."
+  dont="Reserve tips for icon-only buttons or to add a keyboard shortcut."
 />

@@ -8,7 +8,7 @@ description: "Flat and raised: a layer has one material, and its controls take i
 |                | Flat                                                                            | Raised                                                                                        |
 | -------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | Where          | The page and the window's chrome: title bars, toolbars, sidebars, content cards | Floating layers (panels, popovers, menus, dialogs, drawers, toasts) and every control in them |
-| Control        | One translucent fill, no edge, no shadow                                        | A faint top-to-bottom gradient, a 1px translucent edge, a 1px top highlight, layered shadows  |
+| Control        | One translucent fill, flush with the surface                                    | A faint top-to-bottom gradient, a 1px translucent edge, a 1px top highlight, layered shadows  |
 | Set of choices | A fill; the choice is a solid thumb                                             | A recessed well; the choice is its one raised face                                            |
 | Text field     | Card color with a hairline                                                      | A recessed well                                                                               |
 | Dark           | Translucent white fills                                                         | Faces lighter than the panel, near-black edges, half-black shadows                            |
@@ -16,7 +16,7 @@ description: "Flat and raised: a layer has one material, and its controls take i
 ## Rules
 
 1. A layer has one material. A flat part inside a raised layer, as a Toolbar, opens a flat layer of its own.
-2. Only controls and floating layers are raised; never text, content, page cards or a whole window. Images and thumbnails take no material.
+2. Raised material belongs to controls and floating layers; text, content, page cards and the window stay flat, and images and thumbnails render as plain media.
 3. Popups render into `body` through a portal, so each one carries its own `data-material="raised"`.
 4. In the dark, a raised face is lighter than what it sits on and its shadow darker.
 
@@ -33,5 +33,5 @@ Utilities: `material-face`, `material-face-primary`, `material-thumb`, `material
 
 <DoDont
   do="Keep a toolbar flat and a floating panel raised, whole."
-  dont="Raise one button of a toolbar."
+  dont="Keep every button in a toolbar flat; use the primary variant when one action needs emphasis."
 />

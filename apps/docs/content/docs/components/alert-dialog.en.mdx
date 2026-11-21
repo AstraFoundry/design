@@ -1,6 +1,6 @@
 ---
 title: "AlertDialog"
-description: "Asks before something that cannot be undone. Its title states the consequence; an outside click does not close it."
+description: "Asks for confirmation before a permanent action. Its title states the consequence, and closing requires an explicit button choice."
 ---
 
 <Demo name="alert-dialog/basic" />
@@ -15,11 +15,11 @@ import { AlertDialog } from "@astrafoundry/design/ui";
 
 Deleting, overwriting, publishing.
 
-## Do and don't
+## Do, and the alternative
 
 <DoDont
   doLabel="Do"
-  dontLabel="Don't"
+  dontLabel="Try this instead"
   do="State the consequence: “Delete Atlas?”"
-  dont="Title it “Are you sure?” with OK and Cancel."
+  dont="Name buttons by their exact actions: “Delete” and “Keep it”."
 />

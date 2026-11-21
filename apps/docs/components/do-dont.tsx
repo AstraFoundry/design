@@ -14,7 +14,7 @@ export interface DoDontProps {
 /** A rule beside the habit it replaces. */
 export function DoDont({
   doLabel = "Do",
-  dontLabel = "Don't",
+  dontLabel = "Try this instead",
   do: doText,
   dont,
   doExample,

@@ -49,6 +49,6 @@ import { ThinkingShimmer } from "@astrafoundry/design/beui/agents/loading-states
 
 ## 规则
 
-- `src/beui` 是第三方代码，内部可能使用物理颜色或 `dark:`，不要在项目代码里模仿。
+- `src/beui` 是第三方代码，内部保留了原始的物理颜色或 `dark:`；项目代码请统一使用语义 token。
 - 所有文案都通过 props 传入。
 - `agents/code-block` 需要 `shiki`，`motion/theme-toggle` 需要 `next-themes`，都是可选依赖。

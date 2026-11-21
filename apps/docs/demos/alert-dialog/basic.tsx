@@ -21,7 +21,7 @@ export default function AlertDialogBasic() {
       <AlertDialogPopup>
         <AlertDialogTitle>Delete “Atlas” for everyone?</AlertDialogTitle>
         <AlertDialogDescription>
-          Its files, comments and history are removed. This cannot be undone.
+          Its files, comments and history are removed. This change is permanent.
         </AlertDialogDescription>
         <DialogFooter>
           <AlertDialogClose render={<Button variant="ghost" />}>Keep it</AlertDialogClose>

@@ -3,7 +3,7 @@ title: "Introduction"
 description: "Sunbeam is AstraFoundry's design system, made for fast interaction: clear, quick and precise."
 ---
 
-Sunbeam helps people and agents get things done quickly. The interface itself is clear and quick: feedback comes fast, state reads at a glance, and each screen has one yellow. The humanist friction lives in the background, in impressionist, motion-blurred photographs of nature; the UI set on them carries no texture and no nostalgia.
+Sunbeam helps people and agents get things done quickly. The interface itself is clear and quick: feedback comes fast, state reads at a glance, and each screen has one yellow. The humanist friction lives in the background, in impressionist, motion-blurred photographs of nature; the UI set on them stays clean and leaves texture to the photograph.
 
 <Demo name="panel/basic" />
 
@@ -17,7 +17,7 @@ Sunbeam helps people and agents get things done quickly. The interface itself is
   <Step>
     **Flat and raised, side by side.** The page and the window's chrome are flat. Layers
     floating above them (panels, popovers, menus, dialogs) are raised, and so is every
-    control inside. Material follows the layer, not the component.
+    control inside. Material follows the layer.
   </Step>
   <Step>
     **Concentric corners.** Inner radius = outer radius − inset. A 28px panel less its 8px
@@ -44,7 +44,7 @@ pnpm add @astrafoundry/design @base-ui/react
 import { Button, Panel } from "@astrafoundry/design/ui";
 ```
 
-Components use semantic tokens only, never physical colors or `dark:`. A `.dark` class on `<html>` switches the scheme. Every visible string comes in through props; components carry no English defaults.
+Components use semantic tokens only, and a `.dark` class on `<html>` switches the scheme. Every visible string comes in through props.
 
 ## Related systems
 

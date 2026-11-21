@@ -22,7 +22,7 @@ function Actions() {
         variant="secondary"
         onClick={() =>
           toast.add({
-            title: "Couldn't sync",
+            title: "Sync failed",
             description: "Check your connection and try again.",
             type: "danger",
           })

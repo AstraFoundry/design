@@ -49,6 +49,6 @@ Sunbeam's own components, built on Base UI, replace these. They still work and g
 
 ## Rules
 
-- `src/beui` is third-party code and may use physical colors or `dark:` inside; don't copy those patterns.
+- `src/beui` is third-party code and keeps its upstream physical colors or `dark:` classes; in project code, use semantic tokens.
 - Pass every string through props.
 - `agents/code-block` needs `shiki` and `motion/theme-toggle` needs `next-themes`, both optional peers.

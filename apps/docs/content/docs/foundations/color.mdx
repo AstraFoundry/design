@@ -3,7 +3,7 @@ title: "颜色"
 description: "暖墨与一抹黄；状态色只给圆点与图标。"
 ---
 
-所有颜色都是语义 token，亮暗两套由 `.dark` 一次切换，组件里从不写物理颜色。
+所有颜色都是语义 token，亮暗两套由 `.dark` 一次切换，组件全部使用语义 token。
 
 ## 墨与地
 
@@ -24,13 +24,13 @@ description: "暖墨与一抹黄；状态色只给圆点与图标。"
 
 <TokenSwatches names={["primary", "ring", "accent", "accent-foreground"]} />
 
-`--primary` 只填充一屏中唯一的主操作或结果；`--ring` 是键盘焦点环。选中、开启、勾选用 `--foreground`，不用黄。
+`--primary` 只填充一屏中唯一的主操作或结果；`--ring` 是键盘焦点环。选中、开启、勾选一律用 `--foreground`。
 
 ## 状态
 
 <TokenSwatches names={["success", "danger", "info"]} />
 
-状态色只用于圆点和图标，从不用于正文。错误提示是墨色文字加一个红点。
+状态色专用于圆点和图标。错误提示是墨色文字加一个红点。
 
 ## 材质
 
@@ -47,7 +47,7 @@ description: "暖墨与一抹黄；状态色只给圆点与图标。"
 
 <DoDont
   doLabel="这样做"
-  dontLabel="不要这样"
+  dontLabel="改成这样"
   do="一屏只有一个黄色元素。"
-  dont="徽章、边框、图标、链接同时用黄色。"
+  dont="徽章、边框、图标和链接用墨色或中性色。"
 />
