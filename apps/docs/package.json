@@ -21,7 +21,8 @@
     "serve": "^14.2.8",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.3.3",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "wrangler": "4.166.0"
   },
   "dependencies": {
     "@astrafoundry/design": "workspace:*",
