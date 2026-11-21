@@ -15,7 +15,7 @@ import { Spinner } from "@astrafoundry/design/ui";
 
 Loading buttons and lists.
 
-## When not to
+## Use this instead
 
 When progress is measurable: use Progress.
 
@@ -34,7 +34,7 @@ With reduced motion every transition jumps to its end.
   type={{
     label: {
       type: "string",
-      description: "Announces the wait; without it the spinner is decoration",
+      description: "Announces the wait; omit when decorative",
     },
     size: { type: '"sm" | "md" | "lg"', description: "Size", default: '"md"' },
   }}

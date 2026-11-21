@@ -3,7 +3,7 @@ title: "Color"
 description: "Warm ink and one yellow; status colors mark dots and icons only."
 ---
 
-Every color is a semantic token. A `.dark` class switches the whole set at once; components never write physical colors.
+Every color is a semantic token. A `.dark` class switches the whole set at once, and components use semantic tokens throughout.
 
 ## Ink and ground
 
@@ -24,13 +24,13 @@ Every color is a semantic token. A `.dark` class switches the whole set at once;
 
 <TokenSwatches names={["primary", "ring", "accent", "accent-foreground"]} />
 
-`--primary` fills the one primary action or result on a screen; `--ring` is the keyboard focus ring. Chosen, on and checked use `--foreground`, not yellow.
+`--primary` fills the one primary action or result on a screen; `--ring` is the keyboard focus ring. Chosen, on and checked always use `--foreground`.
 
 ## Status
 
 <TokenSwatches names={["success", "danger", "info"]} />
 
-Status colors mark dots and icons only, never running text. An error is ink text with a red dot.
+Status colors mark dots and icons only. An error is ink text with a red dot.
 
 ## Material
 
@@ -47,5 +47,5 @@ Status colors mark dots and icons only, never running text. An error is ink text
 
 <DoDont
   do="Keep one yellow element per screen."
-  dont="Use yellow for badges, borders, icons and links at once."
+  dont="Use ink and neutral tokens for badges, borders, icons and links."
 />

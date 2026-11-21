@@ -10,14 +10,14 @@ const COPY = {
     start: "开始使用",
     components: "浏览组件",
     wall: "每一个都能用",
-    wallLead: "下面不是截图。按一下、拖一下、打开菜单试试。",
+    wallLead: "下面是可交互的演示。按一下、拖一下、打开菜单试试。",
     pillars: [
       ["墨色，一抹黄", "选中、开启、勾选都是墨色。黄色只给一屏中唯一的主操作。"],
       ["平面与浮起", "材质跟着层走：外框是平面，浮动层和其中的控件是浮起。"],
       ["快而有落点", "100ms 内回应；浮层从触发点用 spring 长出，离开更快。"],
       ["照片里的摩擦", "人文主义的质感来自印象派式的照片背景，UI 保持干净。"],
     ],
-    caption: "照片，而不是渐变",
+    caption: "照片做底，替代渐变",
   },
   en: {
     title: "Clear, quick and precise.",
@@ -25,7 +25,7 @@ const COPY = {
     start: "Get started",
     components: "Browse components",
     wall: "Every one of them works",
-    wallLead: "These are not pictures. Press, drag, open a menu.",
+    wallLead: "These are live demos. Press, drag, open a menu.",
     pillars: [
       [
         "Ink, and one yellow",
@@ -44,7 +44,7 @@ const COPY = {
         "The humanist texture comes from impressionist photographs; the UI stays clean.",
       ],
     ],
-    caption: "Photographs, not gradients",
+    caption: "Impressionist photographs, in place of gradients",
   },
 } as const;
 

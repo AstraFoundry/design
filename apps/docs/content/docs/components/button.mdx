@@ -15,7 +15,7 @@ import { Button } from "@astrafoundry/design/ui";
 
 提交、保存、创建——任何立即生效的动作。
 
-## 何时不用
+## 换用这个
 
 跳转到别的页面：用 LinkButton 或链接。
 
@@ -61,7 +61,7 @@ import { Button } from "@astrafoundry/design/ui";
     },
     loading: {
       type: "boolean",
-      description: "显示转圈并阻止再次按下，宽度不变",
+      description: "显示转圈并锁定重复点击，同时保持按钮原有宽度",
       default: "false",
     },
   }}
@@ -73,7 +73,7 @@ import { Button } from "@astrafoundry/design/ui";
 
 <DoDont
   doLabel="这样做"
-  dontLabel="不要这样"
+  dontLabel="改成这样"
   do="一屏只放一个 primary 按钮，其余用 secondary 或 ghost。"
-  dont="把一排按钮都做成黄色。"
+  dont="一排里的其它按钮用 secondary 或 ghost。"
 />

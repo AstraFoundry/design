@@ -40,7 +40,7 @@ export default function CommandBasic() {
         items={groups}
         label="Commands"
         placeholder="Type a command"
-        empty="No matching command"
+        empty="Try another command"
         footer={
           <>
             <span className="flex items-center gap-1">

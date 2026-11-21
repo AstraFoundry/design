@@ -15,7 +15,7 @@ import { Dialog } from "@astrafoundry/design/ui";
 
 需要专注完成的小任务。
 
-## 何时不用
+## 换用这个
 
 破坏性确认：用 AlertDialog。
 
@@ -48,7 +48,7 @@ import { Dialog } from "@astrafoundry/design/ui";
 <TypeTable
   head={["属性", "类型", "默认值"]}
   type={{
-    closeLabel: { type: "string", description: "右上角关闭按钮的名称；不给则不显示" },
+    closeLabel: { type: "string", description: "右上角关闭按钮的名称；省略则隐藏该按钮" },
     size: { type: '"sm" | "md" | "lg"', description: "最大宽度", default: '"md"' },
   }}
 />

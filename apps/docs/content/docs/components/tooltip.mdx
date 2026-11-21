@@ -1,6 +1,6 @@
 ---
 title: "Tooltip"
-description: "纯图标控件的简短墨色标签，不带材质。"
+description: "纯图标控件的简短纯墨色标签。"
 ---
 
 <Demo name="tooltip/basic" material />
@@ -15,9 +15,9 @@ import { Tooltip } from "@astrafoundry/design/ui";
 
 解释只有图标的按钮。
 
-## 何时不用
+## 换用这个
 
-重要信息：不要藏在提示里。
+重要信息：直接写在界面上，或用 Popover 展示。
 
 ## 动效
 
@@ -47,7 +47,7 @@ import { Tooltip } from "@astrafoundry/design/ui";
 
 <DoDont
   doLabel="这样做"
-  dontLabel="不要这样"
+  dontLabel="改成这样"
   do="把一组按钮包进同一个 TooltipProvider，相邻移动时立即显示。"
-  dont="给有文字的按钮再加一个重复文字的提示。"
+  dont="只给纯图标按钮加提示，或用提示补充快捷键。"
 />

@@ -42,13 +42,13 @@ description: "四条曲线，一组时长 token；快速回应，播一次，停
 
 - 每次输入 100ms 内有可见反馈。
 - 离开比进入快。只动 `transform`、`opacity`、`filter`（折叠的 `height` 是唯一例外）。
-- 浮层从触发点（`--transform-origin`）长出，而不是从屏幕中心。
+- 浮层从触发点（`--transform-origin`）长出。
 - 场景被看到时播一次，停在结果上。只有真实等待才循环（Spinner、Skeleton）。
 - 开启减少动态效果时，直接显示终态。
 
 <DoDont
   doLabel="这样做"
-  dontLabel="不要这样"
+  dontLabel="改成这样"
   do="用 spring 让开关的旋钮轻微过冲后停在档位。"
-  dont="让元素持续弹跳、呼吸或闪烁。"
+  dont="动效播放一次即停在终态；把循环动效留给表示真实等待的 Spinner 和 Skeleton。"
 />
